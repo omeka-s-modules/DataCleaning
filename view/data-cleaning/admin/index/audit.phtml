@@ -1,0 +1,64 @@
+<?php
+$auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->translate('Value');
+?>
+<?php echo $this->pageTitle($this->translate('Audit')); ?>
+<ul>
+    <li><?php echo sprintf($this->translate('Item query: %s'), http_build_query($itemQuery)); ?></li>
+    <li><?php echo sprintf($this->translate('Property: %s (%s)'), $property->label(), $property->term()); ?></li>
+    <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $dataType->getLabel(), $dataType->getName()); ?></li>
+    <li><?php echo sprintf($this->translate('Audit column: %s '), $auditColumnLabel); ?></li>
+</ul>
+<p><?php echo sprintf(
+    $this->translate('You are auditing %s unique values (%s total values) from %s items.'),
+    $valuesUniqueCount,
+    $valuesTotalCount,
+    $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
+); ?></p>
+<form id="cleaning-form">
+    <div id="page-actions">
+        <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
+        <button><?php echo $this->translate('Submit'); ?></button>
+    </div>
+    <table>
+    <thead>
+        <tr>
+            <th><?php echo $this->translate('Count'); ?></th>
+            <th><?php echo $auditColumnLabel; ?></th>
+            <th><?php echo $this->translate('Correct'); ?></th>
+            <th><?php echo $this->translate('Remove'); ?></th>
+            <th><?php echo $this->translate('Link'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php while ($value = $valuesStmt->fetch()): ?>
+        <?php
+        $valueQuery = $itemQuery;
+        $valueQuery['property'][] = ['joiner' => 'and', 'property' => $property->id(), 'type' => 'eq', 'text' => $value[1]];
+        ?>
+        <tr>
+            <td><?php echo $value[0]; ?></td>
+            <td><?php echo $value[1]; ?></td>
+            <td><input type="text" name="<?php echo $this->escapeHtml(sprintf('+%s', $value[0])); ?>"></td>
+            <td><input type="checkbox" name="<?php echo $this->escapeHtml(sprintf('-%s', $value[0])); ?>" value="1"></td>
+            <td><?php echo $this->hyperlink(
+                'Link',
+                $this->url(
+                    'admin/default',
+                    ['controller' => 'item', 'action' => 'browse'],
+                    ['query' => $valueQuery]
+                ),
+                ['target' => '_blank', 'title' => 'Results may include values of other data types']
+            ); ?></td>
+        </tr>
+        <?php endwhile; ?>
+    </tbody>
+    </table>
+</form>
+<script>
+const form = document.getElementById('cleaning-form');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const formJson = JSON.stringify(Object.fromEntries(formData));
+});
+</script>

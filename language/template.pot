@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-08 18:19-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: view/data-cleaning/admin/index/audit.phtml:2
+msgid "Value"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:4
+msgid "Audit"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:6
+#, php-format
+msgid "Item query: %s"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:7
+#, php-format
+msgid "Property: %s (%s)"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:8
+#, php-format
+msgid "Data type: %s (%s)"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:9
+#, php-format
+msgid "Audit column: %s "
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:12
+#, php-format
+msgid "You are auditing %s unique values (%s total values) from %s items."
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:25
+msgid "Count"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:27
+msgid "Correct"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:29
+msgid "Link"
+msgstr ""
+
+#: view/data-cleaning/admin/index/index.phtml:4
+msgid "Prepare Audit"
+msgstr ""
+
+#: src/Form/AuditForm.php:17
+msgid "Item query"
+msgstr ""
+
+#: src/Form/AuditForm.php:43
+msgid "Select a data type"
+msgstr ""
+
+#: src/Form/AuditForm.php:50
+msgid "Audit column"
+msgstr ""
+
+#: config/module.config.php:39
+msgid "Data Cleaning"
+msgstr ""
