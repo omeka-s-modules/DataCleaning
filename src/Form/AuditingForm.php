@@ -42,10 +42,10 @@ class AuditingForm extends Form
             'name' => 'data_type_name',
             'options' => [
                 'label' => 'Data type', // @translate
-                'empty_option' => '',
                 'show_required' => true,
             ],
             'attributes' => [
+                'value' => 'literal',
                 'class' => 'chosen-select',
                 'data-placeholder' => 'Select a data type', // @translate
             ],

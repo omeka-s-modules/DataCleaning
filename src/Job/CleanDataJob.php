@@ -43,6 +43,7 @@ class CleanDataJob extends AbstractJob
                 ]
             );
         }
+
         // Remove values.
         foreach ($this->getArg('removals', []) as $value) {
             
