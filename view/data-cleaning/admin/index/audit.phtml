@@ -1,31 +1,27 @@
 <?php
+$form->prepare();
+$auditColumn = $form->get('audit_column')->getValue();
 $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->translate('Value');
 ?>
 <?php echo $this->pageTitle($this->translate('Audit')); ?>
-<ul>
-    <li><?php echo sprintf($this->translate('Item query: %s'), http_build_query($itemQuery)); ?></li>
-    <li><?php echo sprintf($this->translate('Property: %s (%s)'), $property->label(), $property->term()); ?></li>
-    <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $dataType->getLabel(), $dataType->getName()); ?></li>
-    <li><?php echo sprintf($this->translate('Audit column: %s '), $auditColumnLabel); ?></li>
-</ul>
+<dl>
+    <dt><?php echo $this->translate('Item query'); ?></dt>
+    <dd><?php echo http_build_query($itemQuery); ?></dd>
+    <dt><?php echo $this->translate('Property'); ?></dt>
+    <dd><?php echo sprintf('% (%s)', $property->label(), $property->term()); ?></dd>
+    <dt><?php echo $this->translate('Data type'); ?></dt>
+    <dd><?php echo sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName()); ?></dd>
+    <dt><?php echo $this->translate('Audit column'); ?></dt>
+    <dd><?php echo $auditColumnLabel; ?></dd>
+</dl>
 <p><?php echo sprintf(
     $this->translate('You are auditing %s unique values (%s total values) from %s items.'),
     $valuesUniqueCount,
     $valuesTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
 ); ?></p>
-<form id="auditing-form"
-    method="post"
-    action="<?php echo $this->escapeHtml($this->url(null, ['action' => 'clean'], true)); ?>"
-    data-validate-url="<?php echo $this->escapeHtml($this->url(null, ['action' => 'validate'], true)); ?>"
-    data-target-data-type-name="<?php echo $this->escapeHtml($dataType->getName()); ?>"
->
-    <input type="hidden" name="corrections" id="corrections">
-    <input type="hidden" name="removals" id="removals">
-    <input type="hidden" name="item_query" value="<?php echo $this->escapeHtml(json_encode($itemQuery)); ?>">
-    <input type="hidden" name="property_id" value="<?php echo $this->escapeHtml($property->id()); ?>">
-    <input type="hidden" name="data_type_name" value="<?php echo $this->escapeHtml($dataType->getName()); ?>">
-    <input type="hidden" name="audit_column" value="<?php echo $this->escapeHtml($auditColumn); ?>">
+<?php echo $this->form()->openTag($form); ?>
+    <?php echo $this->formCollection($form); ?>
     <div id="page-actions">
         <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
         <button><?php echo $this->translate('Submit'); ?></button>
@@ -50,10 +46,10 @@ $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->
             <td><?php echo $value[0]; ?></td>
             <td><?php echo $value[1]; ?></td>
             <td>
-                <textarea class="correct-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>"></textarea>
+                <textarea class="correction-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>"></textarea>
                 <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
             </td>
-            <td><input type="checkbox" class="remove-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>" value="1"></td>
+            <td><input type="checkbox" class="removal-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>" value="1"></td>
             <td><?php echo $this->hyperlink(
                 'Link',
                 $this->url(
@@ -61,26 +57,29 @@ $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->
                     ['controller' => 'item', 'action' => 'browse'],
                     ['query' => $valueQuery]
                 ),
-                ['target' => '_blank', 'title' => 'Results may include values of other data types']
+                ['target' => '_blank', 'title' => 'Results may include values of other data types and columns']
             ); ?></td>
         </tr>
         <?php endwhile; ?>
     </tbody>
     </table>
-</form>
+<?php echo $this->form()->closeTag(); ?>
 <script>
-const form = document.getElementById('auditing-form');
+const form = document.getElementById('cleaning-form');
+// Handle form submission.
 form.addEventListener('submit', function(e) {
+    // Populate corrections input.
     let corrections = {};
-    const correctionsCollection = document.getElementsByClassName('correct-value');
+    const correctionsCollection = document.getElementsByClassName('correction-value');
     for (let correction of correctionsCollection) {
         if ('' !== correction.value) {
             corrections[correction.dataset.name] = correction.value;
         }
     }
     document.getElementById('corrections').value = JSON.stringify(corrections);
+    // Populate removals input.
     let removals = [];
-    const removalsCollection = document.getElementsByClassName('remove-value');
+    const removalsCollection = document.getElementsByClassName('removal-value');
     for (let removal of removalsCollection) {
         if (removal.checked) {
             removals.push(removal.dataset.name);
@@ -88,6 +87,7 @@ form.addEventListener('submit', function(e) {
     }
     document.getElementById('removals').value = JSON.stringify(removals);
 });
+// Handle validation button click.
 form.addEventListener('click', function(e) {
     if (!e.target.classList.contains('validate-button')) {
         return;
@@ -95,7 +95,7 @@ form.addEventListener('click', function(e) {
     e.preventDefault();
     const formData = new FormData();
     formData.append('value', e.target.previousElementSibling.value);
-    formData.append('data_type_name', form.dataset.targetDataTypeName);
+    formData.append('data_type_name', document.getElementById('data_type_name').value);
     fetch(form.dataset.validateUrl, {
         method: 'POST',
         body: formData

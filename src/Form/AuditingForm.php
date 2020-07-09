@@ -6,16 +6,17 @@ use Omeka\Form\Element as OmekaElement;
 use Zend\Form\Element as ZendElement;
 use Zend\Form\Form;
 
-class AuditForm extends Form
+class AuditingForm extends Form
 {
     public function init()
     {
         // Increase CSRF timeout from 1 to 2 hours.
-        $csrfElement = $this->get('auditform_csrf');
+        $csrfElement = $this->get('auditingform_csrf');
         $csrfOptions = $csrfElement->getOptions();
         $csrfOptions['csrf_options']['timeout'] = 7200;
         $csrfElement->setOptions($csrfOptions);
 
+        $this->setAttribute('id', 'auditing-form');
         $this->add([
             'type' => ZendElement\Text::class,
             'name' => 'item_query',

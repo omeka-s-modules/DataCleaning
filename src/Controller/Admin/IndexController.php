@@ -2,7 +2,8 @@
 namespace DataCleaning\Controller\Admin;
 
 use Laminas\Session\Container;
-use DataCleaning\Form\AuditForm;
+use DataCleaning\Form\AuditingForm;
+use DataCleaning\Form\CleaningForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -11,7 +12,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $form = $this->getForm(AuditForm::class);
+        $form = $this->getForm(AuditingForm::class);
         $form->setAttribute('action', $this->url()->fromRoute(null, ['action' => 'audit'], true));
 
         $view = new ViewModel;
@@ -25,7 +26,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
 
-        $form = $this->getForm(AuditForm::class);
+        $form = $this->getForm(AuditingForm::class);
         $form->setData($this->params()->fromPost());
         if (!$form->isValid()) {
             $this->messenger()->addFormErrors($form);
@@ -45,12 +46,18 @@ class IndexController extends AbstractActionController
         $property = $this->api()->read('properties', $formData['property_id'])->getContent();
         $dataType = $this->dataCleaning()->getDataType($formData['data_type_name']);
 
+        $form = $this->getForm(CleaningForm::class);
+        $formData['item_ids'] = json_encode($itemIds);
+        $form->setData($formData);
+        $form->setAttribute('action', $this->url()->fromRoute(null, ['action' => 'clean'], true));
+        $form->setAttribute('data-validate-url', $this->url()->fromRoute(null, ['action' => 'validate'], true));
+
         $view = new ViewModel;
+        $view->setVariable('form', $form);
         $view->setVariable('itemQuery', $itemQuery);
         $view->setVariable('itemIds', $itemIds);
         $view->setVariable('property', $property);
         $view->setVariable('dataType', $dataType);
-        $view->setVariable('auditColumn', $formData['audit_column']);
         $view->setVariable('valuesStmt', $valuesStmt);
         $view->setVariable('valuesUniqueCount', $valuesUniqueCount);
         $view->setVariable('valuesTotalCount', $valuesTotalCount);
@@ -62,8 +69,7 @@ class IndexController extends AbstractActionController
         if (!$this->getRequest()->isPost()) {
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
-        print_r($this->params()->fromPost());
-        exit;
+        echo '<pre>'; print_r($this->params()->fromPost());echo '</pre>';exit;
     }
 
     public function validateAction()
