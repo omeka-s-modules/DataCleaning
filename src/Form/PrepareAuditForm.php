@@ -16,7 +16,6 @@ class PrepareAuditForm extends Form
         $csrfOptions['csrf_options']['timeout'] = 7200;
         $csrfElement->setOptions($csrfOptions);
 
-        $this->setAttribute('id', 'auditing-form');
         $this->add([
             'type' => ZendElement\Text::class,
             'name' => 'item_query',

@@ -16,7 +16,7 @@ class AuditForm extends Form
         $csrfOptions['csrf_options']['timeout'] = 7200;
         $csrfElement->setOptions($csrfOptions);
 
-        $this->setAttribute('id', 'cleaning-form');
+        $this->setAttribute('id', 'audit-form');
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'property_id',
