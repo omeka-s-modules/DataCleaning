@@ -14,7 +14,18 @@ $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->
     $valuesTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
 ); ?></p>
-<form id="cleaning-form">
+<form id="auditing-form"
+    method="post"
+    action="<?php echo $this->escapeHtml($this->url(null, ['action' => 'clean'], true)); ?>"
+    data-validate-url="<?php echo $this->escapeHtml($this->url(null, ['action' => 'validate'], true)); ?>"
+    data-target-data-type-name="<?php echo $this->escapeHtml($dataType->getName()); ?>"
+>
+    <input type="hidden" name="corrections" id="corrections">
+    <input type="hidden" name="removals" id="removals">
+    <input type="hidden" name="item_query" value="<?php echo $this->escapeHtml(json_encode($itemQuery)); ?>">
+    <input type="hidden" name="property_id" value="<?php echo $this->escapeHtml($property->id()); ?>">
+    <input type="hidden" name="data_type_name" value="<?php echo $this->escapeHtml($dataType->getName()); ?>">
+    <input type="hidden" name="audit_column" value="<?php echo $this->escapeHtml($auditColumn); ?>">
     <div id="page-actions">
         <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
         <button><?php echo $this->translate('Submit'); ?></button>
@@ -38,8 +49,11 @@ $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->
         <tr>
             <td><?php echo $value[0]; ?></td>
             <td><?php echo $value[1]; ?></td>
-            <td><input type="text" name="<?php echo $this->escapeHtml(sprintf('+%s', $value[0])); ?>"></td>
-            <td><input type="checkbox" name="<?php echo $this->escapeHtml(sprintf('-%s', $value[0])); ?>" value="1"></td>
+            <td>
+                <textarea class="correct-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>"></textarea>
+                <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
+            </td>
+            <td><input type="checkbox" class="remove-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>" value="1"></td>
             <td><?php echo $this->hyperlink(
                 'Link',
                 $this->url(
@@ -55,10 +69,44 @@ $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->
     </table>
 </form>
 <script>
-const form = document.getElementById('cleaning-form');
+const form = document.getElementById('auditing-form');
 form.addEventListener('submit', function(e) {
+    let corrections = {};
+    const correctionsCollection = document.getElementsByClassName('correct-value');
+    for (let correction of correctionsCollection) {
+        if ('' !== correction.value) {
+            corrections[correction.dataset.name] = correction.value;
+        }
+    }
+    document.getElementById('corrections').value = JSON.stringify(corrections);
+    let removals = [];
+    const removalsCollection = document.getElementsByClassName('remove-value');
+    for (let removal of removalsCollection) {
+        if (removal.checked) {
+            removals.push(removal.dataset.name);
+        }
+    }
+    document.getElementById('removals').value = JSON.stringify(removals);
+});
+form.addEventListener('click', function(e) {
+    if (!e.target.classList.contains('validate-button')) {
+        return;
+    }
     e.preventDefault();
-    const formData = new FormData(this);
-    const formJson = JSON.stringify(Object.fromEntries(formData));
+    const formData = new FormData();
+    formData.append('value', e.target.previousElementSibling.value);
+    formData.append('data_type_name', form.dataset.targetDataTypeName);
+    fetch(form.dataset.validateUrl, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.isValid) {
+                e.target.style.backgroundColor = '#EFFDEF';
+            } else {
+                e.target.style.backgroundColor = '#FDEFEF';
+            }
+        });
 });
 </script>

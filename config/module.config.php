@@ -17,6 +17,9 @@ return [
         'template_path_stack' => [
             sprintf('%s/../view', __DIR__),
         ],
+        'strategies' => [
+            'ViewJsonStrategy',
+        ],
     ],
     'controllers' => [
         'invokables' => [

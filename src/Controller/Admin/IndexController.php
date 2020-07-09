@@ -4,6 +4,7 @@ namespace DataCleaning\Controller\Admin;
 use Laminas\Session\Container;
 use DataCleaning\Form\AuditForm;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
@@ -54,5 +55,27 @@ class IndexController extends AbstractActionController
         $view->setVariable('valuesUniqueCount', $valuesUniqueCount);
         $view->setVariable('valuesTotalCount', $valuesTotalCount);
         return $view;
+    }
+
+    public function cleanAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            return $this->redirect()->toRoute(null, ['action' => 'index'], true);
+        }
+        print_r($this->params()->fromPost());
+        exit;
+    }
+
+    public function validateAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            return $this->redirect()->toRoute(null, ['action' => 'index'], true);
+        }
+        $value = $this->params()->fromPost('value');
+        $dataTypeName = $this->params()->fromPost('data_type_name');
+        $dataType = $this->dataCleaning()->getDataType($dataTypeName);
+        return new JsonModel([
+            'isValid' => $dataType->isValid(['@value' => $value]),
+        ]);
     }
 }

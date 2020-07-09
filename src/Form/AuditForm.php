@@ -10,6 +10,12 @@ class AuditForm extends Form
 {
     public function init()
     {
+        // Increase CSRF timeout from 1 to 2 hours.
+        $csrfElement = $this->get('auditform_csrf');
+        $csrfOptions = $csrfElement->getOptions();
+        $csrfOptions['csrf_options']['timeout'] = 7200;
+        $csrfElement->setOptions($csrfOptions);
+
         $this->add([
             'type' => ZendElement\Text::class,
             'name' => 'item_query',
