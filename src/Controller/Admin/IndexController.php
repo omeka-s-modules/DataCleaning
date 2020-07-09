@@ -2,8 +2,7 @@
 namespace DataCleaning\Controller\Admin;
 
 use Laminas\Session\Container;
-use DataCleaning\Form\AuditingForm;
-use DataCleaning\Form\CleaningForm;
+use DataCleaning\Form;
 use DataCleaning\Job\CleanDataJob;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -13,7 +12,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $form = $this->getForm(AuditingForm::class);
+        $form = $this->getForm(Form\PrepareAuditForm::class);
         $form->setAttribute('action', $this->url()->fromRoute(null, ['action' => 'audit'], true));
 
         $view = new ViewModel;
@@ -27,7 +26,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
 
-        $form = $this->getForm(AuditingForm::class);
+        $form = $this->getForm(Form\PrepareAuditForm::class);
         $form->setData($this->params()->fromPost());
         if (!$form->isValid()) {
             $this->messenger()->addFormErrors($form);
@@ -47,7 +46,7 @@ class IndexController extends AbstractActionController
         $property = $this->api()->read('properties', $formData['property_id'])->getContent();
         $dataType = $this->dataCleaning()->getDataType($formData['data_type_name']);
 
-        $form = $this->getForm(CleaningForm::class);
+        $form = $this->getForm(Form\AuditForm::class);
         $formData['item_ids'] = json_encode($itemIds);
         $form->setData($formData);
         $form->setAttribute('action', $this->url()->fromRoute(null, ['action' => 'clean'], true));
@@ -71,7 +70,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
 
-        $form = $this->getForm(CleaningForm::class);
+        $form = $this->getForm(Form\AuditForm::class);
         $form->setData($this->params()->fromPost());
         if (!$form->isValid()) {
             $this->messenger()->addFormErrors($form);
