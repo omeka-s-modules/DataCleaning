@@ -3,7 +3,7 @@ $form->prepare();
 $auditColumn = $form->get('audit_column')->getValue();
 $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->translate('Value');
 ?>
-<?php echo $this->pageTitle($this->translate('Audit')); ?>
+<?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
 <dl>
     <dt><?php echo $this->translate('Item query'); ?></dt>
     <dd><?php echo http_build_query($itemQuery); ?></dd>

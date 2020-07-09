@@ -3,6 +3,7 @@ namespace DataCleaning\ControllerPlugin;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
+use PDO;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -40,51 +41,51 @@ class DataCleaning extends AbstractPlugin
 
         // Get the values statement.
         $sql = sprintf('
-        SELECT COUNT(v.%1$s) count, v.%1$s audit_column
-        FROM value v
-        WHERE resource_id IN (?)
-        AND property_id = ?
-        AND type = ?
-        GROUP BY v.%1$s
-        ORDER BY count DESC, audit_column ASC', $auditColumn);
+            SELECT COUNT(%1$s) count, %1$s
+            FROM value
+            WHERE resource_id IN (?)
+            AND property_id = ?
+            AND type = ?
+            GROUP BY %1$s
+            ORDER BY count DESC, %1$s ASC', $auditColumn);
         $valuesStmt = $conn->executeQuery(
             $sql,
             [$resourceIds, $propertyId, $dataTypeName],
-            [Connection::PARAM_INT_ARRAY]
+            [Connection::PARAM_INT_ARRAY, PDO::PARAM_INT, PDO::PARAM_STR]
         );
         $valuesStmt->setFetchMode(FetchMode::NUMERIC);
 
         // Get the unique values count.
         $sql = sprintf('
-        SELECT COUNT(*) FROM
-        (
-            SELECT 1
-            FROM value v
-            WHERE resource_id IN (?)
-            AND property_id = ?
-            AND type = ?
-            GROUP BY v.%1$s
-        ) subquery', $auditColumn);
+            SELECT COUNT(*) FROM
+            (
+                SELECT 1
+                FROM value
+                WHERE resource_id IN (?)
+                AND property_id = ?
+                AND type = ?
+                GROUP BY %1$s
+            ) subquery', $auditColumn);
         $valuesUniqueCount = $conn->executeQuery(
             $sql,
             [$resourceIds, $propertyId, $dataTypeName],
-            [Connection::PARAM_INT_ARRAY]
+            [Connection::PARAM_INT_ARRAY, PDO::PARAM_INT, PDO::PARAM_STR]
         )->fetchColumn();
 
         // Get the total values count.
         $sql = sprintf('
-        SELECT COUNT(*) FROM
-        (
-            SELECT 1
-            FROM value v
-            WHERE resource_id IN (?)
-            AND property_id = ?
-            AND type = ?
-        ) subquery', $auditColumn);
+            SELECT COUNT(*) FROM
+            (
+                SELECT 1
+                FROM value
+                WHERE resource_id IN (?)
+                AND property_id = ?
+                AND type = ?
+            ) subquery', $auditColumn);
         $valuesTotalCount = $conn->executeQuery(
             $sql,
             [$resourceIds, $propertyId, $dataTypeName],
-            [Connection::PARAM_INT_ARRAY]
+            [Connection::PARAM_INT_ARRAY, PDO::PARAM_INT, PDO::PARAM_STR]
         )->fetchColumn();
 
         return [$valuesStmt, $valuesUniqueCount, $valuesTotalCount];

@@ -4,6 +4,7 @@ namespace DataCleaning\Controller\Admin;
 use Laminas\Session\Container;
 use DataCleaning\Form\AuditingForm;
 use DataCleaning\Form\CleaningForm;
+use DataCleaning\Job\CleanDataJob;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -77,6 +78,14 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
         $formData = $form->getData();
+        unset($formData['cleaningform_csrf']);
+
+        $job = $this->jobDispatcher()->dispatch(CleanDataJob::class, $formData);
+        $this->messenger()->addSuccess('Cleaning data. This may take a while.'); // @translate
+
+        $view = new ViewModel;
+        $view->setVariable('formData', $formData);
+        return $view;
     }
 
     public function validateAction()
