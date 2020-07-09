@@ -69,7 +69,14 @@ class IndexController extends AbstractActionController
         if (!$this->getRequest()->isPost()) {
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
-        echo '<pre>'; print_r($this->params()->fromPost());echo '</pre>';exit;
+
+        $form = $this->getForm(CleaningForm::class);
+        $form->setData($this->params()->fromPost());
+        if (!$form->isValid()) {
+            $this->messenger()->addFormErrors($form);
+            return $this->redirect()->toRoute(null, ['action' => 'index'], true);
+        }
+        $formData = $form->getData();
     }
 
     public function validateAction()

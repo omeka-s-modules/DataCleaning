@@ -62,10 +62,6 @@ class CleaningForm extends Form
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add([
-            'name' => 'item_ids',
-            'required' => true,
-        ]);
-        $inputFilter->add([
             'name' => 'property_id',
             'required' => true,
         ]);
@@ -75,6 +71,18 @@ class CleaningForm extends Form
         ]);
         $inputFilter->add([
             'name' => 'audit_column',
+            'required' => true,
+        ]);
+        $inputFilter->add([
+            'name' => 'corrections',
+            'required' => true,
+        ]);
+        $inputFilter->add([
+            'name' => 'removals',
+            'required' => true,
+        ]);
+        $inputFilter->add([
+            'name' => 'item_ids',
             'required' => true,
         ]);
     }
