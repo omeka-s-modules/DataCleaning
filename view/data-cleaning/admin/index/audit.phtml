@@ -1,18 +1,13 @@
-<?php
-$form->prepare();
-$auditColumn = $form->get('audit_column')->getValue();
-$auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->translate('Value');
-?>
 <?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
 <dl>
     <dt><?php echo $this->translate('Item query'); ?></dt>
     <dd><?php echo http_build_query($itemQuery); ?></dd>
     <dt><?php echo $this->translate('Property'); ?></dt>
-    <dd><?php echo sprintf('% (%s)', $property->label(), $property->term()); ?></dd>
+    <dd><?php echo sprintf('%s (%s)', $property->label(), $property->term()); ?></dd>
     <dt><?php echo $this->translate('Data type'); ?></dt>
     <dd><?php echo sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName()); ?></dd>
     <dt><?php echo $this->translate('Audit column'); ?></dt>
-    <dd><?php echo $auditColumnLabel; ?></dd>
+    <dd><?php echo $auditColumn; ?></dd>
 </dl>
 <p><?php echo sprintf(
     $this->translate('You are auditing %s unique values (%s total values) from %s items.'),
@@ -30,7 +25,7 @@ $auditColumnLabel = ('uri' === $auditColumn) ? $this->translate('URI') : $this->
     <thead>
         <tr>
             <th><?php echo $this->translate('Count'); ?></th>
-            <th><?php echo $auditColumnLabel; ?></th>
+            <th><?php echo $this->translate('Text'); ?></th>
             <th><?php echo $this->translate('Correct'); ?></th>
             <th><?php echo $this->translate('Remove'); ?></th>
             <th><?php echo $this->translate('Link'); ?></th>

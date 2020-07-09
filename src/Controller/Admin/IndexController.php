@@ -58,6 +58,7 @@ class IndexController extends AbstractActionController
         $view->setVariable('itemIds', $itemIds);
         $view->setVariable('property', $property);
         $view->setVariable('dataType', $dataType);
+        $view->setVariable('auditColumn', $formData['audit_column']);
         $view->setVariable('valuesStmt', $valuesStmt);
         $view->setVariable('valuesUniqueCount', $valuesUniqueCount);
         $view->setVariable('valuesTotalCount', $valuesTotalCount);

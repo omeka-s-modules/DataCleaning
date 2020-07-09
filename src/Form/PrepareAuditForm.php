@@ -57,8 +57,8 @@ class PrepareAuditForm extends Form
                 'label' => 'Audit column', // @translate
                 'show_required' => true,
                 'value_options' => [
-                    'value' => 'Value', // @translate
-                    'uri' => 'URI', // @translate
+                    'value' => 'value', // @translate
+                    'uri' => 'uri', // @translate
                 ],
             ],
         ]);
