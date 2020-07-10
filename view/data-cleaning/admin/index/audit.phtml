@@ -4,24 +4,23 @@ $tableFilterBasePath = substr($tableFilterUrl, 0, strrpos($tableFilterUrl, '/') 
 $this->headScript()->appendFile($tableFilterUrl);
 $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id' => 'value_resource_ids'];
 ?>
+<?php echo sprintf(
+    "<!--\nItem query: %s\nAudit column: %s\nProperty: %s\nData type: %s\n-->",
+    http_build_query($itemQuery),
+    $auditColumn,
+    sprintf('%s (%s)', $property->label(), $property->term()),
+    sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName())
+); ?>
 <?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
-<dl>
-    <dt><?php echo $this->translate('Item query'); ?></dt>
-    <dd><?php echo http_build_query($itemQuery); ?></dd>
-    <dt><?php echo $this->translate('Property'); ?></dt>
-    <dd><?php echo sprintf('%s (%s)', $property->label(), $property->term()); ?></dd>
-    <dt><?php echo $this->translate('Data type'); ?></dt>
-    <dd><?php echo sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName()); ?></dd>
-    <dt><?php echo $this->translate('Audit column'); ?></dt>
-    <dd><?php echo $auditColumn; ?></dd>
-</dl>
-<span><?php echo sprintf(
+<p><?php echo sprintf(
     $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
     $stringsUniqueCount,
     $pluralAuditColumns[$auditColumn],
     $stringsTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
-); ?></span>
+); ?></p>
+<button type="button" id="copy-all-button"><?php echo $this->translate('Copy all'); ?></button>
+<button type="button" id="clear-all-button"><?php echo $this->translate('Clear all'); ?></button>
 <?php echo $this->form()->openTag($form); ?>
     <?php echo $this->formCollection($form); ?>
     <div id="page-actions">
@@ -38,9 +37,9 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
     <thead>
         <tr>
             <th><?php echo $this->translate('Count'); ?></th>
-            <th><?php echo ucfirst($auditColumn); ?></th>
-            <th><?php echo sprintf($this->translate('Correct %s'), ucfirst($auditColumn)); ?></th>
-            <th><?php echo sprintf($this->translate('Remove %s'), ucfirst($auditColumn)); ?></th>
+            <th><?php echo sprintf($this->translate('From: %s'), $auditColumn); ?></th>
+            <th><?php echo sprintf($this->translate('To: %s'), $auditColumn); ?></th>
+            <th><?php echo $this->translate('Remove'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -50,6 +49,8 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
             <td><pre style="white-space: pre-wrap;"><?php echo $string[1]; ?></pre></td>
             <td>
                 <textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" style="width: 100%;" rows="4"></textarea>
+                <button type="button" class="copy-button"><?php echo $this->translate('Copy'); ?></button>
+                <button type="button" class="clear-button"><?php echo $this->translate('Clear'); ?></button>
                 <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
                 <select class="validate-key">
                     <option value="@value"><?php echo $this->translate('with @value'); ?></option>
@@ -88,29 +89,52 @@ form.addEventListener('submit', function(e) {
     }
     document.getElementById('removals').value = JSON.stringify(removals);
 });
-// Handle validation button click.
+
+// Handle button clicks.
 form.addEventListener('click', function(e) {
-    if (!e.target.classList.contains('validate-button')) {
-        return;
+    if (e.target.classList.contains('copy-button')) {
+        e.preventDefault();
+        copy(e.target);
+    } else if (e.target.classList.contains('clear-button')) {
+        e.preventDefault();
+        clear(e.target);
+    } else if (e.target.classList.contains('validate-button')) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('value', e.target.closest('td').querySelector('.correction-string').value);
+        formData.append('key', e.target.closest('td').querySelector('.validate-key').value);
+        formData.append('data_type_name', document.getElementById('data_type_name').value);
+        fetch(form.dataset.validateUrl, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isValid) {
+                    e.target.style.backgroundColor = '#EFFDEF';
+                } else {
+                    e.target.style.backgroundColor = '#FDEFEF';
+                }
+            });
     }
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('value', e.target.previousElementSibling.value);
-    formData.append('key', e.target.nextElementSibling.value);
-    formData.append('data_type_name', document.getElementById('data_type_name').value);
-    fetch(form.dataset.validateUrl, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.isValid) {
-                e.target.style.backgroundColor = '#EFFDEF';
-            } else {
-                e.target.style.backgroundColor = '#FDEFEF';
-            }
-        });
 });
+
+document.getElementById('copy-all-button').addEventListener('click', function(e) {
+    e.preventDefault();
+    const buttonCollection = document.getElementsByClassName('copy-button');
+    for (let button of buttonCollection) {
+        copy(button);
+    }
+});
+
+document.getElementById('clear-all-button').addEventListener('click', function(e) {
+    e.preventDefault();
+    const buttonCollection = document.getElementsByClassName('clear-button');
+    for (let button of buttonCollection) {
+        clear(button);
+    }
+});
+
 // Use TableFilter library for filtering and sorting the values table.
 // @see https://github.com/koalyptus/TableFilter
 var tableFilter = new TableFilter(table, {
@@ -124,9 +148,6 @@ var tableFilter = new TableFilter(table, {
     watermark: ['Filter', 'Filter'],
     auto_filter: {
         delay: 1000
-    },
-    paging: {
-        results_per_page: ['Per page: ', [25, 50, 100]]
     },
     rows_counter: {
         text: 'Rows: '
@@ -143,4 +164,12 @@ tableFilter.emitter.on(['initialized'], () => {
     table.style.display = 'block';
 });
 tableFilter.init();
+
+function copy(button) {
+    const textarea = button.closest('td').querySelector('.correction-string');
+    textarea.value = textarea.dataset.name;
+}
+function clear(button) {
+    button.closest('td').querySelector('.correction-string').value = '';
+}
 </script>
