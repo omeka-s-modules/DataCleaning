@@ -36,7 +36,7 @@ class IndexController extends AbstractActionController
 
         parse_str($formData['item_query'], $itemQuery);
         $itemIds = $this->dataCleaning()->getItemIds($itemQuery);
-        list($valuesStmt, $valuesUniqueCount, $valuesTotalCount) = $this->dataCleaning()->getValues(
+        list($stringsStmt, $stringsUniqueCount, $stringsTotalCount) = $this->dataCleaning()->getValueStrings(
             $itemIds,
             $formData['property_id'],
             $formData['data_type_name'],
@@ -59,9 +59,9 @@ class IndexController extends AbstractActionController
         $view->setVariable('property', $property);
         $view->setVariable('dataType', $dataType);
         $view->setVariable('auditColumn', $formData['audit_column']);
-        $view->setVariable('valuesStmt', $valuesStmt);
-        $view->setVariable('valuesUniqueCount', $valuesUniqueCount);
-        $view->setVariable('valuesTotalCount', $valuesTotalCount);
+        $view->setVariable('stringsStmt', $stringsStmt);
+        $view->setVariable('stringsUniqueCount', $stringsUniqueCount);
+        $view->setVariable('stringsTotalCount', $stringsTotalCount);
         return $view;
     }
 

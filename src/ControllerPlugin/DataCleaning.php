@@ -34,12 +34,12 @@ class DataCleaning extends AbstractPlugin
         return $response->getContent();
     }
 
-    public function getValues(array $resourceIds, $propertyId, $dataTypeName, $auditColumn)
+    public function getValueStrings(array $resourceIds, $propertyId, $dataTypeName, $auditColumn)
     {
         $auditColumn = ('uri' === $auditColumn) ? 'uri' : 'value';
         $conn = $this->services->get('Omeka\Connection');
 
-        // Get the values statement.
+        // Get the strings statement.
         $sql = sprintf('
             SELECT COUNT(%1$s) count, %1$s
             FROM value
@@ -48,14 +48,14 @@ class DataCleaning extends AbstractPlugin
             AND type = ?
             GROUP BY %1$s
             ORDER BY count DESC, %1$s ASC', $auditColumn);
-        $valuesStmt = $conn->executeQuery(
+        $stringsStmt = $conn->executeQuery(
             $sql,
             [$resourceIds, $propertyId, $dataTypeName],
             [Connection::PARAM_INT_ARRAY, PDO::PARAM_INT, PDO::PARAM_STR]
         );
-        $valuesStmt->setFetchMode(FetchMode::NUMERIC);
+        $stringsStmt->setFetchMode(FetchMode::NUMERIC);
 
-        // Get the unique values count.
+        // Get the unique strings count.
         $sql = sprintf('
             SELECT COUNT(*) FROM
             (
@@ -66,13 +66,13 @@ class DataCleaning extends AbstractPlugin
                 AND type = ?
                 GROUP BY %1$s
             ) subquery', $auditColumn);
-        $valuesUniqueCount = $conn->executeQuery(
+        $stringsUniqueCount = $conn->executeQuery(
             $sql,
             [$resourceIds, $propertyId, $dataTypeName],
             [Connection::PARAM_INT_ARRAY, PDO::PARAM_INT, PDO::PARAM_STR]
         )->fetchColumn();
 
-        // Get the total values count.
+        // Get the total strings count.
         $sql = sprintf('
             SELECT COUNT(*) FROM
             (
@@ -82,12 +82,12 @@ class DataCleaning extends AbstractPlugin
                 AND property_id = ?
                 AND type = ?
             ) subquery', $auditColumn);
-        $valuesTotalCount = $conn->executeQuery(
+        $stringsTotalCount = $conn->executeQuery(
             $sql,
             [$resourceIds, $propertyId, $dataTypeName],
             [Connection::PARAM_INT_ARRAY, PDO::PARAM_INT, PDO::PARAM_STR]
         )->fetchColumn();
 
-        return [$valuesStmt, $valuesUniqueCount, $valuesTotalCount];
+        return [$stringsStmt, $stringsUniqueCount, $stringsTotalCount];
     }
 }

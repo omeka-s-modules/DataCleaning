@@ -1,3 +1,8 @@
+<?php
+$tableFilterUrl = $this->assetUrl('vendor/tablefilter-0.7.2/tablefilter.js', 'DataCleaning');
+$tableFilterBasePath = substr($tableFilterUrl, 0, strrpos($tableFilterUrl, '/') + 1);
+$this->headScript()->appendFile($tableFilterUrl);
+?>
 <?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
 <dl>
     <dt><?php echo $this->translate('Item query'); ?></dt>
@@ -10,9 +15,9 @@
     <dd><?php echo $auditColumn; ?></dd>
 </dl>
 <p><?php echo sprintf(
-    $this->translate('You are auditing %s unique values (%s total values) from %s items.'),
-    $valuesUniqueCount,
-    $valuesTotalCount,
+    $this->translate('You are auditing %s unique strings (%s total strings) from %s items.'),
+    $stringsUniqueCount,
+    $stringsTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
 ); ?></p>
 <?php echo $this->form()->openTag($form); ?>
@@ -21,38 +26,37 @@
         <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
         <button><?php echo $this->translate('Submit'); ?></button>
     </div>
-    <table>
+    <table id="strings-table" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
     <thead>
         <tr>
             <th><?php echo $this->translate('Count'); ?></th>
-            <th><?php echo $this->translate('Text'); ?></th>
+            <th><?php echo $this->translate('String'); ?></th>
             <th><?php echo $this->translate('Correct'); ?></th>
+            <th><?php echo $this->translate('Validate'); ?></th>
             <th><?php echo $this->translate('Remove'); ?></th>
             <th><?php echo $this->translate('Link'); ?></th>
         </tr>
     </thead>
     <tbody>
-        <?php while ($value = $valuesStmt->fetch()): ?>
+        <?php while ($string = $stringsStmt->fetch()): ?>
         <?php
-        $valueQuery = $itemQuery;
-        $valueQuery['property'][] = ['joiner' => 'and', 'property' => $property->id(), 'type' => 'eq', 'text' => $value[1]];
+        $stringQuery = $itemQuery;
+        $stringQuery['property'][] = ['joiner' => 'and', 'property' => $property->id(), 'type' => 'eq', 'text' => $string[1]];
         ?>
         <tr>
-            <td><?php echo $value[0]; ?></td>
-            <td><?php echo $value[1]; ?></td>
-            <td>
-                <textarea class="correction-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>"></textarea>
-                <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
-            </td>
-            <td><input type="checkbox" class="removal-value" data-name="<?php echo $this->escapeHtml($value[1]); ?>" value="1"></td>
+            <td><?php echo $string[0]; ?></td>
+            <td><pre><?php echo $string[1]; ?></pre></td>
+            <td><textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>"></textarea></td>
+            <td><button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button></td>
+            <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
             <td><?php echo $this->hyperlink(
                 'Link',
                 $this->url(
                     'admin/default',
                     ['controller' => 'item', 'action' => 'browse'],
-                    ['query' => $valueQuery]
+                    ['query' => $stringQuery]
                 ),
-                ['target' => '_blank', 'title' => 'Results may include values of other data types and columns']
+                ['target' => '_blank', 'title' => 'Results may include strings of other data types and columns']
             ); ?></td>
         </tr>
         <?php endwhile; ?>
@@ -61,11 +65,13 @@
 <?php echo $this->form()->closeTag(); ?>
 <script>
 const form = document.getElementById('audit-form');
+const table = document.getElementById('strings-table');
+
 // Handle form submission.
 form.addEventListener('submit', function(e) {
     // Populate corrections input.
     let corrections = {};
-    const correctionsCollection = document.getElementsByClassName('correction-value');
+    const correctionsCollection = document.getElementsByClassName('correction-string');
     for (let correction of correctionsCollection) {
         if ('' !== correction.value) {
             corrections[correction.dataset.name] = correction.value;
@@ -74,7 +80,7 @@ form.addEventListener('submit', function(e) {
     document.getElementById('corrections').value = JSON.stringify(corrections);
     // Populate removals input.
     let removals = [];
-    const removalsCollection = document.getElementsByClassName('removal-value');
+    const removalsCollection = document.getElementsByClassName('removal-string');
     for (let removal of removalsCollection) {
         if (removal.checked) {
             removals.push(removal.dataset.name);
@@ -89,7 +95,7 @@ form.addEventListener('click', function(e) {
     }
     e.preventDefault();
     const formData = new FormData();
-    formData.append('value', e.target.previousElementSibling.value);
+    formData.append('value', e.target.closest('tr').querySelector('.correction-string').value);
     formData.append('data_type_name', document.getElementById('data_type_name').value);
     fetch(form.dataset.validateUrl, {
         method: 'POST',
@@ -104,4 +110,23 @@ form.addEventListener('click', function(e) {
             }
         });
 });
+// Use TableFilter library for filtering and sorting the values table.
+// @see https://github.com/koalyptus/TableFilter
+var tableFilter = new TableFilter(table, {
+    base_path: table.dataset.tableFilterBasePath,
+    alternate_rows: true,
+    no_results_message: true,
+    loader: true,
+    rows_counter: {
+        text: 'Rows: '
+    },
+    btn_reset: {
+        text: 'Clear'
+    },
+     col_types: [
+        'number', 'string'
+    ],
+    extensions: [{name: 'sort'}]
+});
+tableFilter.init();
 </script>
