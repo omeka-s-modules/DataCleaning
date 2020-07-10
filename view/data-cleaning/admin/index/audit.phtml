@@ -45,10 +45,6 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
     </thead>
     <tbody>
         <?php while ($string = $stringsStmt->fetch()): ?>
-        <?php
-        $stringQuery = $itemQuery;
-        $stringQuery['property'][] = ['joiner' => 'and', 'property' => $property->id(), 'type' => 'eq', 'text' => $string[1]];
-        ?>
         <tr>
             <td><?php echo $string[0]; ?></td>
             <td><pre style="white-space: pre-wrap;"><?php echo $string[1]; ?></pre></td>
