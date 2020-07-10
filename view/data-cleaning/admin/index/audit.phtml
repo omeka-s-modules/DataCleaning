@@ -46,7 +46,14 @@ $this->headScript()->appendFile($tableFilterUrl);
             <td><?php echo $string[0]; ?></td>
             <td><pre><?php echo $string[1]; ?></pre></td>
             <td><textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>"></textarea></td>
-            <td><button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button></td>
+            <td>
+                <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
+                <select class="">
+                    <option value="">With @value</option>
+                    <option value="">With @id</option>
+                    <option value="">With value_resource_id</option>
+                </select>
+            </td>
             <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
         </tr>
         <?php endwhile; ?>
