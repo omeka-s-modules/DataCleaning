@@ -114,6 +114,10 @@ form.addEventListener('click', function(e) {
 // @see https://github.com/koalyptus/TableFilter
 var tableFilter = new TableFilter(table, {
     base_path: table.dataset.tableFilterBasePath,
+    col_2: 'none',
+    col_3: 'none',
+    col_4: 'none',
+    col_5: 'none',
     alternate_rows: true,
     no_results_message: true,
     loader: true,
@@ -124,7 +128,7 @@ var tableFilter = new TableFilter(table, {
         text: 'Clear'
     },
      col_types: [
-        'number', 'string'
+        'number', 'string', 'none', 'none', 'none', 'none'
     ],
     extensions: [{name: 'sort'}]
 });
