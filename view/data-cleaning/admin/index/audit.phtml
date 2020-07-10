@@ -34,7 +34,6 @@ $this->headScript()->appendFile($tableFilterUrl);
             <th><?php echo $this->translate('Correct'); ?></th>
             <th><?php echo $this->translate('Validate'); ?></th>
             <th><?php echo $this->translate('Remove'); ?></th>
-            <th><?php echo $this->translate('Link'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -49,15 +48,6 @@ $this->headScript()->appendFile($tableFilterUrl);
             <td><textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>"></textarea></td>
             <td><button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button></td>
             <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
-            <td><?php echo $this->hyperlink(
-                'Link',
-                $this->url(
-                    'admin/default',
-                    ['controller' => 'item', 'action' => 'browse'],
-                    ['query' => $stringQuery]
-                ),
-                ['target' => '_blank', 'title' => 'Results may include strings of other data types and columns']
-            ); ?></td>
         </tr>
         <?php endwhile; ?>
     </tbody>
@@ -117,7 +107,6 @@ var tableFilter = new TableFilter(table, {
     col_2: 'none',
     col_3: 'none',
     col_4: 'none',
-    col_5: 'none',
     alternate_rows: true,
     no_results_message: true,
     loader: true,
@@ -128,7 +117,7 @@ var tableFilter = new TableFilter(table, {
         text: 'Clear'
     },
      col_types: [
-        'number', 'string', 'none', 'none', 'none', 'none'
+        'number', 'string', 'none', 'none', 'none'
     ],
     extensions: [{name: 'sort'}]
 });
