@@ -15,20 +15,20 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
     <dt><?php echo $this->translate('Audit column'); ?></dt>
     <dd><?php echo $auditColumn; ?></dd>
 </dl>
-<p><?php echo sprintf(
+<span><?php echo sprintf(
     $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
     $stringsUniqueCount,
     $pluralAuditColumns[$auditColumn],
     $stringsTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
-); ?></p>
+); ?></span>
 <?php echo $this->form()->openTag($form); ?>
     <?php echo $this->formCollection($form); ?>
     <div id="page-actions">
         <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
         <button><?php echo $this->translate('Submit'); ?></button>
     </div>
-    <table id="strings-table" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
+    <table id="strings-table" style="display: none;" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
     <colgroup>
         <col style="width: 8%;">
         <col style="width: 42%;">
@@ -121,19 +121,30 @@ var tableFilter = new TableFilter(table, {
     base_path: table.dataset.tableFilterBasePath,
     col_2: 'none',
     col_3: 'none',
+    responsive: true,
     alternate_rows: true,
     no_results_message: true,
-    loader: true,
+    ignore_diacritics: true,
+    watermark: ['Filter', 'Filter'],
+    auto_filter: {
+        delay: 1000
+    },
+    paging: {
+        results_per_page: ['Per page: ', [25, 50, 100]]
+    },
     rows_counter: {
         text: 'Rows: '
     },
-    btn_reset: {
-        text: 'Clear'
-    },
-     col_types: [
+    col_types: [
         'number', 'string', 'none', 'none'
     ],
-    extensions: [{name: 'sort'}]
+    extensions: [
+        {name: 'sort'}
+    ]
+});
+// Display table when TableFilter is initialized.
+tableFilter.emitter.on(['initialized'], () => {
+    table.style.display = 'block';
 });
 tableFilter.init();
 </script>
