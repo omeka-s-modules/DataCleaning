@@ -29,6 +29,12 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
         <button><?php echo $this->translate('Submit'); ?></button>
     </div>
     <table id="strings-table" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
+    <colgroup>
+        <col style="width: 8%;">
+        <col style="width: 42%;">
+        <col style="width: 42%;">
+        <col style="width: 8%;">
+    </colgroup>
     <thead>
         <tr>
             <th><?php echo $this->translate('Count'); ?></th>
