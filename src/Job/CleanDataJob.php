@@ -14,7 +14,7 @@ class CleanDataJob extends AbstractJob
         $corrections = json_decode($this->getArg('corrections', '{}'), true);
         $removals = json_decode($this->getArg('removals', '[]'), true);
         $itemIds = json_decode($this->getArg('item_ids', '[]'), true);
-        $auditColumn = in_array($this->getArg('audit_column'), ['value', 'uri'])
+        $auditColumn = in_array($this->getArg('audit_column'), ['value', 'uri', 'value_resource_id'])
             ? $this->getArg('audit_column') : 'value';
 
         // Correct values.

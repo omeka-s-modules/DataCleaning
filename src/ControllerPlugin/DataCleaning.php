@@ -36,7 +36,8 @@ class DataCleaning extends AbstractPlugin
 
     public function getValueStrings(array $resourceIds, $propertyId, $dataTypeName, $auditColumn)
     {
-        $auditColumn = ('uri' === $auditColumn) ? 'uri' : 'value';
+        $auditColumn = in_array($auditColumn, ['value', 'uri', 'value_resource_id'])
+            ? $auditColumn : 'value';
         $conn = $this->services->get('Omeka\Connection');
 
         // Get the strings statement.

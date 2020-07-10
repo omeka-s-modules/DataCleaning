@@ -58,6 +58,7 @@ class PrepareAuditForm extends Form
                 'value_options' => [
                     'value' => 'value', // @translate
                     'uri' => 'uri', // @translate
+                    'value_resource_id' => 'value_resource_id', // @translate
                 ],
             ],
         ]);
