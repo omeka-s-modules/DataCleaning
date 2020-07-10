@@ -2,6 +2,7 @@
 $tableFilterUrl = $this->assetUrl('vendor/tablefilter-0.7.2/tablefilter.js', 'DataCleaning');
 $tableFilterBasePath = substr($tableFilterUrl, 0, strrpos($tableFilterUrl, '/') + 1);
 $this->headScript()->appendFile($tableFilterUrl);
+$pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id' => 'value_resource_ids'];
 ?>
 <?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
 <dl>
@@ -15,8 +16,9 @@ $this->headScript()->appendFile($tableFilterUrl);
     <dd><?php echo $auditColumn; ?></dd>
 </dl>
 <p><?php echo sprintf(
-    $this->translate('You are auditing %s unique strings (%s total strings) from %s items.'),
+    $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
     $stringsUniqueCount,
+    $pluralAuditColumns[$auditColumn],
     $stringsTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
 ); ?></p>
@@ -30,9 +32,9 @@ $this->headScript()->appendFile($tableFilterUrl);
     <thead>
         <tr>
             <th><?php echo $this->translate('Count'); ?></th>
-            <th><?php echo $this->translate('String'); ?></th>
-            <th><?php echo $this->translate('Correct string'); ?></th>
-            <th><?php echo $this->translate('Remove string'); ?></th>
+            <th><?php echo ucfirst($auditColumn); ?></th>
+            <th><?php echo sprintf($this->translate('Correct %s'), ucfirst($auditColumn)); ?></th>
+            <th><?php echo sprintf($this->translate('Remove %s'), ucfirst($auditColumn)); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -43,7 +45,7 @@ $this->headScript()->appendFile($tableFilterUrl);
         ?>
         <tr>
             <td><?php echo $string[0]; ?></td>
-            <td><pre><?php echo $string[1]; ?></pre></td>
+            <td><pre style="white-space: pre-wrap;"><?php echo $string[1]; ?></pre></td>
             <td>
                 <textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" style="width: 100%;" rows="4"></textarea>
                 <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
