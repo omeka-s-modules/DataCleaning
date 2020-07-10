@@ -31,9 +31,8 @@ $this->headScript()->appendFile($tableFilterUrl);
         <tr>
             <th><?php echo $this->translate('Count'); ?></th>
             <th><?php echo $this->translate('String'); ?></th>
-            <th><?php echo $this->translate('Correct'); ?></th>
-            <th><?php echo $this->translate('Validate'); ?></th>
-            <th><?php echo $this->translate('Remove'); ?></th>
+            <th><?php echo $this->translate('Correct string'); ?></th>
+            <th><?php echo $this->translate('Remove string'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -45,13 +44,13 @@ $this->headScript()->appendFile($tableFilterUrl);
         <tr>
             <td><?php echo $string[0]; ?></td>
             <td><pre><?php echo $string[1]; ?></pre></td>
-            <td><textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>"></textarea></td>
             <td>
+                <textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" style="width: 100%;" rows="4"></textarea>
                 <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
                 <select class="validate-key">
-                    <option value="@value">With @value</option>
-                    <option value="@id">With @id</option>
-                    <option value="value_resource_id">With value_resource_id</option>
+                    <option value="@value"><?php echo $this->translate('with @value'); ?></option>
+                    <option value="@id"><?php echo $this->translate('with @id'); ?></option>
+                    <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
                 </select>
             </td>
             <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
@@ -92,7 +91,7 @@ form.addEventListener('click', function(e) {
     }
     e.preventDefault();
     const formData = new FormData();
-    formData.append('value', e.target.closest('tr').querySelector('.correction-string').value);
+    formData.append('value', e.target.previousElementSibling.value);
     formData.append('key', e.target.nextElementSibling.value);
     formData.append('data_type_name', document.getElementById('data_type_name').value);
     fetch(form.dataset.validateUrl, {
@@ -114,7 +113,6 @@ var tableFilter = new TableFilter(table, {
     base_path: table.dataset.tableFilterBasePath,
     col_2: 'none',
     col_3: 'none',
-    col_4: 'none',
     alternate_rows: true,
     no_results_message: true,
     loader: true,
@@ -125,7 +123,7 @@ var tableFilter = new TableFilter(table, {
         text: 'Clear'
     },
      col_types: [
-        'number', 'string', 'none', 'none', 'none'
+        'number', 'string', 'none', 'none'
     ],
     extensions: [{name: 'sort'}]
 });
