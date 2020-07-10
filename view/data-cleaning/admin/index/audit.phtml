@@ -48,10 +48,10 @@ $this->headScript()->appendFile($tableFilterUrl);
             <td><textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>"></textarea></td>
             <td>
                 <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
-                <select class="">
-                    <option value="">With @value</option>
-                    <option value="">With @id</option>
-                    <option value="">With value_resource_id</option>
+                <select class="validate-key">
+                    <option value="@value">With @value</option>
+                    <option value="@id">With @id</option>
+                    <option value="value_resource_id">With value_resource_id</option>
                 </select>
             </td>
             <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
@@ -93,6 +93,7 @@ form.addEventListener('click', function(e) {
     e.preventDefault();
     const formData = new FormData();
     formData.append('value', e.target.closest('tr').querySelector('.correction-string').value);
+    formData.append('key', e.target.nextElementSibling.value);
     formData.append('data_type_name', document.getElementById('data_type_name').value);
     fetch(form.dataset.validateUrl, {
         method: 'POST',
