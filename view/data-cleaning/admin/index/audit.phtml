@@ -13,7 +13,7 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
 ); ?></div>
 <?php echo $this->form()->openTag($form); ?>
-    <?php echo $this->formCollection($form); ?>
+    <?php echo $this->formCollection($form, false); ?>
     <div id="page-actions">
         <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
         <button><?php echo $this->translate('Submit'); ?></button>
