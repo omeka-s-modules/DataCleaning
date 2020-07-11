@@ -28,6 +28,8 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
             <option value="@id"><?php echo $this->translate('with @id'); ?></option>
             <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
         </select>
+        <button type="button" id="remove-all-button"><?php echo $this->translate('Remove all'); ?></button>
+        <button type="button" id="unremove-all-button"><?php echo $this->translate('Unremove all'); ?></button>
         <table id="audit-table" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
             <colgroup>
                 <col style="width: 8%;">
@@ -60,7 +62,7 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
                             <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
                         </select>
                     </td>
-                    <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
+                    <td><input type="checkbox" class="removal-checkbox" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
@@ -125,7 +127,7 @@ form.addEventListener('submit', function(e) {
     document.getElementById('corrections').value = JSON.stringify(corrections);
     // Populate removals input.
     let removals = [];
-    const removalsCollection = document.getElementsByClassName('removal-string');
+    const removalsCollection = document.getElementsByClassName('removal-checkbox');
     for (let removal of removalsCollection) {
         if (removal.checked) {
             removals.push(removal.dataset.name);
@@ -179,6 +181,24 @@ document.getElementById('validate-all-button').addEventListener('click', functio
         validateData[button.closest('tr').id] = button.closest('td').querySelector('.correction-string').value;
     }
     validate(validateKey, validateData);
+});
+
+// Handle the remove all button.
+document.getElementById('remove-all-button').addEventListener('click', function(e) {
+    e.preventDefault();
+    const checkboxCollection = document.getElementsByClassName('removal-checkbox');
+    for (let checkbox of checkboxCollection) {
+        checkbox.checked = true;
+    }
+});
+
+// Handle the unremove all button.
+document.getElementById('unremove-all-button').addEventListener('click', function(e) {
+    e.preventDefault();
+    const checkboxCollection = document.getElementsByClassName('removal-checkbox');
+    for (let checkbox of checkboxCollection) {
+        checkbox.checked = false;
+    }
 });
 
 // Use TableFilter library for filtering and sorting the values table.
