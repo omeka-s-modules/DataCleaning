@@ -4,6 +4,69 @@ $tableFilterBasePath = substr($tableFilterUrl, 0, strrpos($tableFilterUrl, '/') 
 $this->headScript()->appendFile($tableFilterUrl);
 $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id' => 'value_resource_ids'];
 ?>
+<?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
+<div><?php echo sprintf(
+    $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
+    $stringsUniqueCount,
+    $pluralAuditColumns[$auditColumn],
+    $stringsTotalCount,
+    $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
+); ?></div>
+<?php echo $this->form()->openTag($form); ?>
+    <?php echo $this->formCollection($form); ?>
+    <div id="page-actions">
+        <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
+        <button><?php echo $this->translate('Submit'); ?></button>
+    </div>
+    <div id="audit-loading-container"><?php echo $this->translate('Loading audit table...'); ?></div>
+    <div id="audit-container" style="display: none;" >
+        <button type="button" id="copy-all-button"><?php echo $this->translate('Copy all'); ?></button>
+        <button type="button" id="clear-all-button"><?php echo $this->translate('Clear all'); ?></button>
+        <button type="button" id="validate-all-button"><?php echo $this->translate('Validate all'); ?></button>
+        <select id="validate-all-key">
+            <option value="@value"><?php echo $this->translate('with @value'); ?></option>
+            <option value="@id"><?php echo $this->translate('with @id'); ?></option>
+            <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
+        </select>
+        <table id="audit-table" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
+            <colgroup>
+                <col style="width: 8%;">
+                <col style="width: 42%;">
+                <col style="width: 42%;">
+                <col style="width: 8%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th><?php echo $this->translate('Count'); ?></th>
+                    <th><?php echo sprintf($this->translate('From: %s'), $auditColumn); ?></th>
+                    <th><?php echo sprintf($this->translate('To: %s'), $auditColumn); ?></th>
+                    <th><?php echo $this->translate('Remove'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $i = 0; ?>
+                <?php while ($string = $stringsStmt->fetch()): ?>
+                <tr id="<?php echo sprintf('row-%s', $i++); ?>" >
+                    <td><?php echo $string[0]; ?></td>
+                    <td><pre style="white-space: pre-wrap;"><?php echo $string[1]; ?></pre></td>
+                    <td>
+                        <textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" style="width: 100%;" rows="4"></textarea>
+                        <button type="button" class="copy-button"><?php echo $this->translate('Copy'); ?></button>
+                        <button type="button" class="clear-button"><?php echo $this->translate('Clear'); ?></button>
+                        <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
+                        <select class="validate-key">
+                            <option value="@value"><?php echo $this->translate('with @value'); ?></option>
+                            <option value="@id"><?php echo $this->translate('with @id'); ?></option>
+                            <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
+                        </select>
+                    </td>
+                    <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+<?php echo $this->form()->closeTag(); ?>
 <?php echo sprintf(
     "<!--\nItem query: %s\nAudit column: %s\nProperty: %s\nData type: %s\n-->",
     http_build_query($itemQuery),
@@ -11,76 +74,22 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
     sprintf('%s (%s)', $property->label(), $property->term()),
     sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName())
 ); ?>
-<?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
-<p><?php echo sprintf(
-    $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
-    $stringsUniqueCount,
-    $pluralAuditColumns[$auditColumn],
-    $stringsTotalCount,
-    $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
-); ?></p>
-<button type="button" id="copy-all-button"><?php echo $this->translate('Copy all'); ?></button>
-<button type="button" id="clear-all-button"><?php echo $this->translate('Clear all'); ?></button>
-<button type="button" id="validate-all-button"><?php echo $this->translate('Validate all'); ?></button>
-<select id="validate-all-key">
-    <option value="@value"><?php echo $this->translate('with @value'); ?></option>
-    <option value="@id"><?php echo $this->translate('with @id'); ?></option>
-    <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
-</select>
-<?php echo $this->form()->openTag($form); ?>
-    <?php echo $this->formCollection($form); ?>
-    <div id="page-actions">
-        <?php echo $this->hyperlink($this->translate('Cancel'), $this->url(null, ['action' => 'index'], true), ['class' => 'button']); ?>
-        <button><?php echo $this->translate('Submit'); ?></button>
-    </div>
-    <table id="strings-table" style="display: none;" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
-    <colgroup>
-        <col style="width: 8%;">
-        <col style="width: 42%;">
-        <col style="width: 42%;">
-        <col style="width: 8%;">
-    </colgroup>
-    <thead>
-        <tr>
-            <th><?php echo $this->translate('Count'); ?></th>
-            <th><?php echo sprintf($this->translate('From: %s'), $auditColumn); ?></th>
-            <th><?php echo sprintf($this->translate('To: %s'), $auditColumn); ?></th>
-            <th><?php echo $this->translate('Remove'); ?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $i = 0; ?>
-        <?php while ($string = $stringsStmt->fetch()): ?>
-        <tr id="<?php echo $i++; ?>" >
-            <td><?php echo $string[0]; ?></td>
-            <td><pre style="white-space: pre-wrap;"><?php echo $string[1]; ?></pre></td>
-            <td>
-                <textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" style="width: 100%;" rows="4"></textarea>
-                <button type="button" class="copy-button"><?php echo $this->translate('Copy'); ?></button>
-                <button type="button" class="clear-button"><?php echo $this->translate('Clear'); ?></button>
-                <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
-                <select class="validate-key">
-                    <option value="@value"><?php echo $this->translate('with @value'); ?></option>
-                    <option value="@id"><?php echo $this->translate('with @id'); ?></option>
-                    <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
-                </select>
-            </td>
-            <td><input type="checkbox" class="removal-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
-        </tr>
-        <?php endwhile; ?>
-    </tbody>
-    </table>
-<?php echo $this->form()->closeTag(); ?>
 <script>
 const form = document.getElementById('audit-form');
-const table = document.getElementById('strings-table');
+const table = document.getElementById('audit-table');
+
+// Copy a string into the textarea.
 const copy = function(button) {
     const textarea = button.closest('td').querySelector('.correction-string');
     textarea.value = textarea.dataset.name;
 };
+
+// Clear a textarea.
 const clear = function(button) {
     button.closest('td').querySelector('.correction-string').value = '';
 };
+
+// Validate a textarea.
 const validate = function(validateKey, validateData) {
     const formData = new FormData();
     formData.append('data_type_name', document.getElementById('data_type_name').value);
@@ -142,6 +151,7 @@ form.addEventListener('click', function(e) {
     }
 });
 
+// Handle the copy all button.
 document.getElementById('copy-all-button').addEventListener('click', function(e) {
     e.preventDefault();
     const buttonCollection = document.getElementsByClassName('copy-button');
@@ -150,6 +160,7 @@ document.getElementById('copy-all-button').addEventListener('click', function(e)
     }
 });
 
+// Handle the clear all button.
 document.getElementById('clear-all-button').addEventListener('click', function(e) {
     e.preventDefault();
     const buttonCollection = document.getElementsByClassName('clear-button');
@@ -158,6 +169,7 @@ document.getElementById('clear-all-button').addEventListener('click', function(e
     }
 });
 
+// Handle the validate all button.
 document.getElementById('validate-all-button').addEventListener('click', function(e) {
     e.preventDefault();
     const buttonCollection = document.getElementsByClassName('validate-button');
@@ -195,7 +207,8 @@ var tableFilter = new TableFilter(table, {
 });
 // Display table when TableFilter is initialized.
 tableFilter.emitter.on(['initialized'], () => {
-    table.style.display = 'block';
+    document.getElementById('audit-loading-container').style.display = 'none';
+    document.getElementById('audit-container').style.display = 'block';
 });
 tableFilter.init();
 </script>
