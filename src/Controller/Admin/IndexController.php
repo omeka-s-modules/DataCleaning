@@ -93,12 +93,12 @@ class IndexController extends AbstractActionController
         if (!$this->getRequest()->isPost()) {
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
-        $value = $this->params()->fromPost('value');
-        $key = $this->params()->fromPost('key');
-        $dataTypeName = $this->params()->fromPost('data_type_name');
-        $dataType = $this->dataCleaning()->getDataType($dataTypeName);
-        return new JsonModel([
-            'isValid' => $dataType->isValid([$key => $value]),
-        ]);
+        $postData = $this->params()->fromPost();
+        $dataType = $this->dataCleaning()->getDataType($postData['data_type_name']);
+        $responseData = [];
+        foreach (json_decode($postData['validate_data'], true) as $id => $string) {
+            $responseData[$id] = $dataType->isValid([$postData['validate_key'] => $string]);
+        }
+        return new JsonModel($responseData);
     }
 }

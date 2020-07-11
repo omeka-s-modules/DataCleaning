@@ -21,6 +21,12 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
 ); ?></p>
 <button type="button" id="copy-all-button"><?php echo $this->translate('Copy all'); ?></button>
 <button type="button" id="clear-all-button"><?php echo $this->translate('Clear all'); ?></button>
+<button type="button" id="validate-all-button"><?php echo $this->translate('Validate all'); ?></button>
+<select id="validate-all-key">
+    <option value="@value"><?php echo $this->translate('with @value'); ?></option>
+    <option value="@id"><?php echo $this->translate('with @id'); ?></option>
+    <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
+</select>
 <?php echo $this->form()->openTag($form); ?>
     <?php echo $this->formCollection($form); ?>
     <div id="page-actions">
@@ -43,8 +49,9 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
         </tr>
     </thead>
     <tbody>
+        <?php $i = 0; ?>
         <?php while ($string = $stringsStmt->fetch()): ?>
-        <tr>
+        <tr id="<?php echo $i++; ?>" >
             <td><?php echo $string[0]; ?></td>
             <td><pre style="white-space: pre-wrap;"><?php echo $string[1]; ?></pre></td>
             <td>
@@ -67,6 +74,34 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
 <script>
 const form = document.getElementById('audit-form');
 const table = document.getElementById('strings-table');
+const copy = function(button) {
+    const textarea = button.closest('td').querySelector('.correction-string');
+    textarea.value = textarea.dataset.name;
+};
+const clear = function(button) {
+    button.closest('td').querySelector('.correction-string').value = '';
+};
+const validate = function(validateKey, validateData) {
+    const formData = new FormData();
+    formData.append('data_type_name', document.getElementById('data_type_name').value);
+    formData.append('validate_key', validateKey);
+    formData.append('validate_data', JSON.stringify(validateData));
+    fetch(form.dataset.validateUrl, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            for (const [id, isValid] of Object.entries(data)) {
+                const button = document.getElementById(id).querySelector('.validate-button');
+                if (isValid) {
+                    button.style.backgroundColor = '#EFFDEF';
+                } else {
+                    button.style.backgroundColor = '#FDEFEF';
+                }
+            }
+        });
+}
 
 // Handle form submission.
 form.addEventListener('submit', function(e) {
@@ -100,22 +135,10 @@ form.addEventListener('click', function(e) {
         clear(e.target);
     } else if (e.target.classList.contains('validate-button')) {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('value', e.target.closest('td').querySelector('.correction-string').value);
-        formData.append('key', e.target.closest('td').querySelector('.validate-key').value);
-        formData.append('data_type_name', document.getElementById('data_type_name').value);
-        fetch(form.dataset.validateUrl, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.isValid) {
-                    e.target.style.backgroundColor = '#EFFDEF';
-                } else {
-                    e.target.style.backgroundColor = '#FDEFEF';
-                }
-            });
+        const validateKey = e.target.closest('td').querySelector('.validate-key').value;
+        const validateData = {};
+        validateData[e.target.closest('tr').id] = e.target.closest('td').querySelector('.correction-string').value;
+        validate(validateKey, validateData);
     }
 });
 
@@ -133,6 +156,17 @@ document.getElementById('clear-all-button').addEventListener('click', function(e
     for (let button of buttonCollection) {
         clear(button);
     }
+});
+
+document.getElementById('validate-all-button').addEventListener('click', function(e) {
+    e.preventDefault();
+    const buttonCollection = document.getElementsByClassName('validate-button');
+    const validateKey = document.getElementById('validate-all-key').value;
+    let validateData = {};
+    for (let button of buttonCollection) {
+        validateData[button.closest('tr').id] = button.closest('td').querySelector('.correction-string').value;
+    }
+    validate(validateKey, validateData);
 });
 
 // Use TableFilter library for filtering and sorting the values table.
@@ -164,12 +198,4 @@ tableFilter.emitter.on(['initialized'], () => {
     table.style.display = 'block';
 });
 tableFilter.init();
-
-function copy(button) {
-    const textarea = button.closest('td').querySelector('.correction-string');
-    textarea.value = textarea.dataset.name;
-}
-function clear(button) {
-    button.closest('td').querySelector('.correction-string').value = '';
-}
 </script>
