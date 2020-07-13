@@ -45,6 +45,8 @@ class CleanDataJob extends AbstractJob
                 ],
                 [
                     PDO::PARAM_STR,
+                    PDO::PARAM_INT,
+                    PDO::PARAM_STR,
                     PDO::PARAM_STR,
                     PDO::PARAM_INT,
                     PDO::PARAM_STR,
@@ -94,8 +96,11 @@ class CleanDataJob extends AbstractJob
         if (!in_array($auditColumn, $validAuditColumns)) {
             throw new Exception\InvalidArgumentException(sprintf('Invalid audit_column "%s"', $auditColumn));
         }
-        if ($this->getArg('target_audit_column') && !in_array($targetAuditColumn, $validAuditColumns)) {
-            throw new Exception\InvalidArgumentException(sprintf('Invalid target_audit_column "%s"', $this->getArg('target_audit_column')));
+        if ($this->getArg('target_audit_column')) {
+            $targetAuditColumn = $this->getArg('target_audit_column');
+            if (!in_array($targetAuditColumn, $validAuditColumns)) {
+                throw new Exception\InvalidArgumentException(sprintf('Invalid target_audit_column "%s"', $targetAuditColumn));
+            }
         }
         if (null === $targetAuditColumn) {
             // If no target is set, set it to the original audit column.
@@ -113,10 +118,10 @@ class CleanDataJob extends AbstractJob
      */
     protected function getProperties()
     {
+        $entityManager = $this->getServiceLocator()->get('Omeka\EntityManager');
         $property = $entityManager->find('Omeka\Entity\Property', $this->getArg('property_id'));
         $targetProperty = null;
         if ($this->getArg('target_property_id')) {
-            $entityManager = $this->getServiceLocator()->get('Omeka\EntityManager');
             $targetProperty = $entityManager->find('Omeka\Entity\Property', $this->getArg('target_property_id'));
         }
         if (null === $targetProperty) {
@@ -135,10 +140,10 @@ class CleanDataJob extends AbstractJob
      */
     protected function getDataTypes()
     {
+        $dataTypeManager = $this->getServiceLocator()->get('Omeka\DataTypeManager');
         $dataType = $dataTypeManager->get($this->getArg('data_type_name'));
         $targetDataType = null;
         if ($this->getArg('target_data_type_name')) {
-            $dataTypeManager = $this->getServiceLocator()->get('Omeka\DataTypeManager');
             $targetDataType = $dataTypeManager->get($this->getArg('target_data_type_name'));
         }
         if (null === $targetDataType) {
