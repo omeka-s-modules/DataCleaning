@@ -110,10 +110,21 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
         $postData = $this->params()->fromPost();
+        switch ($postData['audit_column']) {
+            case 'value_resource_id':
+                $validateKey = 'value_resource_id';
+                break;
+            case 'uri':
+                $validateKey = '@id';
+                break;
+            case 'value':
+            default:
+                $validateKey = '@value';
+        }
         $dataType = $this->dataCleaning()->getDataType($postData['data_type_name']);
         $responseData = [];
         foreach (json_decode($postData['validate_data'], true) as $id => $string) {
-            $responseData[$id] = $dataType->isValid([$postData['validate_key'] => $string]);
+            $responseData[$id] = $dataType->isValid([$validateKey => $string]);
         }
         return new JsonModel($responseData);
     }

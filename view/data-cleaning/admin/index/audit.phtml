@@ -47,11 +47,6 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
         <button type="button" id="copy-all-button"><?php echo $this->translate('Copy all'); ?></button>
         <button type="button" id="clear-all-button"><?php echo $this->translate('Clear all'); ?></button>
         <button type="button" id="validate-all-button"><?php echo $this->translate('Validate all'); ?></button>
-        <select id="validate-all-key">
-            <option value="@value"><?php echo $this->translate('with @value'); ?></option>
-            <option value="@id"><?php echo $this->translate('with @id'); ?></option>
-            <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
-        </select>
         <button type="button" id="remove-all-button"><?php echo $this->translate('Remove all'); ?></button>
         <button type="button" id="unremove-all-button"><?php echo $this->translate('Unremove all'); ?></button>
         <table id="audit-table" data-table-filter-base-path="<?php echo $this->escapeHtml($tableFilterBasePath); ?>">
@@ -80,11 +75,6 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
                         <button type="button" class="copy-button"><?php echo $this->translate('Copy'); ?></button>
                         <button type="button" class="clear-button"><?php echo $this->translate('Clear'); ?></button>
                         <button type="button" class="validate-button"><?php echo $this->translate('Validate'); ?></button>
-                        <select class="validate-key">
-                            <option value="@value"><?php echo $this->translate('with @value'); ?></option>
-                            <option value="@id"><?php echo $this->translate('with @id'); ?></option>
-                            <option value="value_resource_id"><?php echo $this->translate('with value_resource_id'); ?></option>
-                        </select>
                     </td>
                     <td><input type="checkbox" class="removal-checkbox" data-name="<?php echo $this->escapeHtml($string[1]); ?>" value="1"></td>
                 </tr>
@@ -115,15 +105,17 @@ const clear = function(button) {
     button.closest('td').querySelector('.correction-string').value = '';
 };
 
-// Validate a textarea.
-const validate = function(validateKey, validateData) {
+// Validate a textarea against the (target) audit column and (target) data type.
+const validate = function(validateData) {
     const formData = new FormData();
+    const auditColumnInput = document.getElementById('audit_column');
+    const targetAuditColumnInput = document.getElementById('target_audit_column');
     const dataTypeInput = document.getElementById('data_type_name');
     const targetDataTypeInput = document.getElementById('target_data_type_name');
-    // Validate against the target data type if set.
+    const auditColumn = targetAuditColumnInput.value ? targetAuditColumnInput.value : auditColumnInput.value;
     const dataTypeName = targetDataTypeInput.value ? targetDataTypeInput.value : dataTypeInput.value;
+    formData.append('audit_column', auditColumn);
     formData.append('data_type_name', dataTypeName);
-    formData.append('validate_key', validateKey);
     formData.append('validate_data', JSON.stringify(validateData));
     fetch(form.dataset.validateUrl, {
         method: 'POST',
@@ -179,10 +171,9 @@ form.addEventListener('click', function(e) {
         clear(e.target);
     } else if (e.target.classList.contains('validate-button')) {
         e.preventDefault();
-        const validateKey = e.target.closest('td').querySelector('.validate-key').value;
         const validateData = {};
         validateData[e.target.closest('tr').id] = e.target.closest('td').querySelector('.correction-string').value;
-        validate(validateKey, validateData);
+        validate(validateData);
     }
 });
 
@@ -208,12 +199,11 @@ document.getElementById('clear-all-button').addEventListener('click', function(e
 document.getElementById('validate-all-button').addEventListener('click', function(e) {
     e.preventDefault();
     const buttonCollection = document.getElementsByClassName('validate-button');
-    const validateKey = document.getElementById('validate-all-key').value;
     let validateData = {};
     for (let button of buttonCollection) {
         validateData[button.closest('tr').id] = button.closest('td').querySelector('.correction-string').value;
     }
-    validate(validateKey, validateData);
+    validate(validateData);
 });
 
 // Handle the remove all button.
