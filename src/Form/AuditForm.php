@@ -19,6 +19,13 @@ class AuditForm extends Form
         $this->setAttribute('id', 'audit-form');
         $this->add([
             'type' => ZendElement\Hidden::class,
+            'name' => 'audit_column',
+            'attributes' => [
+                'id' => 'audit_column',
+            ],
+       ]);
+        $this->add([
+            'type' => ZendElement\Hidden::class,
             'name' => 'property_id',
             'attributes' => [
                 'id' => 'property_id',
@@ -33,11 +40,25 @@ class AuditForm extends Form
         ]);
         $this->add([
             'type' => ZendElement\Hidden::class,
-            'name' => 'audit_column',
+            'name' => 'target_audit_column',
             'attributes' => [
-                'id' => 'audit_column',
+                'id' => 'target_audit_column',
             ],
        ]);
+        $this->add([
+            'type' => ZendElement\Hidden::class,
+            'name' => 'target_property_id',
+            'attributes' => [
+                'id' => 'target_property_id',
+            ],
+        ]);
+        $this->add([
+            'type' => ZendElement\Hidden::class,
+            'name' => 'target_data_type_name',
+            'attributes' => [
+                'id' => 'target_data_type_name',
+            ],
+        ]);
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'corrections',
@@ -62,6 +83,10 @@ class AuditForm extends Form
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add([
+            'name' => 'audit_column',
+            'required' => true,
+        ]);
+        $inputFilter->add([
             'name' => 'property_id',
             'required' => true,
         ]);
@@ -70,8 +95,16 @@ class AuditForm extends Form
             'required' => true,
         ]);
         $inputFilter->add([
-            'name' => 'audit_column',
-            'required' => true,
+            'name' => 'target_audit_column',
+            'required' => false,
+        ]);
+        $inputFilter->add([
+            'name' => 'target_property_id',
+            'required' => false,
+        ]);
+        $inputFilter->add([
+            'name' => 'target_data_type_name',
+            'required' => false,
         ]);
         $inputFilter->add([
             'name' => 'corrections',

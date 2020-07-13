@@ -94,7 +94,11 @@ const clear = function(button) {
 // Validate a textarea.
 const validate = function(validateKey, validateData) {
     const formData = new FormData();
-    formData.append('data_type_name', document.getElementById('data_type_name').value);
+    const dataTypeInput = document.getElementById('data_type_name');
+    const targetDataTypeInput = document.getElementById('target_data_type_name');
+    // Validate against the target data type if set.
+    const dataTypeName = targetDataTypeInput.value ? targetDataTypeInput.value : dataTypeInput.value;
+    formData.append('data_type_name', dataTypeName);
     formData.append('validate_key', validateKey);
     formData.append('validate_data', JSON.stringify(validateData));
     fetch(form.dataset.validateUrl, {

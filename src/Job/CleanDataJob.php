@@ -3,36 +3,44 @@ namespace DataCleaning\Job;
 
 use Doctrine\DBAL\Connection;
 use Omeka\Job\AbstractJob;
+use Omeka\Job\Exception;
 use PDO;
 
 class CleanDataJob extends AbstractJob
 {
     public function perform()
     {
-        $conn = $this->getServiceLocator()->get('Omeka\Connection');
+        $connection = $this->getServiceLocator()->get('Omeka\Connection');
 
         $corrections = json_decode($this->getArg('corrections', '{}'), true);
         $removals = json_decode($this->getArg('removals', '[]'), true);
         $itemIds = json_decode($this->getArg('item_ids', '[]'), true);
-        $auditColumn = in_array($this->getArg('audit_column'), ['value', 'uri', 'value_resource_id'])
-            ? $this->getArg('audit_column') : 'value';
+        list($auditColumn, $targetAuditColumn) = $this->getAuditColumns();
+        list($property, $targetProperty) = $this->getProperties();
+        list($dataType, $targetDataType) = $this->getDataTypes();
 
         // Correct values.
-        foreach ($corrections as $fromText => $toText) {
+        foreach ($corrections as $fromString => $toString) {
             $sql = sprintf('
                 UPDATE value
-                SET %1$s = ?
-                WHERE %1$s = ?
+                SET %s = ?, property_id = ?, type = ?%s
+                WHERE %s = ?
                 AND property_id = ?
                 AND type = ?
-                AND resource_id IN (?)', $auditColumn);
-            $conn->executeUpdate(
+                AND resource_id IN (?)',
+                $targetAuditColumn,
+                ($auditColumn !== $targetAuditColumn) ? sprintf(', %s = NULL', $auditColumn) : '',
+                $auditColumn
+            );
+            $connection->executeUpdate(
                 $sql,
                 [
-                    $toText,
-                    $fromText,
-                    $this->getArg('property_id'),
-                    $this->getArg('data_type_name'),
+                    $toString,
+                    $targetProperty->getId(),
+                    $targetDataType->getName(),
+                    $fromString,
+                    $property->getId(),
+                    $dataType->getName(),
                     $itemIds,
                 ],
                 [
@@ -46,19 +54,21 @@ class CleanDataJob extends AbstractJob
         }
 
         // Remove values.
-        foreach ($removals as $text) {
+        foreach ($removals as $string) {
             $sql = sprintf('
                 DELETE FROM value
-                WHERE %1$s = ?
+                WHERE %s = ?
                 AND property_id = ?
                 AND type = ?
-                AND resource_id IN (?)', $auditColumn);
-            $conn->executeUpdate(
+                AND resource_id IN (?)',
+                $auditColumn
+            );
+            $connection->executeUpdate(
                 $sql,
                 [
-                    $text,
-                    $this->getArg('property_id'),
-                    $this->getArg('data_type_name'),
+                    $string,
+                    $property->getId(),
+                    $dataType->getName(),
                     $itemIds,
                 ],
                 [
@@ -69,5 +79,72 @@ class CleanDataJob extends AbstractJob
                 ]
             );
         }
+    }
+
+    /**
+     * Validate and return audit columns.
+     *
+     * @return array
+     */
+    protected function getAuditColumns()
+    {
+        $validAuditColumns = ['value', 'uri', 'value_resource_id'];
+        $auditColumn = $this->getArg('audit_column');
+        $targetAuditColumn = null;
+        if (!in_array($auditColumn, $validAuditColumns)) {
+            throw new Exception\InvalidArgumentException(sprintf('Invalid audit_column "%s"', $auditColumn));
+        }
+        if ($this->getArg('target_audit_column') && !in_array($targetAuditColumn, $validAuditColumns)) {
+            throw new Exception\InvalidArgumentException(sprintf('Invalid target_audit_column "%s"', $this->getArg('target_audit_column')));
+        }
+        if (null === $targetAuditColumn) {
+            // If no target is set, set it to the original audit column.
+            $targetAuditColumn = $auditColumn;
+        }
+        return [$auditColumn, $targetAuditColumn];
+    }
+
+    /**
+     * Validate and return properties.
+     *
+     * find() will throw an exception if invalid.
+     *
+     * @return array
+     */
+    protected function getProperties()
+    {
+        $property = $entityManager->find('Omeka\Entity\Property', $this->getArg('property_id'));
+        $targetProperty = null;
+        if ($this->getArg('target_property_id')) {
+            $entityManager = $this->getServiceLocator()->get('Omeka\EntityManager');
+            $targetProperty = $entityManager->find('Omeka\Entity\Property', $this->getArg('target_property_id'));
+        }
+        if (null === $targetProperty) {
+            // If no target is set, set it to the original property.
+            $targetProperty = $property;
+        }
+        return [$property, $targetProperty];
+    }
+
+    /**
+     * Validate and return data types.
+     *
+     * get() will throw an exception if invalid.
+     *
+     * @return array
+     */
+    protected function getDataTypes()
+    {
+        $dataType = $dataTypeManager->get($this->getArg('data_type_name'));
+        $targetDataType = null;
+        if ($this->getArg('target_data_type_name')) {
+            $dataTypeManager = $this->getServiceLocator()->get('Omeka\DataTypeManager');
+            $targetDataType = $dataTypeManager->get($this->getArg('target_data_type_name'));
+        }
+        if (null === $targetDataType) {
+            // If no target is set, set it to the original data type.
+            $targetDataType = $dataType;
+        }
+        return [$dataType, $targetDataType];
     }
 }

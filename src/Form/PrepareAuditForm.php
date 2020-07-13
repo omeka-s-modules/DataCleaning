@@ -28,12 +28,17 @@ class PrepareAuditForm extends Form
             'name' => 'audit_column',
             'options' => [
                 'label' => 'Audit column', // @translate
+                'empty_option' => '',
                 'show_required' => true,
                 'value_options' => [
                     'value' => 'value', // @translate
                     'uri' => 'uri', // @translate
                     'value_resource_id' => 'value_resource_id', // @translate
                 ],
+            ],
+            'attributes' => [
+                'class' => 'chosen-select',
+                'data-placeholder' => 'Select an audit column', // @translate
             ],
         ]);
         $this->add([
@@ -62,6 +67,47 @@ class PrepareAuditForm extends Form
                 'data-placeholder' => 'Select a data type', // @translate
             ],
         ]);
+        $this->add([
+            'type' => ZendElement\Select::class,
+            'name' => 'target_audit_column',
+            'options' => [
+                'label' => 'Target audit column', // @translate
+                'empty_option' => '',
+                'value_options' => [
+                    'value' => 'value', // @translate
+                    'uri' => 'uri', // @translate
+                    'value_resource_id' => 'value_resource_id', // @translate
+                ],
+            ],
+            'attributes' => [
+                'class' => 'chosen-select',
+                'data-placeholder' => 'Select a target audit column', // @translate
+            ],
+        ]);
+        $this->add([
+            'type' => OmekaElement\PropertySelect::class,
+            'name' => 'target_property_id',
+            'options' => [
+                'label' => 'Target property', // @translate
+                'empty_option' => '',
+            ],
+            'attributes' => [
+                'class' => 'chosen-select',
+                'data-placeholder' => 'Select a target property', // @translate
+            ],
+        ]);
+        $this->add([
+            'type' => DataCleaningElement\DataTypeSelect::class,
+            'name' => 'target_data_type_name',
+            'options' => [
+                'label' => 'Target data type', // @translate
+                'empty_option' => '',
+            ],
+            'attributes' => [
+                'class' => 'chosen-select',
+                'data-placeholder' => 'Select a target data type', // @translate
+            ],
+        ]);
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add([
@@ -75,6 +121,18 @@ class PrepareAuditForm extends Form
         $inputFilter->add([
             'name' => 'data_type_name',
             'required' => true,
+        ]);
+        $inputFilter->add([
+            'name' => 'target_audit_column',
+            'required' => false,
+        ]);
+        $inputFilter->add([
+            'name' => 'target_property_id',
+            'required' => false,
+        ]);
+        $inputFilter->add([
+            'name' => 'target_data_type_name',
+            'required' => false,
         ]);
     }
 }
