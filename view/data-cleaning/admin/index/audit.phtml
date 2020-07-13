@@ -152,6 +152,11 @@ form.addEventListener('submit', function(e) {
         }
     }
     document.getElementById('removals').value = JSON.stringify(removals);
+    let confirm = `Please confirm the following changes:\n\nCorrections:\n${JSON.stringify(corrections, null, 2)}\n\nRemovals:\n${JSON.stringify(removals, null, 2)}`;
+    if (false === window.confirm(confirm)) {
+        e.preventDefault();
+        return;
+    }
 });
 
 // Handle button clicks.
