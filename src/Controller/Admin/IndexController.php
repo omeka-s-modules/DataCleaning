@@ -43,8 +43,21 @@ class IndexController extends AbstractActionController
             $formData['audit_column']
         );
 
+        $auditColumn = $formData['audit_column'];
+        $targetAuditColumn = $auditColumn;
+        if ($formData['target_audit_column']) {
+            $targetAuditColumn = $formData['target_audit_column'];
+        }
         $property = $this->api()->read('properties', $formData['property_id'])->getContent();
+        $targetProperty = $property;
+        if ($formData['target_property_id']) {
+            $targetProperty = $this->api()->read('properties', $formData['target_property_id'])->getContent();
+        }
         $dataType = $this->dataCleaning()->getDataType($formData['data_type_name']);
+        $targetDataType = $dataType;
+        if ($formData['target_data_type_name']) {
+            $targetDataType = $this->dataCleaning()->getDataType($formData['target_data_type_name']);
+        }
 
         $form = $this->getForm(Form\AuditForm::class);
         $formData['item_ids'] = json_encode($itemIds);
@@ -56,9 +69,12 @@ class IndexController extends AbstractActionController
         $view->setVariable('form', $form);
         $view->setVariable('itemQuery', $itemQuery);
         $view->setVariable('itemIds', $itemIds);
+        $view->setVariable('auditColumn', $auditColumn);
         $view->setVariable('property', $property);
         $view->setVariable('dataType', $dataType);
-        $view->setVariable('auditColumn', $formData['audit_column']);
+        $view->setVariable('targetAuditColumn', $targetAuditColumn);
+        $view->setVariable('targetProperty', $targetProperty);
+        $view->setVariable('targetDataType', $targetDataType);
         $view->setVariable('stringsStmt', $stringsStmt);
         $view->setVariable('stringsUniqueCount', $stringsUniqueCount);
         $view->setVariable('stringsTotalCount', $stringsTotalCount);

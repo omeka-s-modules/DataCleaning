@@ -12,6 +12,20 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
     $stringsTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
 ); ?></div>
+<ul>
+    <li><?php echo sprintf(
+        $this->translate('From: %s | %s | %s'),
+        $auditColumn,
+        sprintf('%s (%s)', $property->label(), $property->term()),
+        sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName())
+    ); ?></li>
+    <li><?php echo sprintf(
+        $this->translate('To: %s | %s | %s'),
+        $targetAuditColumn,
+        sprintf('%s (%s)', $targetProperty->label(), $targetProperty->term()),
+        sprintf('%s (%s)', $targetDataType->getLabel(), $targetDataType->getName())
+    ); ?></li>
+</ul>
 <?php echo $this->form()->openTag($form); ?>
     <?php echo $this->formCollection($form, false); ?>
     <div id="page-actions">
@@ -40,8 +54,8 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
             <thead>
                 <tr>
                     <th><?php echo $this->translate('Count'); ?></th>
-                    <th><?php echo sprintf($this->translate('From: %s'), $auditColumn); ?></th>
-                    <th><?php echo sprintf($this->translate('To: %s'), $auditColumn); ?></th>
+                    <th><?php echo $this->translate('From'); ?></th>
+                    <th><?php echo $this->translate('To'); ?></th>
                     <th><?php echo $this->translate('Remove'); ?></th>
                 </tr>
             </thead>
