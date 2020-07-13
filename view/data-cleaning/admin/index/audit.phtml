@@ -12,20 +12,30 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
     $stringsTotalCount,
     $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
 ); ?></div>
-<ul>
-    <li><?php echo sprintf(
-        $this->translate('From: %s | %s | %s'),
-        $auditColumn,
-        sprintf('%s (%s)', $property->label(), $property->term()),
-        sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName())
-    ); ?></li>
-    <li><?php echo sprintf(
-        $this->translate('To: %s | %s | %s'),
-        $targetAuditColumn,
-        sprintf('%s (%s)', $targetProperty->label(), $targetProperty->term()),
-        sprintf('%s (%s)', $targetDataType->getLabel(), $targetDataType->getName())
-    ); ?></li>
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col"><?php echo $this->translate('Audit column'); ?></th>
+            <th scope="col"><?php echo $this->translate('Property'); ?></th>
+            <th scope="col"><?php echo $this->translate('Data type'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"><?php echo $this->translate('From:'); ?></th>
+            <td><?php echo $auditColumn; ?></td>
+            <td><?php echo sprintf('%s (%s)', $property->label(), $property->term()); ?></td>
+            <td><?php echo sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName()); ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?php echo $this->translate('To:'); ?></th>
+            <td><?php echo $targetAuditColumn; ?></td>
+            <td><?php echo sprintf('%s (%s)', $targetProperty->label(), $targetProperty->term()); ?></td>
+            <td><?php echo sprintf('%s (%s)', $targetDataType->getLabel(), $targetDataType->getName()); ?></td>
+        </tr>
+    </tbody>
+</table>
 <?php echo $this->form()->openTag($form); ?>
     <?php echo $this->formCollection($form, false); ?>
     <div id="page-actions">
