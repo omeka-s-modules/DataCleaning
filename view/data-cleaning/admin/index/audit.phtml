@@ -2,9 +2,37 @@
 $tableFilterUrl = $this->assetUrl('vendor/tablefilter-0.7.2/tablefilter.js', 'DataCleaning');
 $tableFilterBasePath = substr($tableFilterUrl, 0, strrpos($tableFilterUrl, '/') + 1);
 $this->headScript()->appendFile($tableFilterUrl);
+
 $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id' => 'value_resource_ids'];
+$propertyLabelTerm = sprintf($this->translate('%s (%s)'), $property->label(), $property->term());
+$dataTypeLabelName = sprintf($this->translate('%s (%s)'), $dataType->getLabel(), $dataType->getName());
+$targetPropertyLabelTerm = sprintf($this->translate('%s (%s)'), $targetProperty->label(), $targetProperty->term());
+$targetDataTypeLabelName = sprintf($this->translate('%s (%s)'), $targetDataType->getLabel(), $targetDataType->getName());
+
+$confirmDialog = sprintf($this->translate(
+"Please confirm the following changes:
+
+From:
+  - Audit column: %s
+  - Property: %s
+  - Data type: %s
+To:
+  - Audit column: %s
+  - Property: %s
+  - Data type: %s
+
+__CORRECTION_COUNT__ corrections
+__REMOVAL_COUNT__ removals"),
+    $auditColumn,
+    $propertyLabelTerm,
+    $dataTypeLabelName,
+    $targetAuditColumn,
+    $targetPropertyLabelTerm,
+    $targetDataTypeLabelName
+);
 ?>
 <?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
+<span id="confirm-dialog" data-confirm-dialog="<?php echo $this->escapeHtml($confirmDialog); ?>"></span>
 <div><?php echo sprintf(
     $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
     $stringsUniqueCount,
@@ -25,14 +53,14 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
         <tr>
             <th scope="row"><?php echo $this->translate('From:'); ?></th>
             <td><?php echo $auditColumn; ?></td>
-            <td><?php echo sprintf('%s (%s)', $property->label(), $property->term()); ?></td>
-            <td><?php echo sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName()); ?></td>
+            <td><?php echo $propertyLabelTerm; ?></td>
+            <td><?php echo $dataTypeLabelName; ?></td>
         </tr>
         <tr>
             <th scope="row"><?php echo $this->translate('To:'); ?></th>
             <td><?php echo $targetAuditColumn; ?></td>
-            <td><?php echo sprintf('%s (%s)', $targetProperty->label(), $targetProperty->term()); ?></td>
-            <td><?php echo sprintf('%s (%s)', $targetDataType->getLabel(), $targetDataType->getName()); ?></td>
+            <td><?php echo $targetPropertyLabelTerm; ?></td>
+            <td><?php echo $targetDataTypeLabelName; ?></td>
         </tr>
     </tbody>
 </table>
@@ -83,13 +111,6 @@ $pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id'
         </table>
     </div>
 <?php echo $this->form()->closeTag(); ?>
-<?php echo sprintf(
-    "<!--\nItem query: %s\nAudit column: %s\nProperty: %s\nData type: %s\n-->",
-    http_build_query($itemQuery),
-    $auditColumn,
-    sprintf('%s (%s)', $property->label(), $property->term()),
-    sprintf('%s (%s)', $dataType->getLabel(), $dataType->getName())
-); ?>
 <script>
 const form = document.getElementById('audit-form');
 const table = document.getElementById('audit-table');
@@ -136,6 +157,7 @@ const validate = function(validateData) {
 
 // Handle form submission.
 form.addEventListener('submit', function(e) {
+    e.preventDefault();
     // Populate corrections input.
     let corrections = {};
     const correctionsCollection = document.getElementsByClassName('correction-string');
@@ -154,8 +176,10 @@ form.addEventListener('submit', function(e) {
         }
     }
     document.getElementById('removals').value = JSON.stringify(removals);
-    let confirm = `Please confirm the following changes:\n\nCorrections:\n${JSON.stringify(corrections, null, 2)}\n\nRemovals:\n${JSON.stringify(removals, null, 2)}`;
-    if (false === window.confirm(confirm)) {
+    let dialog = document.getElementById('confirm-dialog').dataset.confirmDialog;
+    dialog = dialog.replace('__CORRECTION_COUNT__', Object.keys(corrections).length);
+    dialog = dialog.replace('__REMOVAL_COUNT__', removals.length);
+    if (false === window.confirm(dialog)) {
         e.preventDefault();
         return;
     }
