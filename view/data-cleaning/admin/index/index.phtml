@@ -1,10 +1,56 @@
-<?php
-$form->prepare();
-?>
-<?php echo $this->pageTitle($this->translate('Prepare audit'), 1, $this->translate('Data Cleaning')); ?>
-<?php echo $this->form()->openTag($form); ?>
+<?php echo $this->pageTitle($this->translate('Past audits'), 1, $this->translate('Data Cleaning')); ?>
 <div id="page-actions">
-    <button type="submit"><?php echo $this->translate('Submit'); ?></button>
+    <?php echo $this->hyperlink($this->translate('Prepare new audit'), $this->url(null, ['action' => 'prepare-audit'], true), ['class' => 'button']); ?>
 </div>
-<?php echo $this->formCollection($form); ?>
-<?php echo $this->form()->closeTag(); ?>
+<?php if ($jobs): ?>
+<div class="browse-controls">
+    <?php echo $this->pagination(); ?>
+</div>
+<table class="tablesaw" data-tablesaw-mode="stack">
+    <thead>
+        <tr>
+            <th>Job ID</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Items</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($jobs as $job): ?>
+    <?php
+    $owner = $job->owner();
+    $args = $job->args();
+    ?>
+        <tr>
+            <td><?php echo $this->hyperlink($job->id(), $this->url('admin/id', ['controller' => 'job', 'action' => 'show', 'id' => $job->id()])); ?></td>
+            <td><?php echo $owner ? $owner->name(): $this->translate('Unknown'); ?></td>
+            <td><?php echo $this->translate($job->statusLabel()) ?></td>
+            <td>
+                <ul>
+                    <li><?php echo sprintf($this->translate('Audit column: %s'), $args['audit_column']); ?></li>
+                    <li><?php echo sprintf($this->translate('Property ID: %s'), $args['property_id']); ?></li>
+                    <li><?php echo sprintf($this->translate('Data type name: %s'), $args['data_type_name']); ?></li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li><?php echo sprintf($this->translate('Audit column: %s'), $args['target_audit_column'] ?: $args['audit_column']); ?></li>
+                    <li><?php echo sprintf($this->translate('Property ID: %s'), $args['target_property_id'] ?: $args['property_id']); ?></li>
+                    <li><?php echo sprintf($this->translate('Data type name: %s'), $args['target_data_type_name'] ?: $args['data_type_name']); ?></li>
+                </ul>
+            </td>
+            <td><?php echo $this->hyperlink($this->translate('Browse'), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $args['item_query']])); ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<div class="browse-controls">
+    <?php echo $this->pagination(); ?>
+</div>
+<?php else: ?>
+<div class="no-resources">
+    <p><?php echo $this->translate('There are no past audits.'); ?></p>
+</div>
+<?php endif; ?>

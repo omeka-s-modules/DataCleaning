@@ -12,6 +12,19 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        $this->setBrowseDefaults('id');
+        $query = $this->params()->fromQuery();
+        $query['class'] = CleanDataJob::class;
+        $response = $this->api()->search('jobs', $query);
+        $this->paginator($response->getTotalResults());
+
+        $view = new ViewModel;
+        $view->setVariable('jobs', $response->getContent());
+        return $view;
+    }
+
+    public function prepareAuditAction()
+    {
         $form = $this->getForm(Form\PrepareAuditForm::class);
         $form->setAttribute('action', $this->url()->fromRoute(null, ['action' => 'audit'], true));
 
@@ -49,7 +62,6 @@ class IndexController extends AbstractActionController
         $formData['item_ids'] = json_encode($itemIds);
         $formData = array_merge($formData, $formData['advanced']);
         unset($formData['prepareauditform_csrf']);
-        unset($formData['item_query']);
         unset($formData['advanced']);
 
         // Set original (From) and target (To) parameters.
@@ -103,14 +115,12 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
         $formData = $form->getData();
-        unset($formData['cleaningform_csrf']);
+        unset($formData['auditform_csrf']);
 
         $job = $this->jobDispatcher()->dispatch(CleanDataJob::class, $formData);
-        $this->messenger()->addSuccess('Cleaning data. This may take a while.'); // @translate
+        $this->messenger()->addSuccess('Cleaning data. This may take a while. You may refresh this page for status updates.'); // @translate
 
-        $view = new ViewModel;
-        $view->setVariable('formData', $formData);
-        return $view;
+        return $this->redirect()->toRoute(null, ['action' => 'index'], true);
     }
 
     public function validateAction()

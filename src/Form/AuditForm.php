@@ -19,6 +19,13 @@ class AuditForm extends Form
         $this->setAttribute('id', 'audit-form');
         $this->add([
             'type' => ZendElement\Hidden::class,
+            'name' => 'item_query',
+            'attributes' => [
+                'id' => 'item_query',
+            ],
+       ]);
+        $this->add([
+            'type' => ZendElement\Hidden::class,
             'name' => 'audit_column',
             'attributes' => [
                 'id' => 'audit_column',
@@ -82,6 +89,10 @@ class AuditForm extends Form
         ]);
 
         $inputFilter = $this->getInputFilter();
+        $inputFilter->add([
+            'name' => 'item_query',
+            'required' => true,
+        ]);
         $inputFilter->add([
             'name' => 'audit_column',
             'required' => true,

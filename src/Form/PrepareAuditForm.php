@@ -119,6 +119,10 @@ class PrepareAuditForm extends Form
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add([
+            'name' => 'item_query',
+            'required' => false,
+        ]);
+        $inputFilter->add([
             'name' => 'audit_column',
             'required' => true,
         ]);
