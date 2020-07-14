@@ -2,20 +2,24 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Giorgio Comai <g@giorgiocomai.eu>, 2020
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-14 07:44-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2020-07-08 22:19+0000\n"
+"Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2020\n"
+"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:7
 #: view/data-cleaning/admin/index/audit.phtml:8
@@ -51,7 +55,7 @@ msgstr ""
 #: view/data-cleaning/admin/index/clean.phtml:1
 #: view/data-cleaning/admin/index/index.phtml:1
 msgid "Data Cleaning"
-msgstr ""
+msgstr "Pulizia dei dat"
 
 #: view/data-cleaning/admin/index/audit.phtml:37
 msgid "Filter count"
@@ -73,7 +77,7 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:52
 msgid "Audit column"
-msgstr ""
+msgstr "Colonna di verifica"
 
 #: view/data-cleaning/admin/index/audit.phtml:59
 msgid "From:"
@@ -109,7 +113,7 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:94
 msgid "Count"
-msgstr ""
+msgstr "Conteggio"
 
 #: view/data-cleaning/admin/index/audit.phtml:95
 #, php-format
@@ -143,7 +147,7 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:23
 msgid "Item query"
-msgstr ""
+msgstr "Query sui contenuti"
 
 #: src/Form/PrepareAuditForm.php:34 src/Form/PrepareAuditForm.php:77
 msgid "value"
@@ -159,7 +163,7 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:67
 msgid "Select a data type"
-msgstr ""
+msgstr "Seleziona un tipo di dati"
 
 #: src/Form/PrepareAuditForm.php:74
 msgid "Target audit column"

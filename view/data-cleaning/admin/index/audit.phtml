@@ -12,6 +12,9 @@ $targetDataTypeLabelName = sprintf($this->translate('%s (%s)'), $targetDataType-
 $confirmDialog = sprintf($this->translate(
 "Please confirm the following changes:
 
+__CORRECTION_COUNT__ corrections
+__REMOVAL_COUNT__ removals
+
 From:
   - Audit column: %s
   - Property: %s
@@ -19,10 +22,7 @@ From:
 To:
   - Audit column: %s
   - Property: %s
-  - Data type: %s
-
-__CORRECTION_COUNT__ corrections
-__REMOVAL_COUNT__ removals"),
+  - Data type: %s"),
     $auditColumn,
     $propertyLabelTerm,
     $dataTypeLabelName,
@@ -32,13 +32,18 @@ __REMOVAL_COUNT__ removals"),
 );
 ?>
 <?php echo $this->pageTitle($this->translate('Audit data'), 1, $this->translate('Data Cleaning')); ?>
-<span id="confirm-dialog" data-confirm-dialog="<?php echo $this->escapeHtml($confirmDialog); ?>"></span>
+<span id="js-strings"
+    data-confirm-dialog="<?php echo $this->escapeHtml($confirmDialog); ?>"
+    data-table-filter-watermark-count="<?php echo $this->escapeHtml($this->translate('Filter count')); ?>"
+    data-table-filter-watermark-column="<?php echo $this->escapeHtml(sprintf($this->translate('Filter %s'), $auditColumn)); ?>"
+    data-table-filter-rows-counter="<?php echo $this->escapeHtml($this->translate('Rows: ')); ?>"
+></span>
 <div><?php echo sprintf(
     $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
     $stringsUniqueCount,
     $pluralAuditColumns[$auditColumn],
     $stringsTotalCount,
-    $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
+    $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]), ['target' => '_blank'])
 ); ?></div>
 <table>
     <thead>
@@ -87,8 +92,8 @@ __REMOVAL_COUNT__ removals"),
             <thead>
                 <tr>
                     <th><?php echo $this->translate('Count'); ?></th>
-                    <th><?php echo $this->translate('From'); ?></th>
-                    <th><?php echo $this->translate('To'); ?></th>
+                    <th><?php echo sprintf($this->translate('From: %s'), $auditColumn); ?></th>
+                    <th><?php echo sprintf($this->translate('To: %s'), $targetAuditColumn); ?></th>
                     <th><?php echo $this->translate('Remove'); ?></th>
                 </tr>
             </thead>
@@ -114,6 +119,7 @@ __REMOVAL_COUNT__ removals"),
 <script>
 const form = document.getElementById('audit-form');
 const table = document.getElementById('audit-table');
+const jsStrings = document.getElementById('js-strings');
 
 // Copy a string into the textarea.
 const copy = function(button) {
@@ -175,7 +181,7 @@ form.addEventListener('submit', function(e) {
         }
     }
     document.getElementById('removals').value = JSON.stringify(removals);
-    let dialog = document.getElementById('confirm-dialog').dataset.confirmDialog;
+    let dialog = jsStrings.dataset.confirmDialog;
     dialog = dialog.replace('__CORRECTION_COUNT__', Object.keys(corrections).length);
     dialog = dialog.replace('__REMOVAL_COUNT__', removals.length);
     if (false === window.confirm(dialog)) {
@@ -257,12 +263,15 @@ var tableFilter = new TableFilter(table, {
     alternate_rows: true,
     no_results_message: true,
     ignore_diacritics: true,
-    watermark: ['Filter', 'Filter'],
+    watermark: [
+        jsStrings.dataset.tableFilterWatermarkCount,
+        jsStrings.dataset.tableFilterWatermarkColumn
+    ],
     auto_filter: {
         delay: 1000
     },
     rows_counter: {
-        text: 'Rows: '
+        text: jsStrings.dataset.tableFilterRowsCounter
     },
     col_types: [
         'number', 'string', 'none', 'none'
