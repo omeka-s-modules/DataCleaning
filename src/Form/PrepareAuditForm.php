@@ -4,6 +4,7 @@ namespace DataCleaning\Form;
 use DataCleaning\Form\Element as DataCleaningElement;
 use Omeka\Form\Element as OmekaElement;
 use Zend\Form\Element as ZendElement;
+use Zend\Form\Fieldset;
 use Zend\Form\Form;
 
 class PrepareAuditForm extends Form
@@ -68,6 +69,13 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->add([
+            'type' => Fieldset::class,
+            'name' => 'advanced',
+            'options' => [
+                'label' => 'Advanced', // @translate
+            ],
+        ]);
+        $this->get('advanced')->add([
             'type' => ZendElement\Select::class,
             'name' => 'target_audit_column',
             'options' => [
@@ -84,7 +92,7 @@ class PrepareAuditForm extends Form
                 'data-placeholder' => 'Select a target audit column', // @translate
             ],
         ]);
-        $this->add([
+        $this->get('advanced')->add([
             'type' => OmekaElement\PropertySelect::class,
             'name' => 'target_property_id',
             'options' => [
@@ -96,7 +104,7 @@ class PrepareAuditForm extends Form
                 'data-placeholder' => 'Select a target property', // @translate
             ],
         ]);
-        $this->add([
+        $this->get('advanced')->add([
             'type' => DataCleaningElement\DataTypeSelect::class,
             'name' => 'target_data_type_name',
             'options' => [
@@ -122,15 +130,15 @@ class PrepareAuditForm extends Form
             'name' => 'data_type_name',
             'required' => true,
         ]);
-        $inputFilter->add([
+        $inputFilter->get('advanced')->add([
             'name' => 'target_audit_column',
             'required' => false,
         ]);
-        $inputFilter->add([
+        $inputFilter->get('advanced')->add([
             'name' => 'target_property_id',
             'required' => false,
         ]);
-        $inputFilter->add([
+        $inputFilter->get('advanced')->add([
             'name' => 'target_data_type_name',
             'required' => false,
         ]);

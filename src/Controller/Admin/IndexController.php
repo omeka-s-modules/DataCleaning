@@ -26,6 +26,7 @@ class IndexController extends AbstractActionController
             return $this->redirect()->toRoute(null, ['action' => 'index'], true);
         }
 
+        // Validate PrepareAuditForm.
         $form = $this->getForm(Form\PrepareAuditForm::class);
         $form->setData($this->params()->fromPost());
         if (!$form->isValid()) {
@@ -34,6 +35,7 @@ class IndexController extends AbstractActionController
         }
         $formData = $form->getData();
 
+        // Get item IDs, unique strings, and string counts.
         parse_str($formData['item_query'], $itemQuery);
         $itemIds = $this->dataCleaning()->getItemIds($itemQuery);
         list($stringsStmt, $stringsUniqueCount, $stringsTotalCount) = $this->dataCleaning()->getValueStrings(
@@ -43,6 +45,14 @@ class IndexController extends AbstractActionController
             $formData['audit_column']
         );
 
+        // Prepare form data for AuditForm.
+        $formData['item_ids'] = json_encode($itemIds);
+        $formData = array_merge($formData, $formData['advanced']);
+        unset($formData['prepareauditform_csrf']);
+        unset($formData['item_query']);
+        unset($formData['advanced']);
+
+        // Set original (From) and target (To) parameters.
         $auditColumn = $formData['audit_column'];
         $targetAuditColumn = $auditColumn;
         if ($formData['target_audit_column']) {
@@ -60,7 +70,6 @@ class IndexController extends AbstractActionController
         }
 
         $form = $this->getForm(Form\AuditForm::class);
-        $formData['item_ids'] = json_encode($itemIds);
         $form->setData($formData);
         $form->setAttribute('action', $this->url()->fromRoute(null, ['action' => 'clean'], true));
         $form->setAttribute('data-validate-url', $this->url()->fromRoute(null, ['action' => 'validate'], true));

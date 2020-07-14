@@ -181,6 +181,7 @@ form.addEventListener('submit', function(e) {
         }
     }
     document.getElementById('removals').value = JSON.stringify(removals);
+    // Display the confirm modal.
     let dialog = jsStrings.dataset.confirmDialog;
     dialog = dialog.replace('__CORRECTION_COUNT__', Object.keys(corrections).length);
     dialog = dialog.replace('__REMOVAL_COUNT__', removals.length);
