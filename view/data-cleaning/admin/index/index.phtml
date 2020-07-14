@@ -9,12 +9,12 @@
 <table class="tablesaw" data-tablesaw-mode="stack">
     <thead>
         <tr>
-            <th>Job ID</th>
-            <th>Owner</th>
-            <th>Status</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Items</th>
+            <th><?php echo $this->translate('Job ID'); ?></th>
+            <th><?php echo $this->translate('Job status'); ?></th>
+            <th><?php echo $this->translate('Auditor'); ?></th>
+            <th><?php echo $this->translate('From'); ?></th>
+            <th><?php echo $this->translate('To'); ?></th>
+            <th><?php echo $this->translate('Items'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -25,8 +25,8 @@
     ?>
         <tr>
             <td><?php echo $this->hyperlink($job->id(), $this->url('admin/id', ['controller' => 'job', 'action' => 'show', 'id' => $job->id()])); ?></td>
-            <td><?php echo $owner ? $owner->name(): $this->translate('Unknown'); ?></td>
             <td><?php echo $this->translate($job->statusLabel()) ?></td>
+            <td><?php echo $owner ? $owner->name(): $this->translate('Unknown'); ?></td>
             <td>
                 <ul>
                     <li><?php echo sprintf($this->translate('Audit column: %s'), $args['audit_column']); ?></li>
