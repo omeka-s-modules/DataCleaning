@@ -34,11 +34,11 @@ class DataCleaning extends AbstractPlugin
         return $response->getContent();
     }
 
-    public function getValueStrings(array $resourceIds, $propertyId, $dataTypeName, $auditColumn)
+    public function getValueStrings(array $resourceIds, $auditColumn, $propertyId, $dataTypeName)
     {
-        $auditColumn = in_array($auditColumn, ['value', 'uri', 'value_resource_id'])
-            ? $auditColumn : 'value';
         $conn = $this->services->get('Omeka\Connection');
+        $validAuditColumns = ['value', 'uri', 'value_resource_id'];
+        $auditColumn = in_array($auditColumn, $validAuditColumns) ? $auditColumn : 'value';
 
         // Get the strings statement.
         $sql = sprintf('
@@ -90,5 +90,37 @@ class DataCleaning extends AbstractPlugin
         )->fetchColumn();
 
         return [$stringsStmt, $stringsUniqueCount, $stringsTotalCount];
+    }
+
+    public function getAuditColumnsFromData(array $data)
+    {
+        $auditColumn = $data['audit_column'];
+        $targetAuditColumn = $auditColumn;
+        if ($data['target_audit_column']) {
+            $targetAuditColumn = $data['target_audit_column'];
+        }
+        return [$auditColumn, $targetAuditColumn];
+    }
+
+    public function getPropertiesFromData(array $data)
+    {
+        $controller = $this->getController();
+        $property = $controller->api()->read('properties', $data['property_id'])->getContent();
+        $targetProperty = $property;
+        if ($data['target_property_id']) {
+            $targetProperty = $controller->api()->read('properties', $data['target_property_id'])->getContent();
+        }
+        return [$property, $targetProperty];
+    }
+
+    public function getDataTypesFromData(array $data)
+    {
+        $controller = $this->getController();
+        $dataType = $controller->dataCleaning()->getDataType($data['data_type_name']);
+        $targetDataType = $dataType;
+        if ($data['target_data_type_name']) {
+            $targetDataType = $controller->dataCleaning()->getDataType($data['target_data_type_name']);
+        }
+        return [$dataType, $targetDataType];
     }
 }

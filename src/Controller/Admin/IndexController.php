@@ -18,8 +18,26 @@ class IndexController extends AbstractActionController
         $response = $this->api()->search('jobs', $query);
         $this->paginator($response->getTotalResults());
 
+        $audits = [];
+        foreach ($response->getContent() as $job) {
+            $args = $job->args();
+            list($auditColumn, $targetAuditColumn) = $this->dataCleaning()->getAuditColumnsFromData($args);
+            list($property, $targetProperty) = $this->dataCleaning()->getPropertiesFromData($args);
+            list($dataType, $targetDataType) = $this->dataCleaning()->getDataTypesFromData($args);
+            $audits[] = [
+                'job' => $job,
+                'item_query' => $args['item_query'],
+                'audit_column' => $auditColumn,
+                'property' => $property,
+                'data_type' => $dataType,
+                'target_audit_column' => $targetAuditColumn,
+                'target_property' => $targetProperty,
+                'target_data_type' => $targetDataType,
+            ];
+        }
+
         $view = new ViewModel;
-        $view->setVariable('jobs', $response->getContent());
+        $view->setVariable('audits', $audits);
         return $view;
     }
 
@@ -44,18 +62,22 @@ class IndexController extends AbstractActionController
         $form->setData($this->params()->fromPost());
         if (!$form->isValid()) {
             $this->messenger()->addFormErrors($form);
-            return $this->redirect()->toRoute(null, ['action' => 'index'], true);
+            return $this->redirect()->toRoute(null, ['action' => 'prepare-audit'], true);
         }
         $formData = $form->getData();
 
         // Get item IDs, unique strings, and string counts.
         parse_str($formData['item_query'], $itemQuery);
         $itemIds = $this->dataCleaning()->getItemIds($itemQuery);
-        list($stringsStmt, $stringsUniqueCount, $stringsTotalCount) = $this->dataCleaning()->getValueStrings(
+        list(
+            $stringsStmt,
+            $stringsUniqueCount,
+            $stringsTotalCount
+        ) = $this->dataCleaning()->getValueStrings(
             $itemIds,
+            $formData['audit_column'],
             $formData['property_id'],
-            $formData['data_type_name'],
-            $formData['audit_column']
+            $formData['data_type_name']
         );
 
         // Prepare form data for AuditForm.
@@ -64,22 +86,10 @@ class IndexController extends AbstractActionController
         unset($formData['prepareauditform_csrf']);
         unset($formData['advanced']);
 
-        // Set original (From) and target (To) parameters.
-        $auditColumn = $formData['audit_column'];
-        $targetAuditColumn = $auditColumn;
-        if ($formData['target_audit_column']) {
-            $targetAuditColumn = $formData['target_audit_column'];
-        }
-        $property = $this->api()->read('properties', $formData['property_id'])->getContent();
-        $targetProperty = $property;
-        if ($formData['target_property_id']) {
-            $targetProperty = $this->api()->read('properties', $formData['target_property_id'])->getContent();
-        }
-        $dataType = $this->dataCleaning()->getDataType($formData['data_type_name']);
-        $targetDataType = $dataType;
-        if ($formData['target_data_type_name']) {
-            $targetDataType = $this->dataCleaning()->getDataType($formData['target_data_type_name']);
-        }
+        // Set original and target parameters.
+        list($auditColumn, $targetAuditColumn) = $this->dataCleaning()->getAuditColumnsFromData($formData);
+        list($property, $targetProperty) = $this->dataCleaning()->getPropertiesFromData($formData);
+        list($dataType, $targetDataType) = $this->dataCleaning()->getDataTypesFromData($formData);
 
         $form = $this->getForm(Form\AuditForm::class);
         $form->setData($formData);

@@ -2,7 +2,7 @@
 <div id="page-actions">
     <?php echo $this->hyperlink($this->translate('Prepare new audit'), $this->url(null, ['action' => 'prepare-audit'], true), ['class' => 'button']); ?>
 </div>
-<?php if ($jobs): ?>
+<?php if ($audits): ?>
 <div class="browse-controls">
     <?php echo $this->pagination(); ?>
 </div>
@@ -18,10 +18,10 @@
         </tr>
     </thead>
     <tbody>
-    <?php foreach ($jobs as $job): ?>
+    <?php foreach ($audits as $audit): ?>
     <?php
+    $job = $audit['job'];
     $owner = $job->owner();
-    $args = $job->args();
     ?>
         <tr>
             <td><?php echo $this->hyperlink($job->id(), $this->url('admin/id', ['controller' => 'job', 'action' => 'show', 'id' => $job->id()])); ?></td>
@@ -29,19 +29,19 @@
             <td><?php echo $owner ? $owner->name(): $this->translate('Unknown'); ?></td>
             <td>
                 <ul>
-                    <li><?php echo sprintf($this->translate('Audit column: %s'), $args['audit_column']); ?></li>
-                    <li><?php echo sprintf($this->translate('Property ID: %s'), $args['property_id']); ?></li>
-                    <li><?php echo sprintf($this->translate('Data type name: %s'), $args['data_type_name']); ?></li>
+                    <li><?php echo sprintf($this->translate('Audit column: %s'), $audit['audit_column']); ?></li>
+                    <li><?php echo sprintf($this->translate('Property: %s (%s)'), $audit['property']->label(), $audit['property']->term()); ?></li>
+                    <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $audit['data_type']->getLabel(), $audit['data_type']->getName()); ?></li>
                 </ul>
             </td>
             <td>
                 <ul>
-                    <li><?php echo sprintf($this->translate('Audit column: %s'), $args['target_audit_column'] ?: $args['audit_column']); ?></li>
-                    <li><?php echo sprintf($this->translate('Property ID: %s'), $args['target_property_id'] ?: $args['property_id']); ?></li>
-                    <li><?php echo sprintf($this->translate('Data type name: %s'), $args['target_data_type_name'] ?: $args['data_type_name']); ?></li>
+                    <li><?php echo sprintf($this->translate('Audit column: %s'), $audit['target_audit_column']); ?></li>
+                    <li><?php echo sprintf($this->translate('Property: %s (%s)'), $audit['target_property']->label(), $audit['target_property']->term()); ?></li>
+                    <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $audit['target_data_type']->getLabel(), $audit['target_data_type']->getName()); ?></li>
                 </ul>
             </td>
-            <td><?php echo $this->hyperlink($this->translate('Browse'), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $args['item_query']])); ?></td>
+            <td><?php echo $this->hyperlink($this->translate('Browse'), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $audit['item_query']])); ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
