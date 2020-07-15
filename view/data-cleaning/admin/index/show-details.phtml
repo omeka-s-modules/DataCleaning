@@ -1,0 +1,42 @@
+<h3><?php echo $this->translate('Audit details'); ?></h3>
+<div class="meta-group">
+    <h4><?php echo $this->translate('Overview'); ?></h4>
+    <div class="value">
+        <?php echo sprintf(
+            $this->translate('Auditing %s items'),
+            $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
+        ); ?>
+    </div>
+    <div class="value">
+        <?php echo sprintf(
+            $this->translate('Making %s corrections'),
+            count($corrections)
+        ); ?>
+    </div>
+    <div class="value">
+        <?php echo sprintf(
+            $this->translate('Making %s removals'),
+            count($removals)
+        ); ?>
+    </div>
+</div>
+<div class="meta-group">
+    <h4><?php echo $this->translate('From'); ?></h4>
+    <div class="value">
+        <ul>
+            <li><?php echo sprintf($this->translate('Audit column: %s'), $auditColumn); ?></li>
+            <li><?php echo sprintf($this->translate('Property: %s (%s)'), $property->label(), $property->term()); ?></li>
+            <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $dataType->getLabel(), $dataType->getName()); ?></li>
+        </ul>
+    </div>
+</div>
+<div class="meta-group">
+    <h4><?php echo $this->translate('To'); ?></h4>
+    <div class="value">
+        <ul>
+            <li><?php echo sprintf($this->translate('Audit column: %s'), $targetAuditColumn); ?></li>
+            <li><?php echo sprintf($this->translate('Property: %s (%s)'), $targetProperty->label(), $targetProperty->term()); ?></li>
+            <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $targetDataType->getLabel(), $targetDataType->getName()); ?></li>
+        </ul>
+    </div>
+</div>

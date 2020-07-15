@@ -2,54 +2,47 @@
 <div id="page-actions">
     <?php echo $this->hyperlink($this->translate('Prepare new audit'), $this->url(null, ['action' => 'prepare-audit'], true), ['class' => 'button']); ?>
 </div>
-<?php if ($audits): ?>
+<?php if ($jobs): ?>
 <div class="browse-controls">
     <?php echo $this->pagination(); ?>
 </div>
-<table class="tablesaw" data-tablesaw-mode="stack">
+<table class="tablesaw browse" data-tablesaw-mode="stack">
     <thead>
         <tr>
             <th><?php echo $this->translate('Job ID'); ?></th>
-            <th><?php echo $this->translate('Job started'); ?></th>
             <th><?php echo $this->translate('Job status'); ?></th>
+            <th><?php echo $this->translate('Job started'); ?></th>
             <th><?php echo $this->translate('Auditor'); ?></th>
-            <th><?php echo $this->translate('From'); ?></th>
-            <th><?php echo $this->translate('To'); ?></th>
-            <th><?php echo $this->translate('Items'); ?></th>
         </tr>
     </thead>
     <tbody>
-    <?php foreach ($audits as $audit): ?>
-    <?php
-    $job = $audit['job'];
-    $owner = $job->owner();
-    ?>
+    <?php foreach ($jobs as $job): ?>
+    <?php $owner = $job->owner(); ?>
         <tr>
-            <td><?php echo $this->hyperlink($job->id(), $this->url('admin/id', ['controller' => 'job', 'action' => 'show', 'id' => $job->id()])); ?></td>
-            <td><?php echo $this->i18n()->dateFormat($job->started(), 'medium', 'short'); ?></td>
+            <td>
+                <?php echo $this->hyperlink($job->id(), $this->url('admin/id', ['controller' => 'job', 'action' => 'show', 'id' => $job->id()])); ?>
+                <ul class="actions">
+                    <li><?php echo $this->hyperlink('', '#', [
+                        'data-sidebar-content-url' => $this->url(null, ['action' => 'show-details'], ['query' => ['job_id' => $job->id()]], true),
+                        'class' => 'o-icon-more sidebar-content',
+                        'data-sidebar-selector' => '#show-details',
+                        'title' => $this->translate('Details'),
+                    ]); ?></li>
+                </ul>
+            </td>
             <td><?php echo $this->translate($job->statusLabel()) ?></td>
+            <td><?php echo $this->i18n()->dateFormat($job->started(), 'medium', 'short'); ?></td>
             <td><?php echo $owner ? $owner->name(): $this->translate('Unknown'); ?></td>
-            <td>
-                <ul>
-                    <li><?php echo sprintf($this->translate('Audit column: %s'), $audit['audit_column']); ?></li>
-                    <li><?php echo sprintf($this->translate('Property: %s (%s)'), $audit['property']->label(), $audit['property']->term()); ?></li>
-                    <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $audit['data_type']->getLabel(), $audit['data_type']->getName()); ?></li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li><?php echo sprintf($this->translate('Audit column: %s'), $audit['target_audit_column']); ?></li>
-                    <li><?php echo sprintf($this->translate('Property: %s (%s)'), $audit['target_property']->label(), $audit['target_property']->term()); ?></li>
-                    <li><?php echo sprintf($this->translate('Data type: %s (%s)'), $audit['target_data_type']->getLabel(), $audit['target_data_type']->getName()); ?></li>
-                </ul>
-            </td>
-            <td><?php echo $this->hyperlink($this->translate('Browse'), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $audit['item_query']])); ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
 <div class="browse-controls">
     <?php echo $this->pagination(); ?>
+</div>
+<div id="show-details" class="sidebar">
+    <?php echo $this->hyperlink('', '#', ['class' => 'sidebar-close o-icon-close', 'title' => $this->translate('Close')]); ?>
+    <div class="sidebar-content"></div>
 </div>
 <?php else: ?>
 <div class="no-resources">

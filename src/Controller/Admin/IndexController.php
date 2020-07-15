@@ -18,26 +18,32 @@ class IndexController extends AbstractActionController
         $response = $this->api()->search('jobs', $query);
         $this->paginator($response->getTotalResults());
 
-        $audits = [];
-        foreach ($response->getContent() as $job) {
-            $args = $job->args();
-            list($auditColumn, $targetAuditColumn) = $this->dataCleaning()->getAuditColumnsFromData($args);
-            list($property, $targetProperty) = $this->dataCleaning()->getPropertiesFromData($args);
-            list($dataType, $targetDataType) = $this->dataCleaning()->getDataTypesFromData($args);
-            $audits[] = [
-                'job' => $job,
-                'item_query' => $args['item_query'],
-                'audit_column' => $auditColumn,
-                'property' => $property,
-                'data_type' => $dataType,
-                'target_audit_column' => $targetAuditColumn,
-                'target_property' => $targetProperty,
-                'target_data_type' => $targetDataType,
-            ];
-        }
+        $view = new ViewModel;
+        $view->setVariable('jobs', $response->getContent());
+        return $view;
+    }
+
+    public function showDetailsAction()
+    {
+        $jobId = $query = $this->params()->fromQuery('job_id');
+        $job = $this->api()->read('jobs', $jobId)->getContent();
+        $args = $job->args();
+        list($auditColumn, $targetAuditColumn) = $this->dataCleaning()->getAuditColumnsFromData($args);
+        list($property, $targetProperty) = $this->dataCleaning()->getPropertiesFromData($args);
+        list($dataType, $targetDataType) = $this->dataCleaning()->getDataTypesFromData($args);
 
         $view = new ViewModel;
-        $view->setVariable('audits', $audits);
+        $view->setTerminal(true);
+        $view->setVariable('auditColumn', $auditColumn);
+        $view->setVariable('property', $property);
+        $view->setVariable('dataType', $dataType);
+        $view->setVariable('targetAuditColumn', $targetAuditColumn);
+        $view->setVariable('targetProperty', $targetProperty);
+        $view->setVariable('targetDataType', $targetDataType);
+        $view->setVariable('corrections', json_decode($args['corrections'], true));
+        $view->setVariable('removals', json_decode($args['removals'], true));
+        $view->setVariable('itemIds', json_decode($args['item_ids'], true));
+        $view->setVariable('itemQuery', $args['item_query']);
         return $view;
     }
 
