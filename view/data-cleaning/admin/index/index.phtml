@@ -10,6 +10,7 @@
     <thead>
         <tr>
             <th><?php echo $this->translate('Job ID'); ?></th>
+            <th><?php echo $this->translate('Job started'); ?></th>
             <th><?php echo $this->translate('Job status'); ?></th>
             <th><?php echo $this->translate('Auditor'); ?></th>
             <th><?php echo $this->translate('From'); ?></th>
@@ -25,6 +26,7 @@
     ?>
         <tr>
             <td><?php echo $this->hyperlink($job->id(), $this->url('admin/id', ['controller' => 'job', 'action' => 'show', 'id' => $job->id()])); ?></td>
+            <td><?php echo $this->i18n()->dateFormat($job->started(), 'medium', 'short'); ?></td>
             <td><?php echo $this->translate($job->statusLabel()) ?></td>
             <td><?php echo $owner ? $owner->name(): $this->translate('Unknown'); ?></td>
             <td>
