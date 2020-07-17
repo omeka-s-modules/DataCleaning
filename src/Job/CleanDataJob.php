@@ -14,7 +14,7 @@ class CleanDataJob extends AbstractJob
 
         $corrections = json_decode($this->getArg('corrections', '{}'), true);
         $removals = json_decode($this->getArg('removals', '[]'), true);
-        $itemIds = json_decode($this->getArg('item_ids', '[]'), true);
+        $resourceIds = json_decode($this->getArg('resource_ids', '[]'), true);
         list($auditColumn, $targetAuditColumn) = $this->getAuditColumns();
         list($property, $targetProperty) = $this->getProperties();
         list($dataType, $targetDataType) = $this->getDataTypes();
@@ -41,7 +41,7 @@ class CleanDataJob extends AbstractJob
                     $fromString,
                     $property->getId(),
                     $dataType->getName(),
-                    $itemIds,
+                    $resourceIds,
                 ],
                 [
                     PDO::PARAM_STR,
@@ -71,7 +71,7 @@ class CleanDataJob extends AbstractJob
                     $string,
                     $property->getId(),
                     $dataType->getName(),
-                    $itemIds,
+                    $resourceIds,
                 ],
                 [
                     PDO::PARAM_STR,

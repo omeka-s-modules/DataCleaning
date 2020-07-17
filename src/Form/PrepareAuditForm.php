@@ -18,10 +18,26 @@ class PrepareAuditForm extends Form
         $csrfElement->setOptions($csrfOptions);
 
         $this->add([
-            'type' => ZendElement\Text::class,
-            'name' => 'item_query',
+            'type' => ZendElement\Select::class,
+            'name' => 'resource_name',
             'options' => [
-                'label' => 'Item query', // @translate
+                'label' => 'Resource type', // @translate
+                'show_required' => true,
+                'value_options' => [
+                    'items' => 'Items',
+                    'item_sets' => 'Item sets',
+                    'media' => 'Media',
+                ],
+            ],
+            'attributes' => [
+                'class' => 'chosen-select',
+            ],
+        ]);
+        $this->add([
+            'type' => ZendElement\Text::class,
+            'name' => 'resource_query',
+            'options' => [
+                'label' => 'Resource query', // @translate
             ],
         ]);
         $this->add([
@@ -119,7 +135,11 @@ class PrepareAuditForm extends Form
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add([
-            'name' => 'item_query',
+            'name' => 'resource_name',
+            'required' => true,
+        ]);
+        $inputFilter->add([
+            'name' => 'resource_query',
             'required' => false,
         ]);
         $inputFilter->add([

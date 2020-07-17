@@ -1,10 +1,18 @@
+<?php
+$controllerMap = [
+    'items' => 'item',
+    'item_sets' => 'item-set',
+    'media' => 'media',
+];
+?>
 <h3><?php echo $this->translate('Audit details'); ?></h3>
 <div class="meta-group">
     <h4><?php echo $this->translate('Overview'); ?></h4>
     <div class="value">
         <?php echo sprintf(
-            $this->translate('Auditing %s items'),
-            $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]))
+            $this->translate('Auditing %s resources (%s)'),
+            $this->hyperlink(count($resourceIds), $this->url('admin/default', ['controller' => $controllerMap[$resourceName], 'action' => 'browse'], ['query' => $resourceQuery])),
+            $resourceName
         ); ?>
     </div>
     <div class="value">

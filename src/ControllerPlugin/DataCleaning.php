@@ -27,10 +27,12 @@ class DataCleaning extends AbstractPlugin
         return $this->services->get('Omeka\DataTypeManager')->get($dataTypeName);
     }
 
-    public function getItemIds(array $query)
+    public function getResourceIds($resourceName, array $query)
     {
         $controller = $this->getController();
-        $response = $controller->api()->search('items', $query, ['returnScalar' => 'id']);
+        $validResourceNames = ['items', 'item_sets', 'media'];
+        $resourceName = in_array($resourceName, $validResourceNames) ? $resourceName : 'items';
+        $response = $controller->api()->search($resourceName, $query, ['returnScalar' => 'id']);
         return $response->getContent();
     }
 

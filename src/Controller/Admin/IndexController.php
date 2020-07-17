@@ -42,8 +42,9 @@ class IndexController extends AbstractActionController
         $view->setVariable('targetDataType', $targetDataType);
         $view->setVariable('corrections', json_decode($args['corrections'], true));
         $view->setVariable('removals', json_decode($args['removals'], true));
-        $view->setVariable('itemIds', json_decode($args['item_ids'], true));
-        $view->setVariable('itemQuery', $args['item_query']);
+        $view->setVariable('resourceName', $args['resource_name']);
+        $view->setVariable('resourceIds', json_decode($args['resource_ids'], true));
+        $view->setVariable('resourceQuery', $args['resource_query']);
         return $view;
     }
 
@@ -72,22 +73,22 @@ class IndexController extends AbstractActionController
         }
         $formData = $form->getData();
 
-        // Get item IDs, unique strings, and string counts.
-        parse_str($formData['item_query'], $itemQuery);
-        $itemIds = $this->dataCleaning()->getItemIds($itemQuery);
+        // Get resource IDs, unique strings, and string counts.
+        parse_str($formData['resource_query'], $resourceQuery);
+        $resourceIds = $this->dataCleaning()->getResourceIds($formData['resource_name'], $resourceQuery);
         list(
             $stringsStmt,
             $stringsUniqueCount,
             $stringsTotalCount
         ) = $this->dataCleaning()->getValueStrings(
-            $itemIds,
+            $resourceIds,
             $formData['audit_column'],
             $formData['property_id'],
             $formData['data_type_name']
         );
 
         // Prepare form data for AuditForm.
-        $formData['item_ids'] = json_encode($itemIds);
+        $formData['resource_ids'] = json_encode($resourceIds);
         $formData = array_merge($formData, $formData['advanced']);
         unset($formData['prepareauditform_csrf']);
         unset($formData['advanced']);
@@ -104,8 +105,9 @@ class IndexController extends AbstractActionController
 
         $view = new ViewModel;
         $view->setVariable('form', $form);
-        $view->setVariable('itemQuery', $itemQuery);
-        $view->setVariable('itemIds', $itemIds);
+        $view->setVariable('resourceName', $formData['resource_name']);
+        $view->setVariable('resourceQuery', $resourceQuery);
+        $view->setVariable('resourceIds', $resourceIds);
         $view->setVariable('auditColumn', $auditColumn);
         $view->setVariable('property', $property);
         $view->setVariable('dataType', $dataType);

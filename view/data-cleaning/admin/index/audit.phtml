@@ -3,7 +3,11 @@ $tableFilterUrl = $this->assetUrl('vendor/tablefilter-0.7.2/tablefilter.js', 'Da
 $tableFilterBasePath = substr($tableFilterUrl, 0, strrpos($tableFilterUrl, '/') + 1);
 $this->headScript()->appendFile($tableFilterUrl);
 
-$pluralAuditColumns = ['value' => 'values', 'uri' => 'uris', 'value_resource_id' => 'value_resource_ids'];
+$controllerMap = [
+    'items' => 'item',
+    'item_sets' => 'item-set',
+    'media' => 'media',
+];
 $propertyLabelTerm = sprintf($this->translate('%s (%s)'), $property->label(), $property->term());
 $dataTypeLabelName = sprintf($this->translate('%s (%s)'), $dataType->getLabel(), $dataType->getName());
 $targetPropertyLabelTerm = sprintf($this->translate('%s (%s)'), $targetProperty->label(), $targetProperty->term());
@@ -39,11 +43,11 @@ To:
     data-table-filter-rows-counter="<?php echo $this->escapeHtml($this->translate('Rows: ')); ?>"
 ></span>
 <div><?php echo sprintf(
-    $this->translate('You are auditing %s unique %s (%s total) from %s items.'),
+    $this->translate('You are auditing %s unique strings (%s total) from %s resources (%s).'),
     $stringsUniqueCount,
-    $pluralAuditColumns[$auditColumn],
     $stringsTotalCount,
-    $this->hyperlink(count($itemIds), $this->url('admin/default', ['controller' => 'item', 'action' => 'browse'], ['query' => $itemQuery]), ['target' => '_blank'])
+    $this->hyperlink(count($resourceIds), $this->url('admin/default', ['controller' => $controllerMap[$resourceName], 'action' => 'browse'], ['query' => $resourceQuery]), ['target' => '_blank']),
+    $resourceName
 ); ?></div>
 <table>
     <thead>
