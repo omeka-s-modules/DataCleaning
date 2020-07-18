@@ -20,6 +20,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'resource_name',
+            'options' => [
+                'label' => 'Resource type',
+            ],
             'attributes' => [
                 'id' => 'resource_name',
             ],
@@ -27,6 +30,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'resource_query',
+            'options' => [
+                'label' => 'Resource query',
+            ],
             'attributes' => [
                 'id' => 'resource_query',
             ],
@@ -34,6 +40,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'audit_column',
+            'options' => [
+                'label' => 'Audit column',
+            ],
             'attributes' => [
                 'id' => 'audit_column',
             ],
@@ -41,6 +50,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'property_id',
+            'options' => [
+                'label' => 'Property',
+            ],
             'attributes' => [
                 'id' => 'property_id',
             ],
@@ -48,6 +60,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'data_type_name',
+            'options' => [
+                'label' => 'Data type',
+            ],
             'attributes' => [
                 'id' => 'data_type_name',
             ],
@@ -55,6 +70,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'target_audit_column',
+            'options' => [
+                'label' => 'Target audit column',
+            ],
             'attributes' => [
                 'id' => 'target_audit_column',
             ],
@@ -62,6 +80,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'target_property_id',
+            'options' => [
+                'label' => 'Target property',
+            ],
             'attributes' => [
                 'id' => 'target_property_id',
             ],
@@ -69,6 +90,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'target_data_type_name',
+            'options' => [
+                'label' => 'Target data type',
+            ],
             'attributes' => [
                 'id' => 'target_data_type_name',
             ],
@@ -76,6 +100,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'corrections',
+            'options' => [
+                'label' => 'Corrections',
+            ],
             'attributes' => [
                 'id' => 'corrections',
             ],
@@ -83,6 +110,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'removals',
+            'options' => [
+                'label' => 'Removals',
+            ],
             'attributes' => [
                 'id' => 'removals',
             ],
@@ -90,6 +120,9 @@ class AuditForm extends Form
         $this->add([
             'type' => ZendElement\Hidden::class,
             'name' => 'resource_ids',
+            'options' => [
+                'label' => 'Resource IDs',
+            ],
             'attributes' => [
                 'id' => 'resource_ids',
             ],
