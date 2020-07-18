@@ -22,11 +22,24 @@ class DataCleaning extends AbstractPlugin
         $this->services = $services;
     }
 
+    /**
+     * Get a data type.
+     *
+     * @param string $dataTypeName
+     * @return \Omeka\DataType\DataTypeInterface
+     */
     public function getDataType($dataTypeName)
     {
         return $this->services->get('Omeka\DataTypeManager')->get($dataTypeName);
     }
 
+    /**
+     * Get resource IDs from a query.
+     *
+     * @param string $resourceName
+     * @param array $query
+     * @return array
+     */
     public function getResourceIds($resourceName, array $query)
     {
         $controller = $this->getController();
@@ -36,7 +49,16 @@ class DataCleaning extends AbstractPlugin
         return $response->getContent();
     }
 
-    public function getValueStrings(array $resourceIds, $auditColumn, $propertyId, $dataTypeName)
+    /**
+     * Get unique strings and counts from the passed resources.
+     *
+     * @param array $resourceIds
+     * @param string $auditColumn
+     * @param int $propertyId
+     * @param string $dataTypeName
+     * @return array Contains the unique strings, unique count, and total count
+     */
+    public function getUniqueStrings(array $resourceIds, $auditColumn, $propertyId, $dataTypeName)
     {
         $conn = $this->services->get('Omeka\Connection');
         $validAuditColumns = ['value', 'uri', 'value_resource_id'];
@@ -94,6 +116,12 @@ class DataCleaning extends AbstractPlugin
         return [$stringsStmt, $stringsUniqueCount, $stringsTotalCount];
     }
 
+    /**
+     * Get original and target audit columns.
+     *
+     * @param array $data
+     * @return array An array of strings
+     */
     public function getAuditColumnsFromData(array $data)
     {
         $auditColumn = $data['audit_column'];
@@ -104,6 +132,12 @@ class DataCleaning extends AbstractPlugin
         return [$auditColumn, $targetAuditColumn];
     }
 
+    /**
+     * Get original and target properties.
+     *
+     * @param array $data
+     * @return array An arry of property objects
+     */
     public function getPropertiesFromData(array $data)
     {
         $controller = $this->getController();
@@ -115,6 +149,12 @@ class DataCleaning extends AbstractPlugin
         return [$property, $targetProperty];
     }
 
+    /**
+     * Get original and target data types.
+     *
+     * @param array $data
+     * @return array An arry of data type objects
+     */
     public function getDataTypesFromData(array $data)
     {
         $controller = $this->getController();

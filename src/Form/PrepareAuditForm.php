@@ -22,6 +22,7 @@ class PrepareAuditForm extends Form
             'name' => 'resource_name',
             'options' => [
                 'label' => 'Resource type', // @translate
+                'info' => 'Select the resource type to audit.', // @translate
                 'show_required' => true,
                 'value_options' => [
                     'items' => 'Items',
@@ -38,6 +39,7 @@ class PrepareAuditForm extends Form
             'name' => 'resource_query',
             'options' => [
                 'label' => 'Resource query', // @translate
+                'info' => 'Enter a search query to filter the resources. After performing an advanced search, this is the part of the URL that follows the "?"', // @translate
             ],
         ]);
         $this->add([
@@ -45,6 +47,7 @@ class PrepareAuditForm extends Form
             'name' => 'audit_column',
             'options' => [
                 'label' => 'Audit column', // @translate
+                'info' => 'Select the column to audit.', // @translate
                 'empty_option' => '',
                 'show_required' => true,
                 'value_options' => [
@@ -63,6 +66,7 @@ class PrepareAuditForm extends Form
             'name' => 'property_id',
             'options' => [
                 'label' => 'Property', // @translate
+                'info' => 'Select the property to audit.', // @translate
                 'empty_option' => '',
                 'show_required' => true,
             ],
@@ -76,6 +80,7 @@ class PrepareAuditForm extends Form
             'name' => 'data_type_name',
             'options' => [
                 'label' => 'Data type', // @translate
+                'info' => 'Select the data type to audit.', // @translate
                 'empty_option' => '',
                 'show_required' => true,
             ],
@@ -96,6 +101,7 @@ class PrepareAuditForm extends Form
             'name' => 'target_audit_column',
             'options' => [
                 'label' => 'Target audit column', // @translate
+                'info' => 'Select the column that corrections will be stored in. You do not need to select a target if it is the same as the audit column above.', // @translate
                 'empty_option' => '',
                 'value_options' => [
                     'value' => 'value', // @translate
@@ -113,6 +119,7 @@ class PrepareAuditForm extends Form
             'name' => 'target_property_id',
             'options' => [
                 'label' => 'Target property', // @translate
+                'info' => 'Select the property that corrections will be stored as. You do not need to select a target if it is the same as the property above.', // @translate
                 'empty_option' => '',
             ],
             'attributes' => [
@@ -125,6 +132,7 @@ class PrepareAuditForm extends Form
             'name' => 'target_data_type_name',
             'options' => [
                 'label' => 'Target data type', // @translate
+                'info' => 'Select the data type that corrections will be stored as. You do not need to select a target if it is the same as the data type above.', // @translate
                 'empty_option' => '',
             ],
             'attributes' => [

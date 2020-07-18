@@ -80,7 +80,7 @@ class IndexController extends AbstractActionController
             $stringsStmt,
             $stringsUniqueCount,
             $stringsTotalCount
-        ) = $this->dataCleaning()->getValueStrings(
+        ) = $this->dataCleaning()->getUniqueStrings(
             $resourceIds,
             $formData['audit_column'],
             $formData['property_id'],
