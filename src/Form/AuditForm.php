@@ -135,7 +135,7 @@ class AuditForm extends Form
         ]);
         $inputFilter->add([
             'name' => 'resource_query',
-            'required' => true,
+            'required' => false,
         ]);
         $inputFilter->add([
             'name' => 'audit_column',
