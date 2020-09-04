@@ -51,9 +51,9 @@ class PrepareAuditForm extends Form
                 'empty_option' => '',
                 'show_required' => true,
                 'value_options' => [
-                    'value' => 'value', // @translate
-                    'uri' => 'uri', // @translate
-                    'value_resource_id' => 'value_resource_id', // @translate
+                    'value' => 'value',
+                    'uri' => 'uri',
+                    'value_resource_id' => 'value_resource_id',
                 ],
             ],
             'attributes' => [
@@ -104,9 +104,9 @@ class PrepareAuditForm extends Form
                 'info' => 'Select the column that corrections will be stored in. You do not need to select a target if it is the same as the audit column above.', // @translate
                 'empty_option' => '',
                 'value_options' => [
-                    'value' => 'value', // @translate
-                    'uri' => 'uri', // @translate
-                    'value_resource_id' => 'value_resource_id', // @translate
+                    'value' => 'value',
+                    'uri' => 'uri',
+                    'value_resource_id' => 'value_resource_id',
                 ],
             ],
             'attributes' => [

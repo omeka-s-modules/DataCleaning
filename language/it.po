@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 14:27-0400\n"
+"POT-Creation-Date: 2020-09-04 15:47-0400\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
 "Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2020\n"
 "Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
@@ -244,14 +244,6 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:50
 msgid "Select the column to audit."
-msgstr ""
-
-#: src/Form/PrepareAuditForm.php:54 src/Form/PrepareAuditForm.php:107
-msgid "value"
-msgstr "valore"
-
-#: src/Form/PrepareAuditForm.php:56 src/Form/PrepareAuditForm.php:109
-msgid "value_resource_id"
 msgstr ""
 
 #: src/Form/PrepareAuditForm.php:61
