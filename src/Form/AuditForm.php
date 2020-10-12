@@ -1,8 +1,6 @@
 <?php
 namespace DataCleaning\Form;
 
-use DataCleaning\Form\Element as DataCleaningElement;
-use Omeka\Form\Element as OmekaElement;
 use Laminas\Form\Element as LaminasElement;
 use Laminas\Form\Form;
 
