@@ -4,9 +4,9 @@ namespace DataCleaning\Controller\Admin;
 use Laminas\Session\Container;
 use DataCleaning\Form;
 use DataCleaning\Job\CleanDataJob;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\JsonModel;
+use Laminas\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {

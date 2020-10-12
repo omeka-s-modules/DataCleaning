@@ -3,8 +3,8 @@ namespace DataCleaning\Form;
 
 use DataCleaning\Form\Element as DataCleaningElement;
 use Omeka\Form\Element as OmekaElement;
-use Zend\Form\Element as ZendElement;
-use Zend\Form\Form;
+use Laminas\Form\Element as LaminasElement;
+use Laminas\Form\Form;
 
 class AuditForm extends Form
 {
@@ -18,7 +18,7 @@ class AuditForm extends Form
 
         $this->setAttribute('id', 'audit-form');
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'resource_name',
             'options' => [
                 'label' => 'Resource type',
@@ -28,7 +28,7 @@ class AuditForm extends Form
             ],
        ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'resource_query',
             'options' => [
                 'label' => 'Resource query',
@@ -38,7 +38,7 @@ class AuditForm extends Form
             ],
        ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'audit_column',
             'options' => [
                 'label' => 'Audit column',
@@ -48,7 +48,7 @@ class AuditForm extends Form
             ],
        ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'property_id',
             'options' => [
                 'label' => 'Property',
@@ -58,7 +58,7 @@ class AuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'data_type_name',
             'options' => [
                 'label' => 'Data type',
@@ -68,7 +68,7 @@ class AuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'target_audit_column',
             'options' => [
                 'label' => 'Target audit column',
@@ -78,7 +78,7 @@ class AuditForm extends Form
             ],
        ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'target_property_id',
             'options' => [
                 'label' => 'Target property',
@@ -88,7 +88,7 @@ class AuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'target_data_type_name',
             'options' => [
                 'label' => 'Target data type',
@@ -98,7 +98,7 @@ class AuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'corrections',
             'options' => [
                 'label' => 'Corrections',
@@ -108,7 +108,7 @@ class AuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'removals',
             'options' => [
                 'label' => 'Removals',
@@ -118,7 +118,7 @@ class AuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Hidden::class,
+            'type' => LaminasElement\Hidden::class,
             'name' => 'resource_ids',
             'options' => [
                 'label' => 'Resource IDs',

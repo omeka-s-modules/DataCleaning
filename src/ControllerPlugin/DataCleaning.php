@@ -4,8 +4,8 @@ namespace DataCleaning\ControllerPlugin;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 use PDO;
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DataCleaning extends AbstractPlugin
 {

@@ -3,9 +3,9 @@ namespace DataCleaning\Form;
 
 use DataCleaning\Form\Element as DataCleaningElement;
 use Omeka\Form\Element as OmekaElement;
-use Zend\Form\Element as ZendElement;
-use Zend\Form\Fieldset;
-use Zend\Form\Form;
+use Laminas\Form\Element as LaminasElement;
+use Laminas\Form\Fieldset;
+use Laminas\Form\Form;
 
 class PrepareAuditForm extends Form
 {
@@ -18,7 +18,7 @@ class PrepareAuditForm extends Form
         $csrfElement->setOptions($csrfOptions);
 
         $this->add([
-            'type' => ZendElement\Select::class,
+            'type' => LaminasElement\Select::class,
             'name' => 'resource_name',
             'options' => [
                 'label' => 'Resource type', // @translate
@@ -35,7 +35,7 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Text::class,
+            'type' => LaminasElement\Text::class,
             'name' => 'resource_query',
             'options' => [
                 'label' => 'Resource query', // @translate
@@ -43,7 +43,7 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => ZendElement\Select::class,
+            'type' => LaminasElement\Select::class,
             'name' => 'audit_column',
             'options' => [
                 'label' => 'Audit column', // @translate
@@ -97,7 +97,7 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->get('advanced')->add([
-            'type' => ZendElement\Select::class,
+            'type' => LaminasElement\Select::class,
             'name' => 'target_audit_column',
             'options' => [
                 'label' => 'Target audit column', // @translate

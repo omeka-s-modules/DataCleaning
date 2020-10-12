@@ -2,7 +2,7 @@
 namespace DataCleaning\Form\Element;
 
 use Omeka\DataType\Manager as DataTypeManager;
-use Zend\Form\Element\Select;
+use Laminas\Form\Element\Select;
 
 class DataTypeSelect extends Select
 {

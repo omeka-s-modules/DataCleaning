@@ -2,7 +2,7 @@
 namespace DataCleaning;
 
 use Omeka\Module\AbstractModule;
-use Zend\EventManager\SharedEventManagerInterface;
+use Laminas\EventManager\SharedEventManagerInterface;
 
 class Module extends AbstractModule
 {

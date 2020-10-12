@@ -3,7 +3,7 @@ namespace DataCleaning\Service\Form\Element;
 
 use Interop\Container\ContainerInterface;
 use DataCleaning\Form\Element\DataTypeSelect;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class DataTypeSelectFactory implements FactoryInterface
 {
