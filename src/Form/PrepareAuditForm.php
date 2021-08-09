@@ -35,11 +35,11 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => LaminasElement\Text::class,
+            'type' => OmekaElement\Query::class,
             'name' => 'resource_query',
             'options' => [
                 'label' => 'Resource query', // @translate
-                'info' => 'Enter a search query to filter the resources. After performing an advanced search, this is the part of the URL that follows the "?"', // @translate
+                'info' => 'Enter a search query to filter the resources. No query means all resources.', // @translate
             ],
         ]);
         $this->add([
