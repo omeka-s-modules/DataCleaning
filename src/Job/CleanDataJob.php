@@ -2,6 +2,7 @@
 namespace DataCleaning\Job;
 
 use Doctrine\DBAL\Connection;
+use Omeka\Api\Adapter\ResourceTitleHydrator;
 use Omeka\Job\AbstractJob;
 use Omeka\Job\Exception;
 use PDO;
@@ -11,6 +12,7 @@ class CleanDataJob extends AbstractJob
     public function perform()
     {
         $connection = $this->getServiceLocator()->get('Omeka\Connection');
+        $entityManager = $this->getServiceLocator()->get('Omeka\EntityManager');
 
         $corrections = json_decode($this->getArg('corrections', '{}'), true);
         $removals = json_decode($this->getArg('removals', '[]'), true);
@@ -80,6 +82,31 @@ class CleanDataJob extends AbstractJob
                     Connection::PARAM_INT_ARRAY,
                 ]
             );
+        }
+
+        // Re-hydrate all resource titles. We do this because corrections and
+        // removals may affect the display title. We must iterate every resource
+        // because there's no way to tell which resources the previous UPDATE
+        // and DELETE operations affected.
+        $dql = '
+        SELECT p FROM Omeka\Entity\Property p
+        JOIN p.vocabulary v
+        WHERE v.namespaceUri = :namespaceUri
+        AND p.localName = :localName';
+        $query = $entityManager->createQuery($dql);
+        $query->setParameters([
+            'namespaceUri' => 'http://purl.org/dc/terms/',
+            'localName' => 'title',
+        ]);
+        $titleProperty = $query->getOneOrNullResult();
+        foreach (array_chunk($resourceIds, 100) as $resourceIdChunk) {
+            foreach ($resourceIdChunk as $resourceId) {
+                $entity = $entityManager->find('Omeka\Entity\Resource', $resourceId);
+                (new ResourceTitleHydrator)->hydrate($entity, $titleProperty);
+            }
+            // Flush and clear after each chunk to avoid reaching the memory limit.
+            $entityManager->flush();
+            $entityManager->clear();
         }
     }
 
