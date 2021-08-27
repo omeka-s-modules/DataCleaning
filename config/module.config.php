@@ -34,6 +34,7 @@ return [
     'form_elements' => [
         'factories' => [
             'DataCleaning\Form\Element\DataTypeSelect' => Service\Form\Element\DataTypeSelectFactory::class,
+            'DataCleaning\Form\Element\UsedPropertySelect' => Service\Form\Element\UsedPropertySelectFactory::class,
         ],
     ],
     'navigation' => [

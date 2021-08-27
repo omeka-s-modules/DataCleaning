@@ -62,7 +62,7 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->add([
-            'type' => OmekaElement\PropertySelect::class,
+            'type' => DataCleaningElement\UsedPropertySelect::class,
             'name' => 'property_id',
             'options' => [
                 'label' => 'Property', // @translate
