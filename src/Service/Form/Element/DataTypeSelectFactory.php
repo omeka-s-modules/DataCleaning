@@ -11,6 +11,7 @@ class DataTypeSelectFactory implements FactoryInterface
     {
         $element = new DataTypeSelect;
         $element->setDataTypeManager($services->get('Omeka\DataTypeManager'));
+        $element->setEntityManager($services->get('Omeka\EntityManager'));
         return $element;
     }
 }

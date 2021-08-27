@@ -1,10 +1,12 @@
 <?php
 namespace DataCleaning\ControllerPlugin;
 
+use DataCleaning\DataType\Unknown;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 use PDO;
 use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\ServiceManager\Exception\ServiceNotFoundException;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class DataCleaning extends AbstractPlugin
@@ -30,7 +32,12 @@ class DataCleaning extends AbstractPlugin
      */
     public function getDataType($dataTypeName)
     {
-        return $this->services->get('Omeka\DataTypeManager')->get($dataTypeName);
+        try {
+            return $this->services->get('Omeka\DataTypeManager')->get($dataTypeName);
+        } catch (ServiceNotFoundException $e) {
+            // Account for unregistered data types.
+            return new Unknown($dataTypeName);
+        }
     }
 
     /**

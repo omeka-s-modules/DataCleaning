@@ -83,6 +83,7 @@ class PrepareAuditForm extends Form
                 'info' => 'Select the data type to audit.', // @translate
                 'empty_option' => '',
                 'show_required' => true,
+                'exclude_unused_data_types' => true,
             ],
             'attributes' => [
                 'class' => 'chosen-select',
