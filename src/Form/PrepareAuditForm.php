@@ -43,6 +43,20 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->add([
+            'type' => DataCleaningElement\UsedPropertySelect::class,
+            'name' => 'property_id',
+            'options' => [
+                'label' => 'Property', // @translate
+                'info' => 'Select the property to audit.', // @translate
+                'empty_option' => '',
+                'show_required' => true,
+            ],
+            'attributes' => [
+                'class' => 'chosen-select',
+                'data-placeholder' => 'Select a property', // @translate
+            ],
+        ]);
+        $this->add([
             'type' => LaminasElement\Select::class,
             'name' => 'audit_column',
             'options' => [
@@ -59,20 +73,6 @@ class PrepareAuditForm extends Form
             'attributes' => [
                 'class' => 'chosen-select',
                 'data-placeholder' => 'Select an audit column', // @translate
-            ],
-        ]);
-        $this->add([
-            'type' => DataCleaningElement\UsedPropertySelect::class,
-            'name' => 'property_id',
-            'options' => [
-                'label' => 'Property', // @translate
-                'info' => 'Select the property to audit.', // @translate
-                'empty_option' => '',
-                'show_required' => true,
-            ],
-            'attributes' => [
-                'class' => 'chosen-select',
-                'data-placeholder' => 'Select a property', // @translate
             ],
         ]);
         $this->add([
@@ -98,6 +98,19 @@ class PrepareAuditForm extends Form
             ],
         ]);
         $this->get('advanced')->add([
+            'type' => OmekaElement\PropertySelect::class,
+            'name' => 'target_property_id',
+            'options' => [
+                'label' => 'Target property', // @translate
+                'info' => 'Select the property that corrections will be stored as. You do not need to select a target if it is the same as the property above.', // @translate
+                'empty_option' => '',
+            ],
+            'attributes' => [
+                'class' => 'chosen-select',
+                'data-placeholder' => 'Select a target property', // @translate
+            ],
+        ]);
+        $this->get('advanced')->add([
             'type' => LaminasElement\Select::class,
             'name' => 'target_audit_column',
             'options' => [
@@ -113,19 +126,6 @@ class PrepareAuditForm extends Form
             'attributes' => [
                 'class' => 'chosen-select',
                 'data-placeholder' => 'Select a target audit column', // @translate
-            ],
-        ]);
-        $this->get('advanced')->add([
-            'type' => OmekaElement\PropertySelect::class,
-            'name' => 'target_property_id',
-            'options' => [
-                'label' => 'Target property', // @translate
-                'info' => 'Select the property that corrections will be stored as. You do not need to select a target if it is the same as the property above.', // @translate
-                'empty_option' => '',
-            ],
-            'attributes' => [
-                'class' => 'chosen-select',
-                'data-placeholder' => 'Select a target property', // @translate
             ],
         ]);
         $this->get('advanced')->add([
