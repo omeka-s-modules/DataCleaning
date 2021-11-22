@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Giorgio Comai <g@giorgiocomai.eu>, 2020
+# Hong Zhang <zhangh@unlv.nevada.edu>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -13,13 +13,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-22 13:59-0500\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
-"Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2020\n"
-"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
+"Last-Translator: Hong Zhang <zhangh@unlv.nevada.edu>, 2021\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/omeka/teams/14184/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:11
 #: view/data-cleaning/admin/index/audit.phtml:12
@@ -27,7 +27,7 @@ msgstr ""
 #: view/data-cleaning/admin/index/audit.phtml:14
 #, php-format
 msgid "%s (%s)"
-msgstr "%s (%s)"
+msgstr "%s（%s）"
 
 #: view/data-cleaning/admin/index/audit.phtml:17
 #, php-format
@@ -49,35 +49,35 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 msgid "Audit data"
-msgstr "Verifica dati"
+msgstr "审计数据"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 #: view/data-cleaning/admin/index/index.phtml:1
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Data Cleaning"
-msgstr "Pulizia dei dati"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:41
 msgid "Filter count"
-msgstr "Conteggio del filtro"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:42
 #, php-format
 msgid "Filter %s"
-msgstr "Filtra %s"
+msgstr "过滤%s"
 
 #: view/data-cleaning/admin/index/audit.phtml:43
 msgid "Rows: "
-msgstr "Righe:"
+msgstr "行："
 
 #: view/data-cleaning/admin/index/audit.phtml:46
 #, php-format
 msgid "You are auditing %s unique strings (%s total) from %s resources (%s)."
-msgstr ""
+msgstr "您正在审计来自%s资源（%s）的%s唯一字符串（总共%s）。"
 
 #: view/data-cleaning/admin/index/audit.phtml:56
 msgid "Audit column"
-msgstr "Colonna di verifica"
+msgstr "审计列"
 
 #: view/data-cleaning/admin/index/audit.phtml:58
 msgid "Data type"
@@ -85,110 +85,110 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:63
 msgid "From:"
-msgstr "Da:"
+msgstr "来自于："
 
 #: view/data-cleaning/admin/index/audit.phtml:69
 msgid "To:"
-msgstr "A:"
+msgstr "发送至："
 
 #: view/data-cleaning/admin/index/audit.phtml:82
 msgid "Loading audit table..."
-msgstr "Caricamento della tabella di verifica..."
+msgstr "加载审计表 ......"
 
 #: view/data-cleaning/admin/index/audit.phtml:84
 msgid "Copy all"
-msgstr "Copia tutto"
+msgstr "拷贝所有"
 
 #: view/data-cleaning/admin/index/audit.phtml:85
 msgid "Clear all"
-msgstr "Pulisci tutto"
+msgstr "清空所有"
 
 #: view/data-cleaning/admin/index/audit.phtml:86
 msgid "Validate all"
-msgstr "Valida tutto"
+msgstr "验证所有"
 
 #: view/data-cleaning/admin/index/audit.phtml:87
 msgid "Remove all"
-msgstr "Elimina tutto"
+msgstr "取消所有"
 
 #: view/data-cleaning/admin/index/audit.phtml:88
 msgid "Unremove all"
-msgstr "Segna tutti come non da eliminare"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:98
 msgid "Count"
-msgstr "Conteggio"
+msgstr "计数"
 
 #: view/data-cleaning/admin/index/audit.phtml:99
 #, php-format
 msgid "From: %s"
-msgstr "Da: %s"
+msgstr "来自于：%s"
 
 #: view/data-cleaning/admin/index/audit.phtml:100
 #, php-format
 msgid "To: %s"
-msgstr "A: %s"
+msgstr "发送至：%s"
 
 #: view/data-cleaning/admin/index/audit.phtml:112
 msgid "Copy"
-msgstr "Copia"
+msgstr "拷贝"
 
 #: view/data-cleaning/admin/index/audit.phtml:114
 msgid "Validate"
-msgstr "Valida"
+msgstr "验证"
 
 #: view/data-cleaning/admin/index/index.phtml:1
 msgid "Past audits"
-msgstr ""
+msgstr "过去的审计"
 
 #: view/data-cleaning/admin/index/index.phtml:3
 msgid "Prepare new audit"
-msgstr ""
+msgstr "准备新审计"
 
 #: view/data-cleaning/admin/index/index.phtml:12
 msgid "Job ID"
-msgstr ""
+msgstr "任务ID"
 
 #: view/data-cleaning/admin/index/index.phtml:13
 msgid "Job status"
-msgstr ""
+msgstr "任务状态"
 
 #: view/data-cleaning/admin/index/index.phtml:14
 msgid "Job started"
-msgstr ""
+msgstr "任务已开始"
 
 #: view/data-cleaning/admin/index/index.phtml:15
 msgid "Job ended"
-msgstr ""
+msgstr "任务已结束"
 
 #: view/data-cleaning/admin/index/index.phtml:16
 msgid "Auditor"
-msgstr ""
+msgstr "审计员"
 
 #: view/data-cleaning/admin/index/index.phtml:39
 msgid "Not ended"
-msgstr ""
+msgstr "未结束"
 
 #: view/data-cleaning/admin/index/index.phtml:54
 msgid "There are no past audits."
-msgstr ""
+msgstr "没有过去的审计。"
 
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Prepare audit"
-msgstr "Prepara la verifica"
+msgstr "准备审计"
 
 #: view/data-cleaning/admin/index/show-details.phtml:8
 msgid "Audit details"
-msgstr ""
+msgstr "审计细节"
 
 #: view/data-cleaning/admin/index/show-details.phtml:10
 msgid "Overview"
-msgstr ""
+msgstr "概览"
 
 #: view/data-cleaning/admin/index/show-details.phtml:13
 #, php-format
 msgid "Auditing %s resources (%s)"
-msgstr ""
+msgstr "审计%s资源（%s）"
 
 #: view/data-cleaning/admin/index/show-details.phtml:20
 #, php-format
@@ -202,37 +202,37 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/show-details.phtml:32
 msgid "From"
-msgstr ""
+msgstr "来自于"
 
 #: view/data-cleaning/admin/index/show-details.phtml:35
 #: view/data-cleaning/admin/index/show-details.phtml:45
 #, php-format
 msgid "Audit column: %s"
-msgstr ""
+msgstr "审计列：%s"
 
 #: view/data-cleaning/admin/index/show-details.phtml:36
 #: view/data-cleaning/admin/index/show-details.phtml:46
 #, php-format
 msgid "Property: %s (%s)"
-msgstr ""
+msgstr "属性：%s（%s）"
 
 #: view/data-cleaning/admin/index/show-details.phtml:37
 #: view/data-cleaning/admin/index/show-details.phtml:47
 #, php-format
 msgid "Data type: %s (%s)"
-msgstr ""
+msgstr "数据累心：%s（%s）"
 
 #: view/data-cleaning/admin/index/show-details.phtml:42
 msgid "To"
-msgstr ""
+msgstr "发送至"
 
 #: src/Form/PrepareAuditForm.php:25
 msgid "Select the resource type to audit."
-msgstr ""
+msgstr "选择需审计的资源类型。"
 
 #: src/Form/PrepareAuditForm.php:41
 msgid "Resource query"
-msgstr ""
+msgstr "资源查询"
 
 #: src/Form/PrepareAuditForm.php:42
 msgid ""
@@ -241,68 +241,68 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:50
 msgid "Select the property to audit."
-msgstr ""
+msgstr "选择需审计的属性。"
 
 #: src/Form/PrepareAuditForm.php:64
 msgid "Select the column to audit."
-msgstr ""
+msgstr "选择需审计的列。"
 
 #: src/Form/PrepareAuditForm.php:75
 msgid "Select an audit column"
-msgstr "Seleziona una colonna per la verifica"
+msgstr "选择一个审计列"
 
 #: src/Form/PrepareAuditForm.php:83
 msgid "Select the data type to audit."
-msgstr ""
+msgstr "选择需审计的数据类型。"
 
 #: src/Form/PrepareAuditForm.php:90
 msgid "Select a data type"
-msgstr "Seleziona un tipo di dati"
+msgstr "选择一个数据类型"
 
 #: src/Form/PrepareAuditForm.php:104
 msgid "Target property"
-msgstr "Proprietà destinazione"
+msgstr "目标属性"
 
 #: src/Form/PrepareAuditForm.php:105
 msgid ""
 "Select the property that corrections will be stored as. You do not need to "
 "select a target if it is the same as the property above."
-msgstr ""
+msgstr "选择将存储更正的属性。如果上面的审计列相同的话，您不需要选择属性。"
 
 #: src/Form/PrepareAuditForm.php:110
 msgid "Select a target property"
-msgstr "Seleziona una proprietà per la destinazione"
+msgstr "选择一个目标属性"
 
 #: src/Form/PrepareAuditForm.php:117
 msgid "Target audit column"
-msgstr "Colonna di destinazione della verifica"
+msgstr "目标审计列"
 
 #: src/Form/PrepareAuditForm.php:118
 msgid ""
 "Select the column that corrections will be stored in. You do not need to "
 "select a target if it is the same as the audit column above."
-msgstr ""
+msgstr "选择将存储更正的列。如果上面的审计列相同的话，您不需要选择目标。"
 
 #: src/Form/PrepareAuditForm.php:128
 msgid "Select a target audit column"
-msgstr "Seleziona una colonna di destinazione della verifica:"
+msgstr "选择一个目标审计列"
 
 #: src/Form/PrepareAuditForm.php:135
 msgid "Target data type"
-msgstr "Tipo di dati di destinazione"
+msgstr "目标数据类型"
 
 #: src/Form/PrepareAuditForm.php:136
 msgid ""
 "Select the data type that corrections will be stored as. You do not need to "
 "select a target if it is the same as the data type above."
-msgstr ""
+msgstr "选择将存储更正的数据类型。如果上面的审计列相同的话，您不需要选择数据类型。"
 
 #: src/Form/PrepareAuditForm.php:141
 msgid "Select a target data type"
-msgstr "Seleziona un tipo di dati per la destinazione"
+msgstr "选择一个目标数据类型"
 
 #: src/Controller/Admin/IndexController.php:138
 msgid ""
 "Cleaning data. This may take a while. You may refresh this page for status "
 "updates."
-msgstr ""
+msgstr "净化数据。这可能需要一段时间。您可以刷新此页查看状态更新。"

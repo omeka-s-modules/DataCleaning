@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-04 15:47-0400\n"
+"POT-Creation-Date: 2021-11-22 13:59-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,6 +73,10 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:56
 msgid "Audit column"
+msgstr ""
+
+#: view/data-cleaning/admin/index/audit.phtml:58
+msgid "Data type"
 msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:63
@@ -218,12 +222,6 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: src/Controller/Admin/IndexController.php:139
-msgid ""
-"Cleaning data. This may take a while. You may refresh this page for status "
-"updates."
-msgstr ""
-
 #: src/Form/PrepareAuditForm.php:25
 msgid "Select the resource type to audit."
 msgstr ""
@@ -234,68 +232,73 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:42
 msgid ""
-"Enter a search query to filter the resources. After performing an advanced "
-"search, this is the part of the URL that follows the \"?\""
+"Enter a search query to filter the resources. No query means all resources."
 msgstr ""
 
 #: src/Form/PrepareAuditForm.php:50
+msgid "Select the property to audit."
+msgstr ""
+
+#: src/Form/PrepareAuditForm.php:64
 msgid "Select the column to audit."
 msgstr ""
 
-#: src/Form/PrepareAuditForm.php:61
+#: src/Form/PrepareAuditForm.php:75
 msgid "Select an audit column"
-msgstr ""
-
-#: src/Form/PrepareAuditForm.php:69
-msgid "Select the property to audit."
 msgstr ""
 
 #: src/Form/PrepareAuditForm.php:83
 msgid "Select the data type to audit."
 msgstr ""
 
-#: src/Form/PrepareAuditForm.php:89
+#: src/Form/PrepareAuditForm.php:90
 msgid "Select a data type"
 msgstr ""
 
-#: src/Form/PrepareAuditForm.php:103
-msgid "Target audit column"
-msgstr ""
-
 #: src/Form/PrepareAuditForm.php:104
-msgid ""
-"Select the column that corrections will be stored in. You do not need to "
-"select a target if it is the same as the audit column above."
-msgstr ""
-
-#: src/Form/PrepareAuditForm.php:114
-msgid "Select a target audit column"
-msgstr ""
-
-#: src/Form/PrepareAuditForm.php:121
 msgid "Target property"
 msgstr ""
 
-#: src/Form/PrepareAuditForm.php:122
+#: src/Form/PrepareAuditForm.php:105
 msgid ""
 "Select the property that corrections will be stored as. You do not need to "
 "select a target if it is the same as the property above."
 msgstr ""
 
-#: src/Form/PrepareAuditForm.php:127
+#: src/Form/PrepareAuditForm.php:110
 msgid "Select a target property"
 msgstr ""
 
-#: src/Form/PrepareAuditForm.php:134
-msgid "Target data type"
+#: src/Form/PrepareAuditForm.php:117
+msgid "Target audit column"
+msgstr ""
+
+#: src/Form/PrepareAuditForm.php:118
+msgid ""
+"Select the column that corrections will be stored in. You do not need to "
+"select a target if it is the same as the audit column above."
+msgstr ""
+
+#: src/Form/PrepareAuditForm.php:128
+msgid "Select a target audit column"
 msgstr ""
 
 #: src/Form/PrepareAuditForm.php:135
+msgid "Target data type"
+msgstr ""
+
+#: src/Form/PrepareAuditForm.php:136
 msgid ""
 "Select the data type that corrections will be stored as. You do not need to "
 "select a target if it is the same as the data type above."
 msgstr ""
 
-#: src/Form/PrepareAuditForm.php:140
+#: src/Form/PrepareAuditForm.php:141
 msgid "Select a target data type"
+msgstr ""
+
+#: src/Controller/Admin/IndexController.php:138
+msgid ""
+"Cleaning data. This may take a while. You may refresh this page for status "
+"updates."
 msgstr ""

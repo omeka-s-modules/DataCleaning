@@ -4,7 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Giorgio Comai <g@giorgiocomai.eu>, 2020
+# Angela-Marina Batarelo <angela-marina.batarelo@ericsson.com>, 2021
+# Josip Ilic <josip.ilic@ericsson.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -13,13 +14,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-22 13:59-0500\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
-"Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2020\n"
-"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
+"Last-Translator: Josip Ilic <josip.ilic@ericsson.com>, 2021\n"
+"Language-Team: Croatian (https://www.transifex.com/omeka/teams/14184/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:11
 #: view/data-cleaning/admin/index/audit.phtml:12
@@ -46,38 +47,51 @@ msgid ""
 "  - Property: %s\n"
 "  - Data type: %s"
 msgstr ""
+"Molimo vas da potvrdite sljedeće promjen:\n"
+"\n"
+"__BROJ_KOREKCIJA__ korekcije\n"
+"__BROJ_UKLANJANJA__ uklanjanja\n"
+"\n"
+"Od:\n"
+"  - Stupac za revidiranje: %s\n"
+"  - Svojstvo: %s\n"
+"  - Vrsta podatka: %s\n"
+"Do:\n"
+"  - Stupac za revidiranje: %s\n"
+"  - Svojstvo: %s\n"
+"  - Vrsta podatka: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 msgid "Audit data"
-msgstr "Verifica dati"
+msgstr "Revizija podataka"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 #: view/data-cleaning/admin/index/index.phtml:1
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Data Cleaning"
-msgstr "Pulizia dei dati"
+msgstr "Čišćenje podataka"
 
 #: view/data-cleaning/admin/index/audit.phtml:41
 msgid "Filter count"
-msgstr "Conteggio del filtro"
+msgstr "Broj filtera"
 
 #: view/data-cleaning/admin/index/audit.phtml:42
 #, php-format
 msgid "Filter %s"
-msgstr "Filtra %s"
+msgstr "Filtrirajte %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:43
 msgid "Rows: "
-msgstr "Righe:"
+msgstr "Redovi"
 
 #: view/data-cleaning/admin/index/audit.phtml:46
 #, php-format
 msgid "You are auditing %s unique strings (%s total) from %s resources (%s)."
-msgstr ""
+msgstr "Revidirate %s jedinstvenih string-ova (ukupno %s) od %s resursa (%s)"
 
 #: view/data-cleaning/admin/index/audit.phtml:56
 msgid "Audit column"
-msgstr "Colonna di verifica"
+msgstr "Stupac za revidiranje"
 
 #: view/data-cleaning/admin/index/audit.phtml:58
 msgid "Data type"
@@ -85,154 +99,154 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:63
 msgid "From:"
-msgstr "Da:"
+msgstr "Od:"
 
 #: view/data-cleaning/admin/index/audit.phtml:69
 msgid "To:"
-msgstr "A:"
+msgstr "Za:"
 
 #: view/data-cleaning/admin/index/audit.phtml:82
 msgid "Loading audit table..."
-msgstr "Caricamento della tabella di verifica..."
+msgstr "Učitavanje tablice za revidiranje ..."
 
 #: view/data-cleaning/admin/index/audit.phtml:84
 msgid "Copy all"
-msgstr "Copia tutto"
+msgstr "Kopiraj sve"
 
 #: view/data-cleaning/admin/index/audit.phtml:85
 msgid "Clear all"
-msgstr "Pulisci tutto"
+msgstr "Očisti sve"
 
 #: view/data-cleaning/admin/index/audit.phtml:86
 msgid "Validate all"
-msgstr "Valida tutto"
+msgstr "Validiraj sve"
 
 #: view/data-cleaning/admin/index/audit.phtml:87
 msgid "Remove all"
-msgstr "Elimina tutto"
+msgstr "Ukloni sve"
 
 #: view/data-cleaning/admin/index/audit.phtml:88
 msgid "Unremove all"
-msgstr "Segna tutti come non da eliminare"
+msgstr "Povrat uklanjanja svega"
 
 #: view/data-cleaning/admin/index/audit.phtml:98
 msgid "Count"
-msgstr "Conteggio"
+msgstr "Prebroji"
 
 #: view/data-cleaning/admin/index/audit.phtml:99
 #, php-format
 msgid "From: %s"
-msgstr "Da: %s"
+msgstr "Od: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:100
 #, php-format
 msgid "To: %s"
-msgstr "A: %s"
+msgstr "Do: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:112
 msgid "Copy"
-msgstr "Copia"
+msgstr "Kopiraj"
 
 #: view/data-cleaning/admin/index/audit.phtml:114
 msgid "Validate"
-msgstr "Valida"
+msgstr "validiraj"
 
 #: view/data-cleaning/admin/index/index.phtml:1
 msgid "Past audits"
-msgstr ""
+msgstr "Prošle revizije"
 
 #: view/data-cleaning/admin/index/index.phtml:3
 msgid "Prepare new audit"
-msgstr ""
+msgstr "Pripremite novo revidiranje"
 
 #: view/data-cleaning/admin/index/index.phtml:12
 msgid "Job ID"
-msgstr ""
+msgstr "ID posla"
 
 #: view/data-cleaning/admin/index/index.phtml:13
 msgid "Job status"
-msgstr ""
+msgstr "Status posla"
 
 #: view/data-cleaning/admin/index/index.phtml:14
 msgid "Job started"
-msgstr ""
+msgstr "Početak posla"
 
 #: view/data-cleaning/admin/index/index.phtml:15
 msgid "Job ended"
-msgstr ""
+msgstr "Kraj posla"
 
 #: view/data-cleaning/admin/index/index.phtml:16
 msgid "Auditor"
-msgstr ""
+msgstr "Revizor"
 
 #: view/data-cleaning/admin/index/index.phtml:39
 msgid "Not ended"
-msgstr ""
+msgstr "Nije završeno"
 
 #: view/data-cleaning/admin/index/index.phtml:54
 msgid "There are no past audits."
-msgstr ""
+msgstr "Nema prethodnih revizija"
 
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Prepare audit"
-msgstr "Prepara la verifica"
+msgstr "Priprema revizije"
 
 #: view/data-cleaning/admin/index/show-details.phtml:8
 msgid "Audit details"
-msgstr ""
+msgstr "Detalji revizije"
 
 #: view/data-cleaning/admin/index/show-details.phtml:10
 msgid "Overview"
-msgstr ""
+msgstr "Pregled"
 
 #: view/data-cleaning/admin/index/show-details.phtml:13
 #, php-format
 msgid "Auditing %s resources (%s)"
-msgstr ""
+msgstr "Revizija %s resursa (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:20
 #, php-format
 msgid "Making %s corrections"
-msgstr ""
+msgstr "Izvršavanje %s korekcija"
 
 #: view/data-cleaning/admin/index/show-details.phtml:26
 #, php-format
 msgid "Making %s removals"
-msgstr ""
+msgstr "Izvršavanje %s uklanjanja"
 
 #: view/data-cleaning/admin/index/show-details.phtml:32
 msgid "From"
-msgstr ""
+msgstr "od"
 
 #: view/data-cleaning/admin/index/show-details.phtml:35
 #: view/data-cleaning/admin/index/show-details.phtml:45
 #, php-format
 msgid "Audit column: %s"
-msgstr ""
+msgstr "Stupac za revidiranje: %s"
 
 #: view/data-cleaning/admin/index/show-details.phtml:36
 #: view/data-cleaning/admin/index/show-details.phtml:46
 #, php-format
 msgid "Property: %s (%s)"
-msgstr ""
+msgstr "Svojstvo: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:37
 #: view/data-cleaning/admin/index/show-details.phtml:47
 #, php-format
 msgid "Data type: %s (%s)"
-msgstr ""
+msgstr "Data type: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:42
 msgid "To"
-msgstr ""
+msgstr "do"
 
 #: src/Form/PrepareAuditForm.php:25
 msgid "Select the resource type to audit."
-msgstr ""
+msgstr "Odabir tipa resursa za revidiranje"
 
 #: src/Form/PrepareAuditForm.php:41
 msgid "Resource query"
-msgstr ""
+msgstr "upit resursa"
 
 #: src/Form/PrepareAuditForm.php:42
 msgid ""
@@ -241,68 +255,82 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:50
 msgid "Select the property to audit."
-msgstr ""
+msgstr "Odabir mjesta za reviziju"
 
 #: src/Form/PrepareAuditForm.php:64
 msgid "Select the column to audit."
-msgstr ""
+msgstr "Odabir supca koji će se revidirati"
 
 #: src/Form/PrepareAuditForm.php:75
 msgid "Select an audit column"
-msgstr "Seleziona una colonna per la verifica"
+msgstr "Odabir stupca za reviziju"
 
 #: src/Form/PrepareAuditForm.php:83
 msgid "Select the data type to audit."
-msgstr ""
+msgstr "Odabir tipa podataka za revidiranje"
 
 #: src/Form/PrepareAuditForm.php:90
 msgid "Select a data type"
-msgstr "Seleziona un tipo di dati"
+msgstr "Odabir tipa podataka"
 
 #: src/Form/PrepareAuditForm.php:104
 msgid "Target property"
-msgstr "Proprietà destinazione"
+msgstr "ciljano svojstvo"
 
 #: src/Form/PrepareAuditForm.php:105
 msgid ""
 "Select the property that corrections will be stored as. You do not need to "
 "select a target if it is the same as the property above."
 msgstr ""
+"Odaberite svojstvo u kojem će se ispravci pohranjivati. Ne morate odabrati "
+"cilj ako je isti kao gore navedeno svojstvo"
 
 #: src/Form/PrepareAuditForm.php:110
 msgid "Select a target property"
-msgstr "Seleziona una proprietà per la destinazione"
+msgstr "Odaberite ciljano svojstvo"
 
 #: src/Form/PrepareAuditForm.php:117
 msgid "Target audit column"
-msgstr "Colonna di destinazione della verifica"
+msgstr "Ciljana kolumna za revidiranje"
 
 #: src/Form/PrepareAuditForm.php:118
 msgid ""
 "Select the column that corrections will be stored in. You do not need to "
 "select a target if it is the same as the audit column above."
 msgstr ""
+"Odaberite stupac u kojem će se ispravci pohranjivati. Ne morate odabrati "
+"cilj ako je isti kao stupac revizije iznad"
 
 #: src/Form/PrepareAuditForm.php:128
 msgid "Select a target audit column"
-msgstr "Seleziona una colonna di destinazione della verifica:"
+msgstr "Odaberite ciljani stupac za revidiranje."
 
 #: src/Form/PrepareAuditForm.php:135
 msgid "Target data type"
-msgstr "Tipo di dati di destinazione"
+msgstr "ciljana vrsta podataka"
 
 #: src/Form/PrepareAuditForm.php:136
 msgid ""
 "Select the data type that corrections will be stored as. You do not need to "
 "select a target if it is the same as the data type above."
 msgstr ""
+"Odaberite vrstu podataka u kojoj će se ispravci pohranjivati. Ne morate "
+"odabrati cilj ako je isti kao gornji tip podataka."
 
 #: src/Form/PrepareAuditForm.php:141
 msgid "Select a target data type"
-msgstr "Seleziona un tipo di dati per la destinazione"
+msgstr "Odaberite ciljanu vrstu podatakaciljanu vrstu podataka"
 
 #: src/Controller/Admin/IndexController.php:138
 msgid ""
 "Cleaning data. This may take a while. You may refresh this page for status "
 "updates."
 msgstr ""
+"Čišćenje podataka. To može potrajati. Ovu stranicu možete osvježiti radi ažuriranja statusa.\n"
+" \n"
+"\n"
+" \n"
+" \n"
+" \n"
+" \n"
+" "

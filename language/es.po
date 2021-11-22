@@ -4,7 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Giorgio Comai <g@giorgiocomai.eu>, 2020
+# María Jesús Colmenero <mjcolmenero@gmail.com>, 2021
+# Alfonso Montejo <almontejor@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -13,12 +14,12 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-22 13:59-0500\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
-"Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2020\n"
-"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
+"Last-Translator: Alfonso Montejo <almontejor@gmail.com>, 2021\n"
+"Language-Team: Spanish (https://www.transifex.com/omeka/teams/14184/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:11
@@ -46,38 +47,52 @@ msgid ""
 "  - Property: %s\n"
 "  - Data type: %s"
 msgstr ""
+"Es necesario confirmar los siguientes cambios:\n"
+"\n"
+"__CORRECTION_COUNT__ correcciones\n"
+"__REMOVAL_COUNT__ eliminaciones\n"
+"\n"
+"De:\n"
+"  - Columna de revisión: %s\n"
+"  - Propiedad: %s\n"
+"  - Tipo de datos: %s\n"
+"A:\n"
+"  - Columna de revisión: %s\n"
+"  - Propiedad: %s\n"
+"  - Tipo de datos: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 msgid "Audit data"
-msgstr "Verifica dati"
+msgstr "Datos de revisión"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 #: view/data-cleaning/admin/index/index.phtml:1
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Data Cleaning"
-msgstr "Pulizia dei dati"
+msgstr "Depuración de datos"
 
 #: view/data-cleaning/admin/index/audit.phtml:41
 msgid "Filter count"
-msgstr "Conteggio del filtro"
+msgstr "Recuento de filtros"
 
 #: view/data-cleaning/admin/index/audit.phtml:42
 #, php-format
 msgid "Filter %s"
-msgstr "Filtra %s"
+msgstr "Filtro %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:43
 msgid "Rows: "
-msgstr "Righe:"
+msgstr "Filas: "
 
 #: view/data-cleaning/admin/index/audit.phtml:46
 #, php-format
 msgid "You are auditing %s unique strings (%s total) from %s resources (%s)."
 msgstr ""
+"Se están revisando %s cadenas únicas (%s en total) de %s recursos (%s)."
 
 #: view/data-cleaning/admin/index/audit.phtml:56
 msgid "Audit column"
-msgstr "Colonna di verifica"
+msgstr "Columna de revisión"
 
 #: view/data-cleaning/admin/index/audit.phtml:58
 msgid "Data type"
@@ -85,7 +100,7 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:63
 msgid "From:"
-msgstr "Da:"
+msgstr "De:"
 
 #: view/data-cleaning/admin/index/audit.phtml:69
 msgid "To:"
@@ -93,36 +108,36 @@ msgstr "A:"
 
 #: view/data-cleaning/admin/index/audit.phtml:82
 msgid "Loading audit table..."
-msgstr "Caricamento della tabella di verifica..."
+msgstr "Cargando revisión de tabla..."
 
 #: view/data-cleaning/admin/index/audit.phtml:84
 msgid "Copy all"
-msgstr "Copia tutto"
+msgstr "Copiar todo"
 
 #: view/data-cleaning/admin/index/audit.phtml:85
 msgid "Clear all"
-msgstr "Pulisci tutto"
+msgstr "Limpiar todo"
 
 #: view/data-cleaning/admin/index/audit.phtml:86
 msgid "Validate all"
-msgstr "Valida tutto"
+msgstr "Validar todo"
 
 #: view/data-cleaning/admin/index/audit.phtml:87
 msgid "Remove all"
-msgstr "Elimina tutto"
+msgstr "Eliminar todo"
 
 #: view/data-cleaning/admin/index/audit.phtml:88
 msgid "Unremove all"
-msgstr "Segna tutti come non da eliminare"
+msgstr "Deshacer eliminar todo"
 
 #: view/data-cleaning/admin/index/audit.phtml:98
 msgid "Count"
-msgstr "Conteggio"
+msgstr "Recuento"
 
 #: view/data-cleaning/admin/index/audit.phtml:99
 #, php-format
 msgid "From: %s"
-msgstr "Da: %s"
+msgstr "De: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:100
 #, php-format
@@ -131,108 +146,108 @@ msgstr "A: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:112
 msgid "Copy"
-msgstr "Copia"
+msgstr "Copiar"
 
 #: view/data-cleaning/admin/index/audit.phtml:114
 msgid "Validate"
-msgstr "Valida"
+msgstr "Validar"
 
 #: view/data-cleaning/admin/index/index.phtml:1
 msgid "Past audits"
-msgstr ""
+msgstr "Revisiones anteriores"
 
 #: view/data-cleaning/admin/index/index.phtml:3
 msgid "Prepare new audit"
-msgstr ""
+msgstr "Preparar una nueva revisión"
 
 #: view/data-cleaning/admin/index/index.phtml:12
 msgid "Job ID"
-msgstr ""
+msgstr "ID del trabajo"
 
 #: view/data-cleaning/admin/index/index.phtml:13
 msgid "Job status"
-msgstr ""
+msgstr "Estado del trabajo"
 
 #: view/data-cleaning/admin/index/index.phtml:14
 msgid "Job started"
-msgstr ""
+msgstr "Trabajo iniciado"
 
 #: view/data-cleaning/admin/index/index.phtml:15
 msgid "Job ended"
-msgstr ""
+msgstr "Trabajo finalizado"
 
 #: view/data-cleaning/admin/index/index.phtml:16
 msgid "Auditor"
-msgstr ""
+msgstr "Revisor"
 
 #: view/data-cleaning/admin/index/index.phtml:39
 msgid "Not ended"
-msgstr ""
+msgstr "Sin finalizar"
 
 #: view/data-cleaning/admin/index/index.phtml:54
 msgid "There are no past audits."
-msgstr ""
+msgstr "No hay ninguna revisión anterior."
 
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Prepare audit"
-msgstr "Prepara la verifica"
+msgstr "Preparar revisión"
 
 #: view/data-cleaning/admin/index/show-details.phtml:8
 msgid "Audit details"
-msgstr ""
+msgstr "Detalles de la revisión"
 
 #: view/data-cleaning/admin/index/show-details.phtml:10
 msgid "Overview"
-msgstr ""
+msgstr "Visión general"
 
 #: view/data-cleaning/admin/index/show-details.phtml:13
 #, php-format
 msgid "Auditing %s resources (%s)"
-msgstr ""
+msgstr "Revisando %s recursos (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:20
 #, php-format
 msgid "Making %s corrections"
-msgstr ""
+msgstr "Realizando %s correcciones"
 
 #: view/data-cleaning/admin/index/show-details.phtml:26
 #, php-format
 msgid "Making %s removals"
-msgstr ""
+msgstr "Realizando %s eliminaciones"
 
 #: view/data-cleaning/admin/index/show-details.phtml:32
 msgid "From"
-msgstr ""
+msgstr "De"
 
 #: view/data-cleaning/admin/index/show-details.phtml:35
 #: view/data-cleaning/admin/index/show-details.phtml:45
 #, php-format
 msgid "Audit column: %s"
-msgstr ""
+msgstr "Columna de revisión: %s"
 
 #: view/data-cleaning/admin/index/show-details.phtml:36
 #: view/data-cleaning/admin/index/show-details.phtml:46
 #, php-format
 msgid "Property: %s (%s)"
-msgstr ""
+msgstr "Propiedad: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:37
 #: view/data-cleaning/admin/index/show-details.phtml:47
 #, php-format
 msgid "Data type: %s (%s)"
-msgstr ""
+msgstr "Tipo de datos: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:42
 msgid "To"
-msgstr ""
+msgstr "A"
 
 #: src/Form/PrepareAuditForm.php:25
 msgid "Select the resource type to audit."
-msgstr ""
+msgstr "Seleccionar el tipo de recurso a revisar"
 
 #: src/Form/PrepareAuditForm.php:41
 msgid "Resource query"
-msgstr ""
+msgstr "Consulta de recursos"
 
 #: src/Form/PrepareAuditForm.php:42
 msgid ""
@@ -241,68 +256,78 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:50
 msgid "Select the property to audit."
-msgstr ""
+msgstr "Seleccionar la propiedad a revisar."
 
 #: src/Form/PrepareAuditForm.php:64
 msgid "Select the column to audit."
-msgstr ""
+msgstr "Seleccionar la columna a revisar."
 
 #: src/Form/PrepareAuditForm.php:75
 msgid "Select an audit column"
-msgstr "Seleziona una colonna per la verifica"
+msgstr "Seleccionar una columna de revisión."
 
 #: src/Form/PrepareAuditForm.php:83
 msgid "Select the data type to audit."
-msgstr ""
+msgstr "Seleccionar el tipo de datos a revisar."
 
 #: src/Form/PrepareAuditForm.php:90
 msgid "Select a data type"
-msgstr "Seleziona un tipo di dati"
+msgstr "Seleccionar el tipo de datos"
 
 #: src/Form/PrepareAuditForm.php:104
 msgid "Target property"
-msgstr "Proprietà destinazione"
+msgstr "Propiedad de destino"
 
 #: src/Form/PrepareAuditForm.php:105
 msgid ""
 "Select the property that corrections will be stored as. You do not need to "
 "select a target if it is the same as the property above."
 msgstr ""
+"Seleccionar la propiedad en la que se almacenarán las correcciones. No es "
+"necesario seleccionar un destino si es el mismo que la propiedad anterior. "
 
 #: src/Form/PrepareAuditForm.php:110
 msgid "Select a target property"
-msgstr "Seleziona una proprietà per la destinazione"
+msgstr "Seleccionar una propiedad de destino"
 
 #: src/Form/PrepareAuditForm.php:117
 msgid "Target audit column"
-msgstr "Colonna di destinazione della verifica"
+msgstr "Columna de revisión de destino"
 
 #: src/Form/PrepareAuditForm.php:118
 msgid ""
 "Select the column that corrections will be stored in. You do not need to "
 "select a target if it is the same as the audit column above."
 msgstr ""
+"Seleccionar la columna en la que se almacenarán las correcciones. No es "
+"necesario seleccionar un destino si es el mismo que el de la columna de "
+"revisión anterior."
 
 #: src/Form/PrepareAuditForm.php:128
 msgid "Select a target audit column"
-msgstr "Seleziona una colonna di destinazione della verifica:"
+msgstr "Seleccionar una columna de revisión de destino "
 
 #: src/Form/PrepareAuditForm.php:135
 msgid "Target data type"
-msgstr "Tipo di dati di destinazione"
+msgstr "Tipo de datos de destino"
 
 #: src/Form/PrepareAuditForm.php:136
 msgid ""
 "Select the data type that corrections will be stored as. You do not need to "
 "select a target if it is the same as the data type above."
 msgstr ""
+"Seleccionar el tipo de datos con el que se almacenarán las correcciones.  No"
+" es necesario que seleccione un destino si es el mismo que el tipo de datos "
+"anterior."
 
 #: src/Form/PrepareAuditForm.php:141
 msgid "Select a target data type"
-msgstr "Seleziona un tipo di dati per la destinazione"
+msgstr "Seleccionar un tipo de datos de destino"
 
 #: src/Controller/Admin/IndexController.php:138
 msgid ""
 "Cleaning data. This may take a while. You may refresh this page for status "
 "updates."
 msgstr ""
+"Limpiando datos. Esta operación podría requerir cierto tiempo. Es posible "
+"recargar la página para actualizar el estado"

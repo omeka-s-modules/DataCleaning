@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Giorgio Comai <g@giorgiocomai.eu>, 2020
+# Rivo Zängov <eraser@eraser.ee>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -13,12 +13,12 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-22 13:59-0500\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
-"Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2020\n"
-"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
+"Last-Translator: Rivo Zängov <eraser@eraser.ee>, 2021\n"
+"Language-Team: Estonian (https://www.transifex.com/omeka/teams/14184/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
+"Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:11
@@ -46,29 +46,42 @@ msgid ""
 "  - Property: %s\n"
 "  - Data type: %s"
 msgstr ""
+"Palun kinnita järgnevad muudatused:\n"
+"\n"
+"__CORRECTION_COUNT__ parandust\n"
+"__REMOVAL_COUNT__ eemaldamist\n"
+"\n"
+"Kohtades:\n"
+"  - Auditeeritud veerud: %s\n"
+"  - Property: %s\n"
+"  - Data type: %s\n"
+"To:\n"
+"  - Audit column: %s\n"
+"  - Property: %s\n"
+"  - Data type: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 msgid "Audit data"
-msgstr "Verifica dati"
+msgstr "Andmete auditeerimine"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 #: view/data-cleaning/admin/index/index.phtml:1
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Data Cleaning"
-msgstr "Pulizia dei dati"
+msgstr "Andmete puhastamine"
 
 #: view/data-cleaning/admin/index/audit.phtml:41
 msgid "Filter count"
-msgstr "Conteggio del filtro"
+msgstr "Filtrite arv"
 
 #: view/data-cleaning/admin/index/audit.phtml:42
 #, php-format
 msgid "Filter %s"
-msgstr "Filtra %s"
+msgstr "Filter %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:43
 msgid "Rows: "
-msgstr "Righe:"
+msgstr "Ridasid:"
 
 #: view/data-cleaning/admin/index/audit.phtml:46
 #, php-format
@@ -77,7 +90,7 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:56
 msgid "Audit column"
-msgstr "Colonna di verifica"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:58
 msgid "Data type"
@@ -85,142 +98,142 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:63
 msgid "From:"
-msgstr "Da:"
+msgstr "Alates:"
 
 #: view/data-cleaning/admin/index/audit.phtml:69
 msgid "To:"
-msgstr "A:"
+msgstr "Kuni:"
 
 #: view/data-cleaning/admin/index/audit.phtml:82
 msgid "Loading audit table..."
-msgstr "Caricamento della tabella di verifica..."
+msgstr "Auditeerimise tabeli laadimine..."
 
 #: view/data-cleaning/admin/index/audit.phtml:84
 msgid "Copy all"
-msgstr "Copia tutto"
+msgstr "Kopeeri kõik"
 
 #: view/data-cleaning/admin/index/audit.phtml:85
 msgid "Clear all"
-msgstr "Pulisci tutto"
+msgstr "Tühjenda kõik"
 
 #: view/data-cleaning/admin/index/audit.phtml:86
 msgid "Validate all"
-msgstr "Valida tutto"
+msgstr "Kinnita kõik"
 
 #: view/data-cleaning/admin/index/audit.phtml:87
 msgid "Remove all"
-msgstr "Elimina tutto"
+msgstr "Eemalda kõik"
 
 #: view/data-cleaning/admin/index/audit.phtml:88
 msgid "Unremove all"
-msgstr "Segna tutti come non da eliminare"
+msgstr "Tühista kõigi eemaldamine"
 
 #: view/data-cleaning/admin/index/audit.phtml:98
 msgid "Count"
-msgstr "Conteggio"
+msgstr "Arv"
 
 #: view/data-cleaning/admin/index/audit.phtml:99
 #, php-format
 msgid "From: %s"
-msgstr "Da: %s"
+msgstr "Alates: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:100
 #, php-format
 msgid "To: %s"
-msgstr "A: %s"
+msgstr "Kuni: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:112
 msgid "Copy"
-msgstr "Copia"
+msgstr "Kopeeri"
 
 #: view/data-cleaning/admin/index/audit.phtml:114
 msgid "Validate"
-msgstr "Valida"
+msgstr "Kinnita"
 
 #: view/data-cleaning/admin/index/index.phtml:1
 msgid "Past audits"
-msgstr ""
+msgstr "Varasemad auditid"
 
 #: view/data-cleaning/admin/index/index.phtml:3
 msgid "Prepare new audit"
-msgstr ""
+msgstr "Valmista ette uus audit"
 
 #: view/data-cleaning/admin/index/index.phtml:12
 msgid "Job ID"
-msgstr ""
+msgstr "Töö ID"
 
 #: view/data-cleaning/admin/index/index.phtml:13
 msgid "Job status"
-msgstr ""
+msgstr "Töö staatus"
 
 #: view/data-cleaning/admin/index/index.phtml:14
 msgid "Job started"
-msgstr ""
+msgstr "Töö alustati"
 
 #: view/data-cleaning/admin/index/index.phtml:15
 msgid "Job ended"
-msgstr ""
+msgstr "Töö lõpetati"
 
 #: view/data-cleaning/admin/index/index.phtml:16
 msgid "Auditor"
-msgstr ""
+msgstr "Audiitor"
 
 #: view/data-cleaning/admin/index/index.phtml:39
 msgid "Not ended"
-msgstr ""
+msgstr "Lõpetamata"
 
 #: view/data-cleaning/admin/index/index.phtml:54
 msgid "There are no past audits."
-msgstr ""
+msgstr "Varasemaid auditeid pole."
 
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Prepare audit"
-msgstr "Prepara la verifica"
+msgstr "Valmista audit ette"
 
 #: view/data-cleaning/admin/index/show-details.phtml:8
 msgid "Audit details"
-msgstr ""
+msgstr "Auditi üksikasjad"
 
 #: view/data-cleaning/admin/index/show-details.phtml:10
 msgid "Overview"
-msgstr ""
+msgstr "e"
 
 #: view/data-cleaning/admin/index/show-details.phtml:13
 #, php-format
 msgid "Auditing %s resources (%s)"
-msgstr ""
+msgstr "%s ressursi auditeerimine (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:20
 #, php-format
 msgid "Making %s corrections"
-msgstr ""
+msgstr "%s paranduse tegemine"
 
 #: view/data-cleaning/admin/index/show-details.phtml:26
 #, php-format
 msgid "Making %s removals"
-msgstr ""
+msgstr "%s eemaldamise sooritamine"
 
 #: view/data-cleaning/admin/index/show-details.phtml:32
 msgid "From"
-msgstr ""
+msgstr "Alates"
 
 #: view/data-cleaning/admin/index/show-details.phtml:35
 #: view/data-cleaning/admin/index/show-details.phtml:45
 #, php-format
 msgid "Audit column: %s"
-msgstr ""
+msgstr "Veeru auit: %s"
 
 #: view/data-cleaning/admin/index/show-details.phtml:36
 #: view/data-cleaning/admin/index/show-details.phtml:46
 #, php-format
 msgid "Property: %s (%s)"
-msgstr ""
+msgstr "Omadus: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:37
 #: view/data-cleaning/admin/index/show-details.phtml:47
 #, php-format
 msgid "Data type: %s (%s)"
-msgstr ""
+msgstr "Andmete liik: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:42
 msgid "To"
@@ -228,11 +241,11 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:25
 msgid "Select the resource type to audit."
-msgstr ""
+msgstr "Vali ressursi liik, mida auditeerida."
 
 #: src/Form/PrepareAuditForm.php:41
 msgid "Resource query"
-msgstr ""
+msgstr "Ressursi päring"
 
 #: src/Form/PrepareAuditForm.php:42
 msgid ""
@@ -241,55 +254,59 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:50
 msgid "Select the property to audit."
-msgstr ""
+msgstr "Vali omadus, mida auditeerida."
 
 #: src/Form/PrepareAuditForm.php:64
 msgid "Select the column to audit."
-msgstr ""
+msgstr "Vali veerg, mida auditeerida."
 
 #: src/Form/PrepareAuditForm.php:75
 msgid "Select an audit column"
-msgstr "Seleziona una colonna per la verifica"
+msgstr "Vali auditi veerg"
 
 #: src/Form/PrepareAuditForm.php:83
 msgid "Select the data type to audit."
-msgstr ""
+msgstr "Vali andmete liik, mida auditeerida."
 
 #: src/Form/PrepareAuditForm.php:90
 msgid "Select a data type"
-msgstr "Seleziona un tipo di dati"
+msgstr "Vali andmete liik"
 
 #: src/Form/PrepareAuditForm.php:104
 msgid "Target property"
-msgstr "Proprietà destinazione"
+msgstr "Sihtkoha omadus"
 
 #: src/Form/PrepareAuditForm.php:105
 msgid ""
 "Select the property that corrections will be stored as. You do not need to "
 "select a target if it is the same as the property above."
 msgstr ""
+"Vali omadus, milles parandused salvestatakse. Sihtomadust ei pea valima, kui"
+" see on sama omadus, mis on üleval valitud."
 
 #: src/Form/PrepareAuditForm.php:110
 msgid "Select a target property"
-msgstr "Seleziona una proprietà per la destinazione"
+msgstr "Vali sihtkoha omadus"
 
 #: src/Form/PrepareAuditForm.php:117
 msgid "Target audit column"
-msgstr "Colonna di destinazione della verifica"
+msgstr "Auditi sihtveerg"
 
 #: src/Form/PrepareAuditForm.php:118
 msgid ""
 "Select the column that corrections will be stored in. You do not need to "
 "select a target if it is the same as the audit column above."
 msgstr ""
+"Vali veerg, milles parandused salvestatakse. Sihtveergu ei pea valima, kui "
+"see on sama veerg, mis on üleval valitud auditi veerg."
 
 #: src/Form/PrepareAuditForm.php:128
 msgid "Select a target audit column"
-msgstr "Seleziona una colonna di destinazione della verifica:"
+msgstr "Vali auditi sihtveerg"
 
 #: src/Form/PrepareAuditForm.php:135
 msgid "Target data type"
-msgstr "Tipo di dati di destinazione"
+msgstr "Vali andmete liik"
 
 #: src/Form/PrepareAuditForm.php:136
 msgid ""
@@ -299,10 +316,12 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:141
 msgid "Select a target data type"
-msgstr "Seleziona un tipo di dati per la destinazione"
+msgstr "Vali sihtandmete liik"
 
 #: src/Controller/Admin/IndexController.php:138
 msgid ""
 "Cleaning data. This may take a while. You may refresh this page for status "
 "updates."
 msgstr ""
+"Andmete puhastamine. See võib veidi aega võtta. Oleku uuenduse nägemiseks "
+"värskenda lehekülge."

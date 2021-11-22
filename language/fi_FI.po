@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Giorgio Comai <g@giorgiocomai.eu>, 2020
+# Kai Metsävainio <kai.metsavainio@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -13,12 +13,12 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-22 13:59-0500\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
-"Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2020\n"
-"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
+"Last-Translator: Kai Metsävainio <kai.metsavainio@gmail.com>, 2021\n"
+"Language-Team: Finnish (Finland) (https://www.transifex.com/omeka/teams/14184/fi_FI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
+"Language: fi_FI\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:11
@@ -27,7 +27,7 @@ msgstr ""
 #: view/data-cleaning/admin/index/audit.phtml:14
 #, php-format
 msgid "%s (%s)"
-msgstr "%s (%s)"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:17
 #, php-format
@@ -49,26 +49,26 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 msgid "Audit data"
-msgstr "Verifica dati"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 #: view/data-cleaning/admin/index/index.phtml:1
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Data Cleaning"
-msgstr "Pulizia dei dati"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:41
 msgid "Filter count"
-msgstr "Conteggio del filtro"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:42
 #, php-format
 msgid "Filter %s"
-msgstr "Filtra %s"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:43
 msgid "Rows: "
-msgstr "Righe:"
+msgstr "Riviä:"
 
 #: view/data-cleaning/admin/index/audit.phtml:46
 #, php-format
@@ -77,7 +77,7 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:56
 msgid "Audit column"
-msgstr "Colonna di verifica"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:58
 msgid "Data type"
@@ -85,105 +85,105 @@ msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:63
 msgid "From:"
-msgstr "Da:"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:69
 msgid "To:"
-msgstr "A:"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:82
 msgid "Loading audit table..."
-msgstr "Caricamento della tabella di verifica..."
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:84
 msgid "Copy all"
-msgstr "Copia tutto"
+msgstr "Kopioi kaikki"
 
 #: view/data-cleaning/admin/index/audit.phtml:85
 msgid "Clear all"
-msgstr "Pulisci tutto"
+msgstr "Tyhjennä kaikki"
 
 #: view/data-cleaning/admin/index/audit.phtml:86
 msgid "Validate all"
-msgstr "Valida tutto"
+msgstr "Tarkista kaikki"
 
 #: view/data-cleaning/admin/index/audit.phtml:87
 msgid "Remove all"
-msgstr "Elimina tutto"
+msgstr "Poista kaikki"
 
 #: view/data-cleaning/admin/index/audit.phtml:88
 msgid "Unremove all"
-msgstr "Segna tutti come non da eliminare"
+msgstr "Palauta kaikki"
 
 #: view/data-cleaning/admin/index/audit.phtml:98
 msgid "Count"
-msgstr "Conteggio"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:99
 #, php-format
 msgid "From: %s"
-msgstr "Da: %s"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:100
 #, php-format
 msgid "To: %s"
-msgstr "A: %s"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:112
 msgid "Copy"
-msgstr "Copia"
+msgstr "Kopio"
 
 #: view/data-cleaning/admin/index/audit.phtml:114
 msgid "Validate"
-msgstr "Valida"
+msgstr "Tarkista"
 
 #: view/data-cleaning/admin/index/index.phtml:1
 msgid "Past audits"
-msgstr ""
+msgstr "Aiemmat tarkastukset"
 
 #: view/data-cleaning/admin/index/index.phtml:3
 msgid "Prepare new audit"
-msgstr ""
+msgstr "Valmistele uusi tarkistus"
 
 #: view/data-cleaning/admin/index/index.phtml:12
 msgid "Job ID"
-msgstr ""
+msgstr "Työn ID"
 
 #: view/data-cleaning/admin/index/index.phtml:13
 msgid "Job status"
-msgstr ""
+msgstr "Työn tila"
 
 #: view/data-cleaning/admin/index/index.phtml:14
 msgid "Job started"
-msgstr ""
+msgstr "Työ aloitettu"
 
 #: view/data-cleaning/admin/index/index.phtml:15
 msgid "Job ended"
-msgstr ""
+msgstr "Työ päättynyt"
 
 #: view/data-cleaning/admin/index/index.phtml:16
 msgid "Auditor"
-msgstr ""
+msgstr "Tarkastaja"
 
 #: view/data-cleaning/admin/index/index.phtml:39
 msgid "Not ended"
-msgstr ""
+msgstr "Ei päättynyt"
 
 #: view/data-cleaning/admin/index/index.phtml:54
 msgid "There are no past audits."
-msgstr ""
+msgstr "Ei aikaisempia tarkistuksia."
 
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Prepare audit"
-msgstr "Prepara la verifica"
+msgstr "Valmistele tarkistus"
 
 #: view/data-cleaning/admin/index/show-details.phtml:8
 msgid "Audit details"
-msgstr ""
+msgstr "Tarkistuksen tiedot"
 
 #: view/data-cleaning/admin/index/show-details.phtml:10
 msgid "Overview"
-msgstr ""
+msgstr "Yleiskatsaus"
 
 #: view/data-cleaning/admin/index/show-details.phtml:13
 #, php-format
@@ -220,7 +220,7 @@ msgstr ""
 #: view/data-cleaning/admin/index/show-details.phtml:47
 #, php-format
 msgid "Data type: %s (%s)"
-msgstr ""
+msgstr "Tietotyyppi: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:42
 msgid "To"
@@ -249,7 +249,7 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:75
 msgid "Select an audit column"
-msgstr "Seleziona una colonna per la verifica"
+msgstr ""
 
 #: src/Form/PrepareAuditForm.php:83
 msgid "Select the data type to audit."
@@ -257,11 +257,11 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:90
 msgid "Select a data type"
-msgstr "Seleziona un tipo di dati"
+msgstr ""
 
 #: src/Form/PrepareAuditForm.php:104
 msgid "Target property"
-msgstr "Proprietà destinazione"
+msgstr ""
 
 #: src/Form/PrepareAuditForm.php:105
 msgid ""
@@ -271,11 +271,11 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:110
 msgid "Select a target property"
-msgstr "Seleziona una proprietà per la destinazione"
+msgstr ""
 
 #: src/Form/PrepareAuditForm.php:117
 msgid "Target audit column"
-msgstr "Colonna di destinazione della verifica"
+msgstr ""
 
 #: src/Form/PrepareAuditForm.php:118
 msgid ""
@@ -285,11 +285,11 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:128
 msgid "Select a target audit column"
-msgstr "Seleziona una colonna di destinazione della verifica:"
+msgstr ""
 
 #: src/Form/PrepareAuditForm.php:135
 msgid "Target data type"
-msgstr "Tipo di dati di destinazione"
+msgstr ""
 
 #: src/Form/PrepareAuditForm.php:136
 msgid ""
@@ -299,10 +299,12 @@ msgstr ""
 
 #: src/Form/PrepareAuditForm.php:141
 msgid "Select a target data type"
-msgstr "Seleziona un tipo di dati per la destinazione"
+msgstr ""
 
 #: src/Controller/Admin/IndexController.php:138
 msgid ""
 "Cleaning data. This may take a while. You may refresh this page for status "
 "updates."
 msgstr ""
+"Siivotaan tietoja. Tämä voi kestää hetken ja voit halutessa päivittää sivun "
+"nähdäksesi tilanteen päivittymisen."
