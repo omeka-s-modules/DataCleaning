@@ -13,7 +13,7 @@ class UsedPropertySelect extends Select
         $this->entityManager = $entityManager;
     }
 
-    public function getValueOptions()
+    public function getValueOptions() : array
     {
         // Only include properties that are used in the value table.
         $query = $this->entityManager->createQuery('

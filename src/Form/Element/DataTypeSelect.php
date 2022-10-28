@@ -22,7 +22,7 @@ class DataTypeSelect extends Select
         $this->entityManager = $entityManager;
     }
 
-    public function getValueOptions()
+    public function getValueOptions() : array
     {
         if ($this->getOption('exclude_unused_data_types')) {
             // Only include data types that are used in the value table. Note
