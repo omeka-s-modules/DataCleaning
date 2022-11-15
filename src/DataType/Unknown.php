@@ -9,6 +9,8 @@ use Laminas\View\Renderer\PhpRenderer;
 
 class Unknown implements DataTypeInterface
 {
+    protected $name;
+
     public function __construct($name)
     {
         $this->name = $name;
