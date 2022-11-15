@@ -106,7 +106,7 @@ To:
                 <?php while ($string = $stringsStmt->fetch()): ?>
                 <tr id="<?php echo sprintf('row-%s', $i++); ?>" >
                     <td><?php echo $string[0]; ?></td>
-                    <td style="word-break: break-all;"><?php echo $string[1]; ?></td>
+                    <td style="word-break: break-all;"><?php echo $this->escapeHtml($string[1]); ?></td>
                     <td>
                         <textarea class="correction-string" data-name="<?php echo $this->escapeHtml($string[1]); ?>" style="width: 100%;" rows="4"></textarea>
                         <button type="button" class="copy-button"><?php echo $this->translate('Copy'); ?></button>
