@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 13:59-0500\n"
+"POT-Creation-Date: 2022-11-29 11:03-0500\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
 "Last-Translator: Alfonso Montejo <almontejor@gmail.com>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/omeka/teams/14184/es/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:11
 #: view/data-cleaning/admin/index/audit.phtml:12
@@ -96,7 +96,7 @@ msgstr "Columna de revisión"
 
 #: view/data-cleaning/admin/index/audit.phtml:58
 msgid "Data type"
-msgstr ""
+msgstr "Tipo de dato"
 
 #: view/data-cleaning/admin/index/audit.phtml:63
 msgid "From:"
@@ -253,6 +253,8 @@ msgstr "Consulta de recursos"
 msgid ""
 "Enter a search query to filter the resources. No query means all resources."
 msgstr ""
+"Introducir una consulta de búsqueda para filtrar los recursos. Si no se "
+"indica ninguna consulta se devolverán todos los recursos."
 
 #: src/Form/PrepareAuditForm.php:50
 msgid "Select the property to audit."
