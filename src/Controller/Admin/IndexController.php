@@ -27,9 +27,9 @@ class IndexController extends AbstractActionController
         $jobId = $query = $this->params()->fromQuery('job_id');
         $job = $this->api()->read('jobs', $jobId)->getContent();
         $args = $job->args();
-        list($auditColumn, $targetAuditColumn) = $this->dataCleaning()->getAuditColumnsFromData($args);
-        list($property, $targetProperty) = $this->dataCleaning()->getPropertiesFromData($args);
-        list($dataType, $targetDataType) = $this->dataCleaning()->getDataTypesFromData($args);
+        [$auditColumn, $targetAuditColumn] = $this->dataCleaning()->getAuditColumnsFromData($args);
+        [$property, $targetProperty] = $this->dataCleaning()->getPropertiesFromData($args);
+        [$dataType, $targetDataType] = $this->dataCleaning()->getDataTypesFromData($args);
 
         $view = new ViewModel;
         $view->setTerminal(true);
@@ -75,11 +75,11 @@ class IndexController extends AbstractActionController
         // Get resource IDs, unique strings, and string counts.
         parse_str($formData['resource_query'], $resourceQuery);
         $resourceIds = $this->dataCleaning()->getResourceIds($formData['resource_name'], $resourceQuery);
-        list(
+        [
             $stringsStmt,
             $stringsUniqueCount,
             $stringsTotalCount
-        ) = $this->dataCleaning()->getUniqueStrings(
+        ] = $this->dataCleaning()->getUniqueStrings(
             $resourceIds,
             $formData['audit_column'],
             $formData['property_id'],
@@ -93,9 +93,9 @@ class IndexController extends AbstractActionController
         unset($formData['advanced']);
 
         // Set original and target parameters.
-        list($auditColumn, $targetAuditColumn) = $this->dataCleaning()->getAuditColumnsFromData($formData);
-        list($property, $targetProperty) = $this->dataCleaning()->getPropertiesFromData($formData);
-        list($dataType, $targetDataType) = $this->dataCleaning()->getDataTypesFromData($formData);
+        [$auditColumn, $targetAuditColumn] = $this->dataCleaning()->getAuditColumnsFromData($formData);
+        [$property, $targetProperty] = $this->dataCleaning()->getPropertiesFromData($formData);
+        [$dataType, $targetDataType] = $this->dataCleaning()->getDataTypesFromData($formData);
 
         $form = $this->getForm(Form\AuditForm::class);
         $form->setData($formData);
