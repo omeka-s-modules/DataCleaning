@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Tzvetan Tzvetanski <ceibg.org@gmail.com>, 2021
+# Iametza Interaktiboa, 2022
 # 
 #, fuzzy
 msgid ""
@@ -13,12 +13,12 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-12 12:07-0500\n"
 "PO-Revision-Date: 2020-07-08 22:19+0000\n"
-"Last-Translator: Tzvetan Tzvetanski <ceibg.org@gmail.com>, 2021\n"
-"Language-Team: Bulgarian (Bulgaria) (https://www.transifex.com/omeka/teams/14184/bg_BG/)\n"
+"Last-Translator: Iametza Interaktiboa, 2022\n"
+"Language-Team: Basque (https://www.transifex.com/omeka/teams/14184/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: bg_BG\n"
+"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: view/data-cleaning/admin/index/audit.phtml:11
@@ -27,7 +27,7 @@ msgstr ""
 #: view/data-cleaning/admin/index/audit.phtml:14
 #, php-format
 msgid "%s (%s)"
-msgstr "%s (%s)"
+msgstr ""
 
 #: view/data-cleaning/admin/index/audit.phtml:17
 #, php-format
@@ -46,283 +46,268 @@ msgid ""
 "  - Property: %s\n"
 "  - Data type: %s"
 msgstr ""
-"Моля, потвърдете следните промени:\n"
-"__CORRECTION_COUNT__ corrections\n"
-"__REMOVAL_COUNT__ removals\n"
-"\n"
-"От:\n"
-"  - Колона одит: %s\n"
-"  - Реквизит: %s\n"
-"  - Тип данни: %s\n"
-"Към:\n"
-"  - Колона одит:%s\n"
-"  - Реквизит: %s\n"
-"  - Тип данни: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 msgid "Audit data"
-msgstr "Колона одит"
+msgstr "Informazioa ikuskatu"
 
 #: view/data-cleaning/admin/index/audit.phtml:38
 #: view/data-cleaning/admin/index/index.phtml:1
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Data Cleaning"
-msgstr "Почистване на данни"
+msgstr "Informazioa Garbitzen"
 
 #: view/data-cleaning/admin/index/audit.phtml:41
 msgid "Filter count"
-msgstr "Брой филтри"
+msgstr "Iragazpen kopurua"
 
 #: view/data-cleaning/admin/index/audit.phtml:42
 #, php-format
 msgid "Filter %s"
-msgstr "Филтър%s"
+msgstr "%s iragazi"
 
 #: view/data-cleaning/admin/index/audit.phtml:43
 msgid "Rows: "
-msgstr "Редове:"
+msgstr "Lerroak:"
 
 #: view/data-cleaning/admin/index/audit.phtml:46
 #, php-format
 msgid "You are auditing %s unique strings (%s total) from %s resources (%s)."
-msgstr "Одитирате%s уникални низове (%sобщо) от %sресурси (%s)."
+msgstr ""
+"%s baliabideetako (%s) %s kate batar (%s guztira) ikuskatzen ari zara."
 
 #: view/data-cleaning/admin/index/audit.phtml:56
 msgid "Audit column"
-msgstr "Колона одит"
+msgstr "Ikuskatu zutabea"
 
 #: view/data-cleaning/admin/index/audit.phtml:58
 msgid "Data type"
-msgstr ""
+msgstr "Datu mota"
 
 #: view/data-cleaning/admin/index/audit.phtml:63
 msgid "From:"
-msgstr "От:"
+msgstr "Noiztik:"
 
 #: view/data-cleaning/admin/index/audit.phtml:69
 msgid "To:"
-msgstr "Към:"
+msgstr "Nora:"
 
 #: view/data-cleaning/admin/index/audit.phtml:82
 msgid "Loading audit table..."
-msgstr "Зарежда се таблица за одит ..."
+msgstr "Ikuskatze taula kargatzen..."
 
 #: view/data-cleaning/admin/index/audit.phtml:84
 msgid "Copy all"
-msgstr "Копиране на всички"
+msgstr "Kopiatu dena"
 
 #: view/data-cleaning/admin/index/audit.phtml:85
 msgid "Clear all"
-msgstr "Почистване на всички"
+msgstr "Garbitu dena"
 
 #: view/data-cleaning/admin/index/audit.phtml:86
 msgid "Validate all"
-msgstr "Валидиране на всички"
+msgstr "Balidatu dena"
 
 #: view/data-cleaning/admin/index/audit.phtml:87
 msgid "Remove all"
-msgstr "Премахване на всички"
+msgstr "Kendu guztiak"
 
 #: view/data-cleaning/admin/index/audit.phtml:88
 msgid "Unremove all"
-msgstr "Връщане на премахмането на всички"
+msgstr "Berreskuratu guztiak"
 
 #: view/data-cleaning/admin/index/audit.phtml:98
 msgid "Count"
-msgstr "Броене"
+msgstr "Kontatu"
 
 #: view/data-cleaning/admin/index/audit.phtml:99
 #, php-format
 msgid "From: %s"
-msgstr "От: %s"
+msgstr "Noiztik: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:100
 #, php-format
 msgid "To: %s"
-msgstr "Към: %s"
+msgstr "Nora: %s"
 
 #: view/data-cleaning/admin/index/audit.phtml:112
 msgid "Copy"
-msgstr "Копиране"
+msgstr "Kopiatu"
 
 #: view/data-cleaning/admin/index/audit.phtml:114
 msgid "Validate"
-msgstr "Валидиране"
+msgstr "Balidatu"
 
 #: view/data-cleaning/admin/index/index.phtml:1
 msgid "Past audits"
-msgstr "Минали одити"
+msgstr "Aurreko ikuskatzeak"
 
 #: view/data-cleaning/admin/index/index.phtml:3
 msgid "Prepare new audit"
-msgstr "Подготви нов одит"
+msgstr "Prestatu ikuskatze berria"
 
 #: view/data-cleaning/admin/index/index.phtml:12
 msgid "Job ID"
-msgstr "Job ID"
+msgstr "Lan IDa"
 
 #: view/data-cleaning/admin/index/index.phtml:13
 msgid "Job status"
-msgstr "Job статус"
+msgstr "Lanaren egoera"
 
 #: view/data-cleaning/admin/index/index.phtml:14
 msgid "Job started"
-msgstr "Job започнат"
+msgstr "Lana hasita"
 
 #: view/data-cleaning/admin/index/index.phtml:15
 msgid "Job ended"
-msgstr "Job приключен"
+msgstr "Lana bukatuta"
 
 #: view/data-cleaning/admin/index/index.phtml:16
 msgid "Auditor"
-msgstr "Одитор"
+msgstr "Ikuskatzailea"
 
 #: view/data-cleaning/admin/index/index.phtml:39
 msgid "Not ended"
-msgstr "Неприключен"
+msgstr "Bukatu gabe"
 
 #: view/data-cleaning/admin/index/index.phtml:54
 msgid "There are no past audits."
-msgstr "Няма минали одити"
+msgstr "Ez dago pasatako ikuskatzerik."
 
 #: view/data-cleaning/admin/index/prepare-audit.phtml:4
 msgid "Prepare audit"
-msgstr "Подготвяне на одит"
+msgstr "Prestatu ikuskatzea"
 
 #: view/data-cleaning/admin/index/show-details.phtml:8
 msgid "Audit details"
-msgstr "Характеристики на одита"
+msgstr "Ikuskatzaren xehetasunak"
 
 #: view/data-cleaning/admin/index/show-details.phtml:10
 msgid "Overview"
-msgstr "Общ преглед"
+msgstr "Gainbegiratu"
 
 #: view/data-cleaning/admin/index/show-details.phtml:13
 #, php-format
 msgid "Auditing %s resources (%s)"
-msgstr "Одитиране%s ресурси (%s)"
+msgstr "%s baliabide ikuskatzen (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:20
 #, php-format
 msgid "Making %s corrections"
-msgstr "Извършване на %s корекции"
+msgstr "%s zuzenketa egiten"
 
 #: view/data-cleaning/admin/index/show-details.phtml:26
 #, php-format
 msgid "Making %s removals"
-msgstr "Извършване на%s премахвания"
+msgstr "%s kentze burutzen"
 
 #: view/data-cleaning/admin/index/show-details.phtml:32
 msgid "From"
-msgstr "От"
+msgstr "Noiztik"
 
 #: view/data-cleaning/admin/index/show-details.phtml:35
 #: view/data-cleaning/admin/index/show-details.phtml:45
 #, php-format
 msgid "Audit column: %s"
-msgstr "Одит колона: %s"
+msgstr "Zutabea ikuskatu: %s"
 
 #: view/data-cleaning/admin/index/show-details.phtml:36
 #: view/data-cleaning/admin/index/show-details.phtml:46
 #, php-format
 msgid "Property: %s (%s)"
-msgstr "Реквизит: %s(%s)"
+msgstr "Propietatea: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:37
 #: view/data-cleaning/admin/index/show-details.phtml:47
 #, php-format
 msgid "Data type: %s (%s)"
-msgstr "Тип данни: %s(%s)"
+msgstr "Datu mota: %s (%s)"
 
 #: view/data-cleaning/admin/index/show-details.phtml:42
 msgid "To"
-msgstr "Към"
+msgstr "Nora"
 
 #: src/Form/PrepareAuditForm.php:25
 msgid "Select the resource type to audit."
-msgstr "Изберете типа на ресурса за одит."
+msgstr "Hautatu ikuskatzeko baliabide mota"
 
 #: src/Form/PrepareAuditForm.php:41
 msgid "Resource query"
-msgstr "Заявка за ресурс"
+msgstr "Baliabide kontsulta"
 
 #: src/Form/PrepareAuditForm.php:42
 msgid ""
 "Enter a search query to filter the resources. No query means all resources."
 msgstr ""
+"Sartu bilaketa kontsulta baliabideak iragazteko. Kontsultarik ezak baliabide"
+" guztiak esan nahi du."
 
 #: src/Form/PrepareAuditForm.php:50
 msgid "Select the property to audit."
-msgstr "Изберете реквизит за одит"
+msgstr "Hautatu ikuskatzeko propietatea."
 
 #: src/Form/PrepareAuditForm.php:64
 msgid "Select the column to audit."
-msgstr "Изберете колоната за одит."
+msgstr "Hautatu ikuskatzeko zutabea."
 
 #: src/Form/PrepareAuditForm.php:75
 msgid "Select an audit column"
-msgstr "Изберете колона за одит"
+msgstr "Hautatu ikuskatze zutabea"
 
 #: src/Form/PrepareAuditForm.php:83
 msgid "Select the data type to audit."
-msgstr "Изберете тип данни за одит"
+msgstr "Hautatu ikuskatzeko datu mota."
 
 #: src/Form/PrepareAuditForm.php:90
 msgid "Select a data type"
-msgstr "Изберете тип данни"
+msgstr "Hautatu datu mota"
 
 #: src/Form/PrepareAuditForm.php:104
 msgid "Target property"
-msgstr "Целеви реквизит"
+msgstr "Propietate helburua"
 
 #: src/Form/PrepareAuditForm.php:105
 msgid ""
 "Select the property that corrections will be stored as. You do not need to "
 "select a target if it is the same as the property above."
 msgstr ""
-"Изберете свойството, в което ще се съхраняват корекциите. Не е необходимо да"
-" избирате цел, ако тя е същата като собствеността по-горе."
 
 #: src/Form/PrepareAuditForm.php:110
 msgid "Select a target property"
-msgstr "Изберете целеви реквизит"
+msgstr "Hautatu propietate helburua"
 
 #: src/Form/PrepareAuditForm.php:117
 msgid "Target audit column"
-msgstr "Целева колона за одит"
+msgstr "Ikuskatzeko zutabe helburua"
 
 #: src/Form/PrepareAuditForm.php:118
 msgid ""
 "Select the column that corrections will be stored in. You do not need to "
 "select a target if it is the same as the audit column above."
 msgstr ""
-"Изберете колоната, в която ще се съхраняват корекциите. Не е необходимо да "
-"избирате цел, ако тя е същата като колоната за одит по-горе."
 
 #: src/Form/PrepareAuditForm.php:128
 msgid "Select a target audit column"
-msgstr "Изберете колона на целевия одит"
+msgstr "Hautatu ikuskatzeko zutabe helburu "
 
 #: src/Form/PrepareAuditForm.php:135
 msgid "Target data type"
-msgstr "Целеви тип данни"
+msgstr "Helburu datu mota"
 
 #: src/Form/PrepareAuditForm.php:136
 msgid ""
 "Select the data type that corrections will be stored as. You do not need to "
 "select a target if it is the same as the data type above."
 msgstr ""
-"Изберете типа данни, в който ще се съхраняват корекциите. Не е необходимо да"
-" избирате цел, ако тя е същата като типа на данните по-горе."
 
 #: src/Form/PrepareAuditForm.php:141
 msgid "Select a target data type"
-msgstr "Изберете целеви тип данни"
+msgstr "Hautatu datu mota helburua"
 
 #: src/Controller/Admin/IndexController.php:138
 msgid ""
 "Cleaning data. This may take a while. You may refresh this page for status "
 "updates."
 msgstr ""
-"Данни за почистване. Това може да отнеме известно време. Можете да опресните"
-" тази страница за актуализации на състоянието."
+"Datuak garbitzen. Honek denbora iraun dezake. Orrialde hau freskatu dezakezu"
+" egoeraren eguneraketak kargatzeko."
